@@ -7,7 +7,12 @@ import ma.novassure.domaine.User;
 import ma.novassure.utils.HibernateUtil;
 
 public class UserDAOImpl implements UserDAO{
-	SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
+	SessionFactory sessionFactory;
+	
+	public UserDAOImpl() {
+		sessionFactory=HibernateUtil.getSessionFactory();
+	}
+	
 	public void addUser(User user) {
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
