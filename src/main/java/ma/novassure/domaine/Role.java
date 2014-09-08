@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Role implements Serializable{
@@ -15,8 +13,6 @@ public class Role implements Serializable{
 	@GeneratedValue
 	private int id;
 	private String name;
-	@OneToMany
-	private User user;
 
 	public Role() {
 	}
@@ -42,14 +38,6 @@ public class Role implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }

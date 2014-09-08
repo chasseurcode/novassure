@@ -37,8 +37,10 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	public User findUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session=sessionFactory.openSession();
+		User user=(User) session.createQuery("from User where username=?")
+				.setString(0, username).list().get(0);
+		return user;
 	}
 
 	public User findUserByEmail(String email) {
