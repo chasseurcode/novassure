@@ -25,8 +25,8 @@ public class HibernateUtil {
 			try {
 				Configuration configuration = new Configuration().configure();
 				
-				configuration.addClass(User.class);
-				configuration.addClass(Role.class);
+				configuration.addAnnotatedClass(User.class);
+				configuration.addAnnotatedClass(Role.class);
 				
 				serviceRegistry = new ServiceRegistryBuilder()
 										.applySettings(configuration.getProperties())
