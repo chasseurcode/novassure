@@ -1,15 +1,18 @@
 package ma.novassure.domaine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private int id;
@@ -17,7 +20,7 @@ public class User {
 	private String password;
 	private String email;
 	private boolean enabled;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Role> roles=new ArrayList<Role>();
 	
 	public User() {
