@@ -1,5 +1,8 @@
 package ma.novassure.utils;
 
+import ma.novassure.domaine.Role;
+import ma.novassure.domaine.User;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,6 +24,10 @@ public class HibernateUtil {
 		static {
 			try {
 				Configuration configuration = new Configuration().configure();
+				
+				configuration.addClass(User.class);
+				configuration.addClass(Role.class);
+				
 				serviceRegistry = new ServiceRegistryBuilder()
 										.applySettings(configuration.getProperties())
 										.buildServiceRegistry();
