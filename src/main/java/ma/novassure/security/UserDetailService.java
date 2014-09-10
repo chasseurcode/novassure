@@ -7,7 +7,6 @@ import ma.novassure.dao.UserDAO;
 import ma.novassure.dao.UserDAOImpl;
 import ma.novassure.domaine.Role;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,18 +15,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserDetailService implements UserDetailsService {
-	@Autowired
 	UserDAO userDAO;
 	
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		
 		userDAO=new UserDAOImpl();
-		
 		ma.novassure.domaine.User user=userDAO.findUserByUsername(username);
-		List<GrantedAuthority> authorities=builAuthorities(user.getRoles());
-		
-		return buildUserForAuthentication(user, authorities);
+		if (user==null) {
+			throw new UsernameNotFoundException(null);
+		} else {
+			List<GrantedAuthority> authorities=builAuthorities(user.getRoles());
+			return buildUserForAuthentication(user, authorities);
+		}	
 	}
 	
 	public User buildUserForAuthentication(ma.novassure.domaine.User user,List<GrantedAuthority> authorities) {
@@ -41,5 +41,4 @@ public class UserDetailService implements UserDetailsService {
 		}
 		 return new ArrayList<GrantedAuthority>(auths);
 	}
-
 }

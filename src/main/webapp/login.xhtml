@@ -8,10 +8,10 @@
 <h:head></h:head>
 <body>
 <h2>Formulaire de connexion</h2>
-
-<p:panel header="Login">
-
-
-</p:panel>
+	<h:form>
+		<h:inputText id="username" required="true" value="#{userBean.username}"/>
+		<h:inputText id="password" required="true" value="#{userBean.password}"/>
+		<h:commandButton value="connexion" action="#{userBean.login}" />
+	</h:form>
 </body>
 </html>

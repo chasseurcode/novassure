@@ -21,31 +21,39 @@ public class UserDAOImpl implements UserDAO{
 		session.close();
 	}
 
-	public void desableUser() {
-		// TODO Auto-generated method stub
-		
+	public void desableUser(int id) {
+		Session session=sessionFactory.openSession();
+		User user=(User) session.load(User.class, id);
+		user.setEnabled(false);
+		session.flush();		
 	}
 
-	public void enableUser() {
-		// TODO Auto-generated method stub
-		
+	public void enableUser(int id) {
+		Session session=sessionFactory.openSession();
+		User user=(User) session.load(User.class, id);
+		user.setEnabled(true);
+		session.flush();
 	}
 
 	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-		
+		Session session=sessionFactory.openSession();
+		session.update(user);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	public User findUserByUsername(String username) {
 		Session session=sessionFactory.openSession();
 		User user=(User) session.createQuery("from User where username=?")
-				.setString(0, username).list().get(0);
+				.setString(0, username).uniqueResult();
 		return user;
 	}
 
 	public User findUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session=sessionFactory.openSession();
+		User user=(User) session.createQuery("from User where email=?")
+				.setString(0, email).list().get(0);
+		return user;
 	}
 
 }
