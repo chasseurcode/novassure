@@ -1,17 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head></h:head>
-<body>
-<h2>Formulaire de connexion</h2>
-	<h:form>
-		<h:inputText id="username" required="true" value="#{userBean.username}"/>
-		<h:inputText id="password" required="true" value="#{userBean.password}"/>
-		<h:commandButton value="connexion" action="#{userBean.login}" />
+<h:body>
+	<h:form prependId="false">
+		<p:panel style="width:400px;height:180px;position:relative;margin:auto;" header="Authentification">
+			<h:panelGrid columns="2" cellpadding="5" styleClass="centered">
+				<h:outputLabel value="Nom d'Utilisateur : *"></h:outputLabel>
+				<h:inputText id="username" value="#{userBean.username}" />
+
+				<h:outputLabel value="Mot de Passe: *" ></h:outputLabel>
+				<h:inputSecret id="password" value="#{userBean.password}" />
+				<h:commandButton value="Se connecter" action="#{userBean.login}" />
+			</h:panelGrid>
+		</p:panel>
 	</h:form>
-</body>
+</h:body>
 </html>

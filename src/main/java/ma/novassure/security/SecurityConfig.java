@@ -20,7 +20,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.csrf().disable()
 				.authorizeRequests()
+				.antMatchers("/javax.faces.resource/**").permitAll()
 				.anyRequest().authenticated()
-				.and().formLogin();
+				.and().formLogin()
+				.loginPage("/login.xhtml").permitAll()
+				.loginProcessingUrl("/login.xhtml");
 	}
 }
