@@ -13,7 +13,7 @@ public class Client {
 
     protected String nom;
     protected String adresse;
-    protected String ville;
+    protected Ville ville;
     protected String telephone;
     protected String email;
     protected String faxe;
@@ -31,10 +31,10 @@ public class Client {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	public String getVille() {
+	public Ville getVille() {
 		return ville;
 	}
-	public void setVille(String ville) {
+	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
 	public String getTelephone() {

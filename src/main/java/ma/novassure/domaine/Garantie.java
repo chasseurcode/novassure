@@ -5,12 +5,15 @@ package ma.novassure.domaine;
  * @author TARAM & BODIE
  */
 public class Garantie {
-
-    public Garantie() {
-    }
     
     private int id;
     private String libelle;
+    private Categorie categorie;
+    private Branche branche;
+    
+    public Garantie() {
+    }
+    
 	public int getId() {
 		return id;
 	}
@@ -23,6 +26,22 @@ public class Garantie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+	
 
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public Branche getBranche() {
+		return branche;
+	}
+
+	public void setBranche(Branche branche) {
+		this.branche = branche;
+	}
     
 }

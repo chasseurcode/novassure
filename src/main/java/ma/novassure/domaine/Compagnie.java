@@ -9,7 +9,7 @@ public class Compagnie {
     private String code;
     private String telephone;
     private String adresse;
-    private String ville;
+    private Ville ville;
     private String faxe;
     private String nom;
     
@@ -34,10 +34,10 @@ public class Compagnie {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	public String getVille() {
+	public Ville getVille() {
 		return ville;
 	}
-	public void setVille(String ville) {
+	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
 	public String getFaxe() {
