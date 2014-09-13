@@ -1,18 +1,24 @@
 package ma.novassure.domaine;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 /**
  * @author TARAM & BODIE
  */
+@Entity
 public class Branche {
 
-
-    public Branche() {
-    }
-
-
+	
+	@Id @GeneratedValue
     private int id;
     private String libelle;
+    
+    public Branche() {
+    }
+   
 	public int getId() {
 		return id;
 	}

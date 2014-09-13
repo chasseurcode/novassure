@@ -2,18 +2,27 @@ package ma.novassure.domaine;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * @author TARAM & BODIE
  */
+
+@Entity
 public class Paiement {
 	
-    public Paiement() {
-    }
-
+   @Id @GeneratedValue
     private int id;
     private double montant;
     private Date datePaiement;
     private String mode;
+    
+    
+    public Paiement() {
+    }
+
 	public int getId() {
 		return id;
 	}

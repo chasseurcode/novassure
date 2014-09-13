@@ -1,16 +1,25 @@
 package ma.novassure.domaine;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 /**
  * @author TARAM & BODIE
  */
+@Entity
 public class Document {
-    public Document() {
-    }
+    
 
+	@Id @GeneratedValue
     private int id;
     private String titre;
     private String chemin;
+    
+    public Document() {
+    }
+    
 	public int getId() {
 		return id;
 	}

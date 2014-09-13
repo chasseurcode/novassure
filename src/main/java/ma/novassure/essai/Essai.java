@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-
 import ma.novassure.dao.UserDAO;
 import ma.novassure.dao.UserDAOImpl;
 import ma.novassure.domaine.Role;

@@ -1,17 +1,23 @@
 package ma.novassure.domaine;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 /**
  * @author TARAM & BODIE
  */
+@Entity
 public class TypeQuittance {
 
-    public TypeQuittance() {
-    }
 
+	@Id @GeneratedValue
+	private int id;
+	private String libelle;
 
-    private String libelle;
-    private int id;
+	public TypeQuittance() {
+	}
 	public String getLibelle() {
 		return libelle;
 	}
@@ -24,5 +30,5 @@ public class TypeQuittance {
 	public void setId(int id) {
 		this.id = id;
 	}
-    
+
 }

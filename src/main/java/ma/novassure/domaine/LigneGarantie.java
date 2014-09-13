@@ -1,20 +1,29 @@
 package ma.novassure.domaine;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 /**
  * @author TARAM & BODIE
  */
+
+@Entity
 public class LigneGarantie {
 
-    public LigneGarantie() {
-    }
 
-    private int id;
-    private double primeNette;
-    private double accessoire;
-    private double timbre;
-    private double taxe;
-    private double commission;
+	@Id @GeneratedValue
+	private int id;
+	private double primeNette;
+	private double accessoire;
+	private double timbre;
+	private double taxe;
+	private double commission;
+
+	public LigneGarantie() {
+	}
+
 	public int getId() {
 		return id;
 	}

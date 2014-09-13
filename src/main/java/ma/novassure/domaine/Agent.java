@@ -1,21 +1,31 @@
 package ma.novassure.domaine;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 /**
  * @author TARAM & BODIE
  */
+@Entity
 public class Agent {
-
- 
-    public Agent() {
-    }
-
+  
+	@Id @GeneratedValue
+    private int id;
+	
     private String code;
     private String nom;
     private String prenom;
     private String adresse;
     private String email;
     private String telephone;
+    
+    
+    public Agent() {
+    }
+       
+    
 	public String getCode() {
 		return code;
 	}
@@ -52,4 +62,16 @@ public class Agent {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 }

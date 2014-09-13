@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 /**
  * @author TARAM & BODIE
  */
+@Entity
 public class Affaire {
 
+	@Id @GeneratedValue
     private int id;
+    
     private Date createdDate;
     private Date updatedDate;
     private Client client;

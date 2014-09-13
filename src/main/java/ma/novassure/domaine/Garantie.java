@@ -1,19 +1,26 @@
 package ma.novassure.domaine;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 /**
  * @author TARAM & BODIE
  */
+
+@Entity
 public class Garantie {
-    
-    private int id;
-    private String libelle;
-    private Categorie categorie;
-    private Branche branche;
-    
-    public Garantie() {
-    }
-    
+
+	@Id @GeneratedValue
+	private int id;
+	private String libelle;
+	private Categorie categorie;
+	private Branche branche;
+
+	public Garantie() {
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -26,7 +33,7 @@ public class Garantie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	
+
 
 	public Categorie getCategorie() {
 		return categorie;
@@ -43,5 +50,5 @@ public class Garantie {
 	public void setBranche(Branche branche) {
 		this.branche = branche;
 	}
-    
+
 }
