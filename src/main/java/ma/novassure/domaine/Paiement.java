@@ -18,6 +18,7 @@ public class Paiement {
     private double montant;
     private Date datePaiement;
     private String mode;
+    private Affaire affaire;
     
     
     public Paiement() {
@@ -47,7 +48,13 @@ public class Paiement {
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
-    
-    
+
+	public Affaire getAffaire() {
+		return affaire;
+	}
+
+	public void setAffaire(Affaire affaire) {
+		this.affaire = affaire;
+	}
 
 }

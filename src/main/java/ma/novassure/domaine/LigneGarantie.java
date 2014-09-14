@@ -20,6 +20,8 @@ public class LigneGarantie {
 	private double timbre;
 	private double taxe;
 	private double commission;
+	private Garantie garantie;
+	private Quittance quittance;
 
 	public LigneGarantie() {
 	}
@@ -61,4 +63,20 @@ public class LigneGarantie {
 		this.commission = commission;
 	}
 
+	public Garantie getGarantie() {
+		return garantie;
+	}
+
+	public void setGarantie(Garantie garantie) {
+		this.garantie = garantie;
+	}
+
+	public Quittance getQuittance() {
+		return quittance;
+	}
+
+	public void setQuittance(Quittance quittance) {
+		this.quittance = quittance;
+	}
+	
 }

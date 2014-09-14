@@ -16,6 +16,7 @@ public class Document {
     private int id;
     private String titre;
     private String chemin;
+    private Affaire affaire;
     
     public Document() {
     }
@@ -38,5 +39,11 @@ public class Document {
 	public void setChemin(String chemin) {
 		this.chemin = chemin;
 	}
-
+	public Affaire getAffaire() {
+		return affaire;
+	}
+	public void setAffaire(Affaire affaire) {
+		this.affaire = affaire;
+	}
+	
 }

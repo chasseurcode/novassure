@@ -25,6 +25,7 @@ public class Quittance {
     private TypeQuittance typeQuittance;
     private Agent agent;
     private List<LigneGarantie> garanties;
+    private Affaire affaire;
     
     public Quittance() {
     	garanties=new ArrayList<LigneGarantie>();
@@ -108,6 +109,14 @@ public class Quittance {
 
 	public void setCompagnie(Compagnie compagnie) {
 		this.compagnie = compagnie;
+	}
+
+	public Affaire getAffaire() {
+		return affaire;
+	}
+
+	public void setAffaire(Affaire affaire) {
+		this.affaire = affaire;
 	}
     
 	

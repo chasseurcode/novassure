@@ -1,5 +1,7 @@
 package ma.novassure.domaine;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,6 +22,7 @@ public class Client {
 	protected String telephone;
 	protected String email;
 	protected String faxe;
+	private List<Affaire> affaires;
 
 
 	public Client() {
@@ -71,6 +74,12 @@ public class Client {
 		this.faxe = faxe;
 	}
 
+	public List<Affaire> getAffaires() {
+		return affaires;
+	}
 
+	public void setAffaires(List<Affaire> affaires) {
+		this.affaires = affaires;
+	}
 
 }
