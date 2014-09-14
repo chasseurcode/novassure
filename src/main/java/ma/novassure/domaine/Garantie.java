@@ -3,6 +3,7 @@ package ma.novassure.domaine;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -16,6 +17,7 @@ public class Garantie {
 	private int id;
 	private String libelle;
 	private Categorie categorie;
+	@ManyToOne
 	private Branche branche;
 
 	public Garantie() {

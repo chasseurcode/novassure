@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -18,10 +20,13 @@ public class Compagnie {
     private String code;
     private String telephone;
     private String adresse;
+    @ManyToOne
     private Ville ville;
     private String faxe;
     private String nom;
+    @OneToMany
     private List<Quittance> quittances;
+    
     public Compagnie() {
     }
      

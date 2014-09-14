@@ -1,8 +1,11 @@
 package ma.novassure.domaine;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -15,6 +18,8 @@ public class Categorie {
     private int id;
     private String libelle;
     private int code;
+    @OneToMany
+    private List<Garantie> garanties;
     
     
 	public int getId() {
@@ -34,5 +39,12 @@ public class Categorie {
 	}
 	public void setCode(int code) {
 		this.code = code;
+	}
+	public List<Garantie> getGaranties() {
+		return garanties;
+	}
+	public void setGaranties(List<Garantie> garanties) {
+		this.garanties = garanties;
 	} 
+	
 }

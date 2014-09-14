@@ -3,6 +3,7 @@ package ma.novassure.domaine;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -16,6 +17,7 @@ public class Document {
     private int id;
     private String titre;
     private String chemin;
+    @ManyToOne
     private Affaire affaire;
     
     public Document() {

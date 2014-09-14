@@ -5,6 +5,10 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -12,16 +16,19 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Client {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class Client {
 
 	@Id @GeneratedValue
 	private int id;
 	protected String nom;
 	protected String adresse;
+	@ManyToOne
 	protected Ville ville;
 	protected String telephone;
 	protected String email;
 	protected String faxe;
+	@OneToMany
 	private List<Affaire> affaires;
 
 

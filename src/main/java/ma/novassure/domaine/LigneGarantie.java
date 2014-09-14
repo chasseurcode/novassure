@@ -3,6 +3,7 @@ package ma.novassure.domaine;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -20,7 +21,9 @@ public class LigneGarantie {
 	private double timbre;
 	private double taxe;
 	private double commission;
+	@ManyToOne
 	private Garantie garantie;
+	@ManyToOne
 	private Quittance quittance;
 
 	public LigneGarantie() {

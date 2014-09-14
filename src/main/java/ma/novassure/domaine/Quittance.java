@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author TARAM & BODIE
@@ -21,10 +23,15 @@ public class Quittance {
     private String numAttestation;
     private Date dateDebut;
     private Date dateFin;
+    @ManyToOne
     private Compagnie compagnie;
+    @ManyToOne
     private TypeQuittance typeQuittance;
+    @ManyToOne
     private Agent agent;
+    @OneToMany
     private List<LigneGarantie> garanties;
+    @ManyToOne
     private Affaire affaire;
     
     public Quittance() {

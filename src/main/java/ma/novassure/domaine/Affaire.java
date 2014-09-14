@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -21,8 +23,11 @@ public class Affaire {
     private Date createdDate;
     private Date updatedDate;
     private Client client;
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Quittance> quittances;
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Paiement> paiements;
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Document> documents;
     
     public Affaire() {

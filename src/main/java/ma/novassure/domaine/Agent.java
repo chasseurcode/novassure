@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -22,6 +23,7 @@ public class Agent {
     private String adresse;
     private String email;
     private String telephone;
+    @OneToMany
     private List<Quittance> quittances;
     
     

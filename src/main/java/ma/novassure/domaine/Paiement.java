@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * @author TARAM & BODIE
@@ -18,6 +19,7 @@ public class Paiement {
     private double montant;
     private Date datePaiement;
     private String mode;
+    @ManyToOne
     private Affaire affaire;
     
     

@@ -1,8 +1,6 @@
 package ma.novassure.domaine;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 
 /**
@@ -10,21 +8,10 @@ import javax.persistence.Id;
  */
 @Entity
 public class Entreprise extends Client {
-
-	@Id @GeneratedValue
-	private int id;
 	private String nrc;
 	private String patente;
 	private String raisonSociale;
 	
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getNrc() {
 		return nrc;
 	}
