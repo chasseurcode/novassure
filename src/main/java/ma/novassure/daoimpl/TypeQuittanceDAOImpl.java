@@ -1,5 +1,6 @@
-package ma.novassure.dao;
+package ma.novassure.daoimpl;
 
+import ma.novassure.dao.TypeQuittanceDAO;
 import ma.novassure.domaine.TypeQuittance;
 
 /**

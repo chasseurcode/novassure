@@ -1,5 +1,6 @@
-package ma.novassure.dao;
+package ma.novassure.daoimpl;
 
+import ma.novassure.dao.AffaireDAO;
 import ma.novassure.domaine.Affaire;
 import ma.novassure.domaine.Client;
 import ma.novassure.domaine.Document;

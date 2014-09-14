@@ -1,8 +1,9 @@
-package ma.novassure.dao;
+package ma.novassure.daoimpl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import ma.novassure.dao.RoleDAO;
 import ma.novassure.domaine.Role;
 import ma.novassure.utils.HibernateUtil;
 

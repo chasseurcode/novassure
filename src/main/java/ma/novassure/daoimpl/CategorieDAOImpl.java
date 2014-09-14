@@ -1,5 +1,6 @@
-package ma.novassure.dao;
+package ma.novassure.daoimpl;
 
+import ma.novassure.dao.CategorieDAO;
 import ma.novassure.domaine.Categorie;
 
 /**

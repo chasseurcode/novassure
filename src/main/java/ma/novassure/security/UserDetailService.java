@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.novassure.dao.UserDAO;
-import ma.novassure.dao.UserDAOImpl;
+import ma.novassure.daoimpl.UserDAOImpl;
 import ma.novassure.domaine.Role;
 
 import org.springframework.security.core.GrantedAuthority;

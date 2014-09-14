@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ma.novassure.dao.UserDAO;
-import ma.novassure.dao.UserDAOImpl;
+import ma.novassure.daoimpl.UserDAOImpl;
 import ma.novassure.domaine.Role;
 import ma.novassure.domaine.User;
 @WebServlet(urlPatterns="/essai")

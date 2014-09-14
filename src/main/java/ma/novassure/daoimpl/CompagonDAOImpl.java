@@ -1,5 +1,6 @@
-package ma.novassure.dao;
+package ma.novassure.daoimpl;
 
+import ma.novassure.dao.CompagnieDAO;
 import ma.novassure.domaine.Compagnie;
 
 /**
