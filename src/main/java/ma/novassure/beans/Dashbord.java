@@ -20,9 +20,14 @@ public class Dashbord {
 		DashboardColumn colonne2=new DefaultDashboardColumn();
 		
 		colonne1.addWidget("stat");
-		colonne1.addWidget("tbl_de_bord");
+		colonne1.addWidget("echeance");
+		
+		colonne2.addWidget("tbl_bord");
+		colonne2.addWidget("derniere");
+		colonne2.addWidget("attente");
 		
 		model.addColumn(colonne1);
+		model.addColumn(colonne2);
 	}
 
 	public DashboardModel getModel() {
