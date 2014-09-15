@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
+   
+
+<h:head></h:head>
+<body>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80">
+			<h3>Novassure</h3>
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="240">
+			<ui:insert name="menu" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<ui:insert name="contenu" />
+		</p:layoutUnit>
+	</p:layout>
+</body>
+</html>
