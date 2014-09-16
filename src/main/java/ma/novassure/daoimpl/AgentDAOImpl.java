@@ -1,37 +1,50 @@
 package ma.novassure.daoimpl;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import ma.novassure.dao.AgentDAO;
 import ma.novassure.domaine.Agent;
+import ma.novassure.domaine.User;
+import ma.novassure.utils.HibernateUtil;
 
 /**
  * @author TARAM & BODIE
  */
 public class AgentDAOImpl implements AgentDAO {
+	SessionFactory sessionFactory;
 
-    /**
-     * 
-     */
-    public AgentDAOImpl() {
-    }
+	public AgentDAOImpl() {
+		sessionFactory=HibernateUtil.getSessionFactory();
+	}
 
 	public void addAgent(Agent agent) {
-		// TODO Auto-generated method stub
-		
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(agent);
+		session.getTransaction().commit();
+		session.close();		
 	}
 
 	public void updateAgent(Agent agent) {
-		// TODO Auto-generated method stub
-		
+		Session session=sessionFactory.openSession();
+		session.update(agent);
+		session.getTransaction().commit();
+		session.close();		
 	}
 
 	public Agent findAgentByCode(String code) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session=sessionFactory.openSession();
+		Agent agent=(Agent) session.createQuery("from Agent where code=?")
+				.setString(0, code).uniqueResult();
+		return agent;
 	}
 
 	public Agent findAgentByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session=sessionFactory.openSession();
+		Agent agent=(Agent) session.createQuery("from Agent where nom=?")
+				.setString(0, name).uniqueResult();
+		return agent;
 	}
 
 }

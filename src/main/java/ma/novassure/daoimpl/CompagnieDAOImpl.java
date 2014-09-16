@@ -6,12 +6,12 @@ import ma.novassure.domaine.Compagnie;
 /**
  * @author TARAM & BODIE
  */
-public class CompagonDAOImpl implements CompagnieDAO {
+public class CompagnieDAOImpl implements CompagnieDAO {
 
     /**
      * 
      */
-    public CompagonDAOImpl() {
+    public CompagnieDAOImpl() {
     }
 
 	public void addCompagnie(Compagnie compagnie) {

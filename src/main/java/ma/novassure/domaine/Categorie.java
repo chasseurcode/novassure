@@ -13,15 +13,15 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Categorie {
-  
-    @Id @GeneratedValue
-    private int id;
-    private String libelle;
-    private int code;
-    @OneToMany
-    private List<Garantie> garanties;
-    
-    
+
+	@Id @GeneratedValue
+	private int id;
+	private String libelle;
+	private int code;
+	@OneToMany
+	private List<Garantie> garanties;
+
+
 	public int getId() {
 		return id;
 	}
@@ -46,5 +46,5 @@ public class Categorie {
 	public void setGaranties(List<Garantie> garanties) {
 		this.garanties = garanties;
 	} 
-	
+
 }

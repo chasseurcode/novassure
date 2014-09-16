@@ -1,37 +1,50 @@
 package ma.novassure.daoimpl;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import ma.novassure.dao.VilleDAO;
+import ma.novassure.domaine.User;
 import ma.novassure.domaine.Ville;
+import ma.novassure.utils.HibernateUtil;
 
 /**
  * @author TARAM & BODIE
  */
 public class VilleDAOImpl implements VilleDAO {
+	SessionFactory sessionFactory;
 
-    /**
-     * 
-     */
-    public VilleDAOImpl() {
-    }
+	public VilleDAOImpl() {
+		sessionFactory=HibernateUtil.getSessionFactory();
+	}
 
 	public void addVille(Ville ville) {
-		// TODO Auto-generated method stub
-		
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(ville);
+		session.getTransaction().commit();
+		session.close();		
 	}
 
 	public void updateVille(Ville ville) {
-		// TODO Auto-generated method stub
-		
+		Session session=sessionFactory.openSession();
+		session.update(ville);
+		session.getTransaction().commit();
+		session.close();		
 	}
 
-	public void findVilleById(int id) {
-		// TODO Auto-generated method stub
-		
+	public Ville findVilleById(int id) {
+		Session session=sessionFactory.openSession();
+		Ville ville=(Ville) session.createQuery("from Ville where id=?")
+				.setInteger(0, id).uniqueResult();
+		return ville;		
 	}
 
-	public void findVilleByName(String name) {
-		// TODO Auto-generated method stub
-		
+	public Ville findVilleByName(String name) {
+		Session session=sessionFactory.openSession();
+		Ville ville=(Ville) session.createQuery("from Ville where nom=?")
+				.setString(0, name).uniqueResult();
+		return ville;
 	}
 
 }
