@@ -1,5 +1,7 @@
 package ma.novassure.daoimpl;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -55,6 +57,11 @@ public class UserDAOImpl implements UserDAO{
 		User user=(User) session.createQuery("from User where email=?")
 				.setString(0, email).list().get(0);
 		return user;
+	}
+
+	public List<User> getAll() {
+		Session session=sessionFactory.openSession();
+		return session.createQuery("From User").list();
 	}
 
 }

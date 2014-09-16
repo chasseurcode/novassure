@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="login">
+		<pattern value="/login" />
+		<view-id value="/login.xhtml" />
+	</url-mapping>
+
+	<!-- Users -->
+	<url-mapping id="createUser">
+		<pattern value="/users/create" />
+		<view-id value="/pages/users/create.xhtml" />
+	</url-mapping>
+	<url-mapping id="users">
+		<pattern value="/users" />
+		<view-id value="/pages/users/index.xhtml" />
+	</url-mapping>
+
+
+	<url-mapping id="useredit">
+		<pattern value="/users/#{userBean.findName}" />
+		<view-id value="/pages/users/edit.xhtml" />
+		<action>#{userBean.load}</action>
+	</url-mapping>
+
+</pretty-config>

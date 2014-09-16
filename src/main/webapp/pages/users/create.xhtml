@@ -10,17 +10,12 @@
 	<h:outputStylesheet name="css/style.css" />
 </h:head>
 <body>
-	<ui:composition template="templates/layout.xhtml">
+	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="contenu">
-			<p:dashboard  id="controle" model="#{dashbord.model}">
-				<p:panel id="stat" header="Statistique"></p:panel>
-				<p:panel id="echeance" header="Les quittances arrivée à échéance"></p:panel>
-				<p:panel id="tbl_bord" header="Tableau de Bord de Travail"></p:panel>
-				<p:panel id="derniere" header="Les 5 dernière quittances"></p:panel>
-				<p:panel id="attente" header="Les Quittance en attente de Paiement"></p:panel>
-			</p:dashboard>
+			<p:panel header="Gestion des utilisateurs">
+				
+			</p:panel>
 		</ui:define>
 	</ui:composition>
-
 </body>
 </html>

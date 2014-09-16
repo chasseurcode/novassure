@@ -1,5 +1,7 @@
 package ma.novassure.dao;
 
+import java.util.List;
+
 import ma.novassure.domaine.User;
 
 public interface UserDAO {
@@ -9,4 +11,5 @@ public interface UserDAO {
 	public void updateUser(User user);
 	public User findUserByUsername(String username);
 	public User findUserByEmail(String email);
+	public List<User> getAll();
 }

@@ -1,7 +1,25 @@
-body{
-	
-	background: #000000;
-}
-.pf-dashboard-column {
-	width:500px;
+
+.ui-dashboard-column{
+	margin: 10px;
+	width: 450px
 } 
+.ui-panel .ui-panel-titlebar{
+	font-size: 0.7em;
+	font-style: italic;
+}
+.ui-panelmenu .ui-panelmenu-header{
+	font-size: 0.7em;
+}
+
+.ui-panelmenu .ui-menuitem-text{
+	font-size: 0.7em;
+	font-weight: lighter;
+}
+
+.ui-panelmenu .ui-panelmenu-panel{
+	width: 220px;
+}
+
+.ui-datatable table a{
+	font-size: 0.6em;
+}

@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/javax.faces.resource/**").permitAll()
 				.anyRequest().authenticated()
 				.and().formLogin()
-				.loginPage("/login.xhtml").permitAll()
-				.loginProcessingUrl("/login.xhtml");
+				.loginPage("/login").permitAll()
+				.loginProcessingUrl("/login");
 	}
 }
