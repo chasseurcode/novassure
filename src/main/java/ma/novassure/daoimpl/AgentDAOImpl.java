@@ -1,12 +1,11 @@
 package ma.novassure.daoimpl;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import ma.novassure.dao.AgentDAO;
 import ma.novassure.domaine.Agent;
-import ma.novassure.domaine.User;
 import ma.novassure.utils.HibernateUtil;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  * @author TARAM & BODIE
