@@ -2,6 +2,7 @@ package ma.novassure.domaine;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class Agent {
     private String adresse;
     private String email;
     private String telephone;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Quittance> quittances;
     
     

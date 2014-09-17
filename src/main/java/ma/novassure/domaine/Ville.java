@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -18,8 +19,11 @@ public class Ville {
 	private int id;
 	private String code;
 	private String nom;
+	@OneToMany
 	private List<Client> clients;
+	@OneToMany
 	private List<Compagnie> compagnies;
+	
 	public Ville() {
 	}
 	public int getId() {

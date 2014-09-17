@@ -23,6 +23,11 @@ public interface AgentDAO {
      * @return
      */
     public Agent findAgentByCode(String code);
+    /**
+     * @param id 
+     * @return
+     */
+    public Agent findAgentById(int id);
 
     /**
      * @param name 

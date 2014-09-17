@@ -15,6 +15,7 @@ public class AgentDAOImpl implements AgentDAO {
 
 	public AgentDAOImpl() {
 		sessionFactory=HibernateUtil.getSessionFactory();
+		
 	}
 
 	public void addAgent(Agent agent) {
@@ -31,6 +32,12 @@ public class AgentDAOImpl implements AgentDAO {
 		session.getTransaction().commit();
 		session.close();		
 	}
+	public Agent findAgentById(int id) {
+		Session session=sessionFactory.openSession();
+		Agent agent=(Agent) session.createQuery("from Agent where id=?")
+				.setInteger(0, id).uniqueResult();
+		return agent;
+	}
 
 	public Agent findAgentByCode(String code) {
 		Session session=sessionFactory.openSession();
@@ -45,5 +52,7 @@ public class AgentDAOImpl implements AgentDAO {
 				.setString(0, name).uniqueResult();
 		return agent;
 	}
+
+
 
 }

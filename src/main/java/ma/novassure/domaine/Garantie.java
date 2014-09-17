@@ -16,6 +16,8 @@ public class Garantie {
 	@Id @GeneratedValue
 	private int id;
 	private String libelle;
+	
+	@ManyToOne
 	private Categorie categorie;
 	@ManyToOne
 	private Branche branche;

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -32,7 +33,7 @@ public class Quittance {
     @OneToMany
     private List<LigneGarantie> garanties;
     @ManyToOne
-    private Affaire affaire;
+     private Affaire affaire;
     
     public Quittance() {
     	garanties=new ArrayList<LigneGarantie>();
