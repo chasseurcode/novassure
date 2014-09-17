@@ -12,14 +12,15 @@ import org.hibernate.SessionFactory;
  */
 public class AgentDAOImpl implements AgentDAO {
 	SessionFactory sessionFactory;
+	Session session;
+
 
 	public AgentDAOImpl() {
 		sessionFactory=HibernateUtil.getSessionFactory();
-		
+	     session=sessionFactory.openSession();	
 	}
 
 	public void addAgent(Agent agent) {
-		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(agent);
 		session.getTransaction().commit();
@@ -27,27 +28,24 @@ public class AgentDAOImpl implements AgentDAO {
 	}
 
 	public void updateAgent(Agent agent) {
-		Session session=sessionFactory.openSession();
+		session.beginTransaction();
 		session.update(agent);
 		session.getTransaction().commit();
 		session.close();		
 	}
 	public Agent findAgentById(int id) {
-		Session session=sessionFactory.openSession();
 		Agent agent=(Agent) session.createQuery("from Agent where id=?")
 				.setInteger(0, id).uniqueResult();
 		return agent;
 	}
 
 	public Agent findAgentByCode(String code) {
-		Session session=sessionFactory.openSession();
 		Agent agent=(Agent) session.createQuery("from Agent where code=?")
 				.setString(0, code).uniqueResult();
 		return agent;
 	}
 
 	public Agent findAgentByName(String name) {
-		Session session=sessionFactory.openSession();
 		Agent agent=(Agent) session.createQuery("from Agent where nom=?")
 				.setString(0, name).uniqueResult();
 		return agent;

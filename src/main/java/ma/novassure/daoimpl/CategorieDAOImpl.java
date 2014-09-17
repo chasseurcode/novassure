@@ -12,13 +12,15 @@ import org.hibernate.SessionFactory;
  */
 public class CategorieDAOImpl implements CategorieDAO {
 	SessionFactory sessionFactory;
+	Session session;
+
 
 	public CategorieDAOImpl() {
 		sessionFactory=HibernateUtil.getSessionFactory();
+		session=sessionFactory.openSession();
 	}
 
 	public void addCategorie(Categorie categorie) {
-		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(categorie);
 		session.getTransaction().commit();
@@ -26,28 +28,25 @@ public class CategorieDAOImpl implements CategorieDAO {
 	}
 
 	public void updateCategorie(Categorie categorie) {
-		Session session=sessionFactory.openSession();
+		session.beginTransaction();
 		session.update(categorie);
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	public Categorie findCategorieById(int id) {
-		Session session=sessionFactory.openSession();
 		Categorie categorie=(Categorie) session.createQuery("from Categorie where id=?")
 				.setInteger(0, id).uniqueResult();
 		return categorie;
 	}
 
 	public Categorie findCategorieByName(String libelle) {
-		Session session=sessionFactory.openSession();
-		Categorie categorie=(Categorie) session.createQuery("from Categorie where lebelle=?")
+		Categorie categorie=(Categorie) session.createQuery("from Categorie where libelle=?")
 				.setString(0, libelle).uniqueResult();
 		return categorie;
 	}
 
 	public Categorie findCategorieByCode(int code) {
-		Session session=sessionFactory.openSession();
 		Categorie categorie=(Categorie) session.createQuery("from Categorie where code=?")
 				.setInteger(0, code).uniqueResult();
 		return categorie;

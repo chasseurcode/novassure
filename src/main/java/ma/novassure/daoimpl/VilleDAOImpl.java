@@ -12,13 +12,16 @@ import org.hibernate.SessionFactory;
  */
 public class VilleDAOImpl implements VilleDAO {
 	SessionFactory sessionFactory;
+	Session session;
+
 
 	public VilleDAOImpl() {
 		sessionFactory=HibernateUtil.getSessionFactory();
+		session=sessionFactory.openSession();
+
 	}
 
 	public void addVille(Ville ville) {
-		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(ville);
 		session.getTransaction().commit();
@@ -26,21 +29,19 @@ public class VilleDAOImpl implements VilleDAO {
 	}
 
 	public void updateVille(Ville ville) {
-		Session session=sessionFactory.openSession();
+		session.beginTransaction();
 		session.update(ville);
 		session.getTransaction().commit();
 		session.close();		
 	}
 
 	public Ville findVilleById(int id) {
-		Session session=sessionFactory.openSession();
 		Ville ville=(Ville) session.createQuery("from Ville where id=?")
 				.setInteger(0, id).uniqueResult();
 		return ville;		
 	}
 
 	public Ville findVilleByName(String name) {
-		Session session=sessionFactory.openSession();
 		Ville ville=(Ville) session.createQuery("from Ville where nom=?")
 				.setString(0, name).uniqueResult();
 		return ville;

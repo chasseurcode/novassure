@@ -12,13 +12,16 @@ import ma.novassure.utils.HibernateUtil;
  */
 public class BrancheDAOImpl implements BrancheDAO {
 	SessionFactory sessionFactory;
+	Session session;
+
 	
     public BrancheDAOImpl() {
 		sessionFactory=HibernateUtil.getSessionFactory();
+		session=sessionFactory.openSession();
+
     }
 
 	public void addBranche(Branche branche) {
-		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(branche);
 		session.getTransaction().commit();
@@ -26,14 +29,12 @@ public class BrancheDAOImpl implements BrancheDAO {
 	}
 
 	public void updateBranche(Branche branche) {
-		Session session=sessionFactory.openSession();
 		session.update(branche);
 		session.getTransaction().commit();
 		session.close();		
 	}
 
 	public Branche findBrancheById(int id) {
-		Session session=sessionFactory.openSession();
 		Branche branche= (Branche) session.createQuery("from Branche where id=?")
 				.setInteger(0, id).uniqueResult();
 		return branche;
