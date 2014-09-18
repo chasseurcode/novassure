@@ -16,11 +16,8 @@ public class Garantie {
 	@Id @GeneratedValue
 	private int id;
 	private String libelle;
-	
 	@ManyToOne
 	private Categorie categorie;
-	@ManyToOne
-	private Branche branche;
 
 	public Garantie() {
 	}
@@ -38,21 +35,12 @@ public class Garantie {
 		this.libelle = libelle;
 	}
 
-
 	public Categorie getCategorie() {
 		return categorie;
 	}
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
-	}
-
-	public Branche getBranche() {
-		return branche;
-	}
-
-	public void setBranche(Branche branche) {
-		this.branche = branche;
 	}
 
 }

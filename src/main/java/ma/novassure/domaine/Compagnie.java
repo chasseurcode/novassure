@@ -30,6 +30,21 @@ public class Compagnie {
     public Compagnie() {
     }
      
+    
+    
+	public Compagnie(String code, String telephone, String adresse,
+			Ville ville, String faxe, String nom, List<Quittance> quittances) {
+		this.code = code;
+		this.telephone = telephone;
+		this.adresse = adresse;
+		this.ville = ville;
+		this.faxe = faxe;
+		this.nom = nom;
+		this.quittances = quittances;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

@@ -26,6 +26,12 @@ public class Ville {
 	
 	public Ville() {
 	}
+	
+	public Ville(String nom) {
+		super();
+		this.nom = nom;
+	}
+
 	public int getId() {
 		return id;
 	}

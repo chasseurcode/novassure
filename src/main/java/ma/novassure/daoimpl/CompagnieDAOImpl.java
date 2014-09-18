@@ -1,37 +1,44 @@
 package ma.novassure.daoimpl;
 
+import java.util.List;
+
 import ma.novassure.dao.CompagnieDAO;
 import ma.novassure.domaine.Compagnie;
+import ma.novassure.utils.HibernateUtil;
+
+import org.hibernate.Session;
 
 /**
  * @author TARAM & BODIE
  */
 public class CompagnieDAOImpl implements CompagnieDAO {
 
-    /**
-     * 
-     */
+    Session session;
+    
     public CompagnieDAOImpl() {
+    	session=HibernateUtil.getSession();
     }
 
-	public void addCompagnie(Compagnie compagnie) {
-		// TODO Auto-generated method stub
-		
+	public Compagnie addCompagnie(Compagnie compagnie) {
+		return null;
 	}
 
 	public void updateCompagnie(Compagnie compagnie) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	public void findCompagnieById(int id) {
-		// TODO Auto-generated method stub
-		
+	public Compagnie findCompagnieById(int id) {
+		return null;
 	}
 
-	public void findCompagnieByName(String name) {
-		// TODO Auto-generated method stub
+	public Compagnie findCompagnieByName(String name) {
 		
+		return null;
+	}
+
+	public List<Compagnie> findAllCompagnies() {
+
+		return null;
 	}
 
 }

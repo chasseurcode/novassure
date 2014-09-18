@@ -1,5 +1,7 @@
 package ma.novassure.dao;
 
+import java.util.List;
+
 import ma.novassure.domaine.Compagnie;
 
 /**
@@ -7,25 +9,14 @@ import ma.novassure.domaine.Compagnie;
  */
 public interface CompagnieDAO {
 
+    public Compagnie addCompagnie(Compagnie compagnie);
 
-    /**
-     * @param compagnie
-     */
-    public void addCompagnie(Compagnie compagnie);
-
-    /**
-     * @param compagnie
-     */
     public void updateCompagnie(Compagnie compagnie);
 
-    /**
-     * @param id
-     */
-    public void findCompagnieById(int id);
+    public Compagnie findCompagnieById(int id);
 
-    /**
-     * @param name
-     */
-    public void findCompagnieByName(String name);
-
+    public Compagnie findCompagnieByName(String name);
+    
+    public List<Compagnie> findAllCompagnies();
+    
 }
