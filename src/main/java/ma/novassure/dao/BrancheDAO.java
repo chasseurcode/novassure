@@ -1,5 +1,7 @@
 package ma.novassure.dao;
 
+import java.util.List;
+
 import ma.novassure.domaine.Branche;
 
 /**
@@ -11,7 +13,7 @@ public interface BrancheDAO {
     /**
      * @param branche
      */
-    public void addBranche(Branche branche);
+    public Branche addBranche(Branche branche);
 
     /**
      * @param branche
@@ -24,4 +26,5 @@ public interface BrancheDAO {
      */
     public Branche findBrancheById(int id);
 
+    public List<Branche> findAllBranches();
 }

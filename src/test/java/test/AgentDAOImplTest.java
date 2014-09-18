@@ -1,6 +1,7 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import ma.novassure.daoimpl.AgentDAOImpl;
 import ma.novassure.domaine.Agent;
 
@@ -12,10 +13,15 @@ import org.junit.Test;
 public class AgentDAOImplTest {
 	SessionFactory sessionFactory;
 	AgentDAOImpl impl;
-
+	Agent a1;
+	Agent a2;
+	Agent testAgent;
 	@Before
 	public void setUp() throws Exception {
-		impl=new AgentDAOImpl();		
+		impl=new AgentDAOImpl();	
+		a1=new Agent("001", "ali", "sanogo", "assabah", "ali@gmail.com", "0656282175");
+		a2=new Agent("002", "Mohamed", "Benali", "ocean", "benali@gmail.com", "0246282376");
+		impl.addAgent(a2);
 	}
 
 	@After
@@ -24,50 +30,31 @@ public class AgentDAOImplTest {
 
 	@Test
 	public void testAddAgent() {
-		Agent agent =new Agent();
-		agent.setAdresse("rabat");
-		agent.setCode("1b");
-		agent.setEmail("mail");
-		agent.setNom("toto");
-		agent.setPrenom("prenom");
-		agent.setTelephone("telephone");
-		impl.addAgent(agent);
-		assertNotNull(agent);
-		assertEquals("toto", agent.getNom());
+		testAgent=impl.addAgent(a1);
+		assertNotNull("L'id du nouveau agent doit etre different de null",testAgent.getId());
 	}
 
 	@Test
 	public void testUpdateAgent() {
-		Agent agent= impl.findAgentById(1);
-		agent.setNom("maj");
-		agent.setPrenom("lili");
-		agent.setTelephone("tel");
-		impl.updateAgent(agent);
-		assertNotNull(agent);
-		assertEquals("1a", agent.getCode());
-		assertEquals("maj", agent.getNom());	
-
+		testAgent=impl.findAgentById(1);
+		assertNotNull("L'id de l'agent retourné ne doit pas etre null", testAgent.getId());
+		
+		testAgent.setCode("A002");
+		impl.updateAgent(testAgent);
+		Agent newAgent =impl.findAgentById(1);
+		assertEquals("le code de l'agent retourné doit corespondre au changement", "A002",newAgent.getCode());
 	}
 
 	@Test
 	public void testFindAgentById() {
-		Agent agent= impl.findAgentById(1);
-		assertNotNull(agent);
-		assertEquals("1a", agent.getCode());		
+		testAgent=impl.findAgentById(1);
+		assertEquals("Le nom de l'agent doit etre Mohamed", "Mohamed", testAgent.getNom());
 	}
 
 	@Test
 	public void testFindAgentByCode() {
-		Agent agent= impl.findAgentByCode("1a");
-		assertNotNull(agent);
-		assertEquals("totyhhho", agent.getNom());	
+		
+		testAgent=impl.findAgentByCode("002");
+		assertEquals("le prenom de l'agent retourne doit etre Benali", "Benali",testAgent.getPrenom());
 	}
-
-	@Test
-	public void testFindAgentByName() {
-		Agent agent= impl.findAgentByName("totyhhho");
-		assertNotNull(agent);
-		assertEquals("totyhhho", agent.getNom());	
-	}
-
 }

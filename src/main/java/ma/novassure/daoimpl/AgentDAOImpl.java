@@ -1,37 +1,34 @@
 package ma.novassure.daoimpl;
 
+import java.util.List;
+
 import ma.novassure.dao.AgentDAO;
 import ma.novassure.domaine.Agent;
 import ma.novassure.utils.HibernateUtil;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  * @author TARAM & BODIE
  */
 public class AgentDAOImpl implements AgentDAO {
-	SessionFactory sessionFactory;
 	Session session;
-
-
+	
 	public AgentDAOImpl() {
-		sessionFactory=HibernateUtil.getSessionFactory();
-	     session=sessionFactory.openSession();	
+		session=HibernateUtil.getSession();
 	}
 
-	public void addAgent(Agent agent) {
+	public Agent addAgent(Agent agent) {
 		session.beginTransaction();
 		session.save(agent);
-		session.getTransaction().commit();
-		session.close();		
+		session.getTransaction().commit(); 
+		return agent;
 	}
 
 	public void updateAgent(Agent agent) {
 		session.beginTransaction();
 		session.update(agent);
-		session.getTransaction().commit();
-		session.close();		
+		session.getTransaction().commit();		
 	}
 	public Agent findAgentById(int id) {
 		Agent agent=(Agent) session.createQuery("from Agent where id=?")
@@ -51,6 +48,9 @@ public class AgentDAOImpl implements AgentDAO {
 		return agent;
 	}
 
-
+	@SuppressWarnings("unchecked")
+	public List<Agent> findAllAgents() {
+		return session.createQuery("From Agent").list();
+	}
 
 }

@@ -1,38 +1,36 @@
 package ma.novassure.daoimpl;
 
+import java.util.List;
+
 import ma.novassure.dao.CategorieDAO;
 import ma.novassure.domaine.Categorie;
 import ma.novassure.utils.HibernateUtil;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  * @author TARAM & BODIE
  */
 public class CategorieDAOImpl implements CategorieDAO {
-	SessionFactory sessionFactory;
 	Session session;
 
 
 	public CategorieDAOImpl() {
-		sessionFactory=HibernateUtil.getSessionFactory();
-		session=sessionFactory.openSession();
+		session=HibernateUtil.getSession();
 	}
 
-	public void addCategorie(Categorie categorie) {
+	public Categorie addCategorie(Categorie categorie) {
 		session.beginTransaction();
 		session.save(categorie);
 		session.getTransaction().commit();
-		session.close();
+		return categorie;
 	}
 
 	public void updateCategorie(Categorie categorie) {
 		session.beginTransaction();
 		session.update(categorie);
 		session.getTransaction().commit();
-		session.close();
-	}
+		}
 
 	public Categorie findCategorieById(int id) {
 		Categorie categorie=(Categorie) session.createQuery("from Categorie where id=?")
@@ -46,10 +44,15 @@ public class CategorieDAOImpl implements CategorieDAO {
 		return categorie;
 	}
 
-	public Categorie findCategorieByCode(int code) {
+	public Categorie findCategorieByCode(String code) {
 		Categorie categorie=(Categorie) session.createQuery("from Categorie where code=?")
-				.setInteger(0, code).uniqueResult();
+				.setString(0, code).uniqueResult();
 		return categorie;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Categorie> findAllCategories() {
+		return session.createQuery("From Categorie").list();
 	}
 
 }

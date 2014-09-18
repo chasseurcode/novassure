@@ -19,11 +19,18 @@ public class Branche {
     private int id;
     private String libelle;
     @OneToMany
-    private List<Garantie> garanties;
+    private List<Categorie> categories;
     
     public Branche() {
     }
-   
+    
+    
+	public Branche(String libelle) {
+		super();
+		this.libelle = libelle;
+	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -36,11 +43,16 @@ public class Branche {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	public List<Garantie> getGaranties() {
-		return garanties;
+
+
+	public List<Categorie> getCategories() {
+		return categories;
 	}
-	public void setGaranties(List<Garantie> garanties) {
-		this.garanties = garanties;
+
+
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
 	}
+		
 
 }

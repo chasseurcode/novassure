@@ -32,6 +32,17 @@ public class Agent {
     }
        
     
+	public Agent(String code, String nom, String prenom, String adresse,
+			String email, String telephone) { 
+		this.code = code;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.email = email;
+		this.telephone = telephone;
+	}
+
+
 	public String getCode() {
 		return code;
 	}

@@ -70,7 +70,7 @@ public class HibernateUtil {
 			return sessionFactory;
 		}
 		
-		public Session getSession(){
+		public static Session getSession(){
 			return getSessionFactory().openSession();
 		}
 	 

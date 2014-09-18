@@ -2,6 +2,7 @@ package ma.novassure.domaine;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,14 +18,20 @@ public class Categorie {
 	@Id @GeneratedValue
 	private int id;
 	private String libelle;
-	private int code;
-	@OneToMany
+	private String code;
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Garantie> garanties;
 
-
+ public Categorie() {}
 	public int getId() {
 		return id;
 	}
+	
+	public Categorie(String libelle, String code) {
+		this.libelle = libelle;
+		this.code = code;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -34,10 +41,10 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public List<Garantie> getGaranties() {
@@ -46,5 +53,4 @@ public class Categorie {
 	public void setGaranties(List<Garantie> garanties) {
 		this.garanties = garanties;
 	} 
-
 }

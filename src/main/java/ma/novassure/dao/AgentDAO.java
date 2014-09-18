@@ -1,5 +1,7 @@
 package ma.novassure.dao;
 
+import java.util.List;
+
 import ma.novassure.domaine.Agent;
 
 /**
@@ -11,7 +13,7 @@ public interface AgentDAO {
     /**
      * @param agent
      */
-    public void addAgent(Agent agent);
+    public Agent addAgent(Agent agent);
 
     /**
      * @param agent
@@ -35,7 +37,7 @@ public interface AgentDAO {
      */
     public Agent findAgentByName(String name);
     
-   
-
+    public List<Agent> findAllAgents();
+    
 
 }
