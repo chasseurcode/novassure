@@ -21,6 +21,13 @@ public class Garantie {
 
 	public Garantie() {
 	}
+	
+	
+	public Garantie(String libelle) {
+		super();
+		this.libelle = libelle;
+	}
+
 
 	public int getId() {
 		return id;

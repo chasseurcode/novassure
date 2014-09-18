@@ -1,13 +1,18 @@
 package test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import ma.novassure.daoimpl.CategorieDAOImpl;
 import ma.novassure.domaine.Categorie;
+import ma.novassure.domaine.Garantie;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class CategorieDAOImplTest {
    CategorieDAOImpl impl;
@@ -33,12 +38,21 @@ public class CategorieDAOImplTest {
 	@Test
 	public void testUpdateCategorie() {
 		testCat=null;
+		List<Garantie> garanties=new ArrayList<Garantie>();
+		garanties.add(new Garantie("ALPHA"));
+		garanties.add(new Garantie("BETA"));
+		garanties.add(new Garantie("GAMMA"));
 		testCat=impl.findCategorieById(1);
 		testCat.setCode("40");
+		testCat.setGaranties(garanties);
 		impl.updateCategorie(testCat);
 		testCat=null;
 		testCat=impl.findCategorieById(1);
 		assertEquals("Le code de la nouvelle categorie doit etre 40", "40", testCat.getCode());
+		garanties=null;
+		garanties=testCat.getGaranties();
+		assertNotNull("La liste des garranties ne doit pas etre null", garanties);
+		assertEquals("La taille de la liste des garantie doit etre de 3", 3, garanties.size() );
 	}
 
 	@Test
