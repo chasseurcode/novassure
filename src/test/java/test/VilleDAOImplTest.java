@@ -1,8 +1,10 @@
 package test;
 
 import static org.junit.Assert.*;
+import ma.novassure.dao.VilleDAO;
 import ma.novassure.daoimpl.VilleDAOImpl;
 import ma.novassure.domaine.Ville;
+import ma.novassure.utils.HibernateUtil;
 
 import org.hibernate.SessionFactory;
 import org.junit.After;
@@ -10,12 +12,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class VilleDAOImplTest {
-	SessionFactory sessionFactory;
-	VilleDAOImpl impl;
-
+	VilleDAO villeDao;
+	Ville v1,v2,villeTest;
 	@Before
 	public void setUp() throws Exception {
-		impl=new VilleDAOImpl();
+		villeDao=new VilleDAOImpl(HibernateUtil.getSession());
+		v1=new Ville("Rabat");
+		villeDao.addVille(v1);
 	}
 
 	@After
@@ -24,36 +27,39 @@ public class VilleDAOImplTest {
 
 	@Test
 	public void testAddVille() {
-		Ville ville=new Ville();
-		ville.setCode("123");
-		ville.setNom("kenitra");
-		impl.addVille(ville);
-		assertNotNull(ville);
-		assertEquals("kenitra", ville.getNom());
+		v2=villeDao.addVille(new Ville("Casa"));
+		assertNotNull("L'id de la nouvelle ville doit etre differnt de null", v2);
 	}
 
 	@Test
 	public void testUpdateVille() {
-		Ville ville=impl.findVilleById(1);
-		ville.setNom("oujdaa");
-		impl.updateVille(ville);
-		assertNotNull(ville);
-		assertEquals("oujdaa", ville.getNom());
-
+		villeTest=null;
+		villeTest=villeDao.findVilleById(1);
+		assertNotNull("La ville retourné doit etre différent de null", villeTest);
+		
+		villeTest.setNom("Marrakech");
+		villeDao.updateVille(villeTest);
+		villeTest=null;
+		villeTest=villeDao.findVilleById(1);
+		assertNotNull("La ville retourné doit etre différent de null", villeTest);
+		assertEquals("Le nom de la ville doit etre Marrakech", "Marrakech", villeTest.getNom());
 	}
 
 	@Test
 	public void testFindVilleById() {
-		Ville ville=impl.findVilleById(2);
-		assertNotNull(ville);
-		assertEquals("kenitra", ville.getNom());
+	villeTest=null;
+	villeTest=villeDao.findVilleById(1);
+	assertNotNull("La ville doit etre different de null", villeTest);
+	assertEquals("Le nom de la ville doit Rabat", "Rabat", villeTest.getNom());
 	}
 
 	@Test
 	public void testFindVilleByName() {
-		Ville ville=impl.findVilleByName("oujdaa");
-		assertNotNull(ville);
-		assertEquals("oujdaa", ville.getNom());
+		villeDao.addVille(new Ville("Settat"));
+		villeTest=null;
+		villeTest=villeDao.findVilleByName("Settat");
+		assertNotNull("La ville doit etre different de null", villeTest);
+		assertEquals("Le nom de la ville doit Settat", "Settat", villeTest.getNom());
 	}
 
 }
