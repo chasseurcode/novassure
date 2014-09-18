@@ -1,5 +1,7 @@
 package test;
 
+import java.util.List;
+
 import ma.novassure.daoimpl.BrancheDAOImpl;
 import ma.novassure.domaine.Branche;
 import ma.novassure.utils.HibernateUtil;
@@ -54,13 +56,11 @@ public class BrancheDAOImplTest {
 	
 	@Test
 	public void testgetAllBranches() {
-		int fisrtNumber=impl.findAllBranches().size();
-		int total=fisrtNumber+2;
 		impl.addBranche(b1);
 		impl.addBranche(b2);
-		int newNumber=impl.findAllBranches().size();
-		
-		assertEquals("Le nombre d'enregistrement retourné doit etre "+total, total, newNumber);
+		List<Branche> branches=impl.findAllBranches();
+		assertNotNull("La liste des branche ne doit pas etre null", branches);
+		assertNotEquals("La taille de la liste doit etre différent de 0", 0, branches.size());
 	}
 
 }
