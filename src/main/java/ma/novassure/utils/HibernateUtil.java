@@ -7,9 +7,11 @@ import ma.novassure.domaine.Categorie;
 import ma.novassure.domaine.Client;
 import ma.novassure.domaine.Compagnie;
 import ma.novassure.domaine.Document;
+import ma.novassure.domaine.Entreprise;
 import ma.novassure.domaine.Garantie;
 import ma.novassure.domaine.LigneGarantie;
 import ma.novassure.domaine.Paiement;
+import ma.novassure.domaine.Particulier;
 import ma.novassure.domaine.Quittance;
 import ma.novassure.domaine.Role;
 import ma.novassure.domaine.TypeQuittance;
@@ -53,6 +55,8 @@ public class HibernateUtil {
 				configuration.addAnnotatedClass(Document.class);
 				configuration.addAnnotatedClass(LigneGarantie.class);
 				configuration.addAnnotatedClass(Client.class);
+				configuration.addAnnotatedClass(Entreprise.class);
+				configuration.addAnnotatedClass(Particulier.class);
 
 				
 				serviceRegistry = new ServiceRegistryBuilder()

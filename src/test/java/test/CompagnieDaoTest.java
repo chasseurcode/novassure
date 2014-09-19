@@ -9,6 +9,7 @@ import java.util.List;
 import ma.novassure.dao.CompagnieDAO;
 import ma.novassure.daoimpl.CompagnieDAOImpl;
 import ma.novassure.domaine.Compagnie;
+import ma.novassure.utils.HibernateUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class CompagnieDaoTest{
 	
 	@Before
 	public void setUp() {
-		compDao=new CompagnieDAOImpl();	
+		compDao=new CompagnieDAOImpl(HibernateUtil.getSession());	
 		c1=new Compagnie("001", "0928826633", "Boulevard", null, "0928826633", "AXA Assurance", null);
 		compDao.addCompagnie(c1);
 	}

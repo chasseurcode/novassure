@@ -4,7 +4,6 @@ import java.util.List;
 
 import ma.novassure.dao.AgentDAO;
 import ma.novassure.domaine.Agent;
-import ma.novassure.utils.HibernateUtil;
 
 import org.hibernate.Session;
 
@@ -12,10 +11,10 @@ import org.hibernate.Session;
  * @author TARAM & BODIE
  */
 public class AgentDAOImpl implements AgentDAO {
-	Session session;
+	private Session session;
 	
-	public AgentDAOImpl() {
-		session=HibernateUtil.getSession();
+	public AgentDAOImpl(Session session) {
+		this.session=session;
 	}
 
 	public Agent addAgent(Agent agent) {
@@ -31,26 +30,32 @@ public class AgentDAOImpl implements AgentDAO {
 		session.getTransaction().commit();		
 	}
 	public Agent findAgentById(int id) {
-		Agent agent=(Agent) session.createQuery("from Agent where id=?")
-				.setInteger(0, id).uniqueResult();
-		return agent;
+		return (Agent) session.get(Agent.class, id);
 	}
 
 	public Agent findAgentByCode(String code) {
-		Agent agent=(Agent) session.createQuery("from Agent where code=?")
-				.setString(0, code).uniqueResult();
+		Agent agent=(Agent) session.createQuery("from Agent where code= :code")
+				.setString("code", code).uniqueResult();
 		return agent;
 	}
 
 	public Agent findAgentByName(String name) {
-		Agent agent=(Agent) session.createQuery("from Agent where nom=?")
-				.setString(0, name).uniqueResult();
+		Agent agent=(Agent) session.createQuery("from Agent where nom= :name")
+				.setString("name", name).uniqueResult();
 		return agent;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Agent> findAllAgents() {
 		return session.createQuery("From Agent").list();
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
 	}
 
 }

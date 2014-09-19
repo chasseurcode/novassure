@@ -21,7 +21,7 @@ public class BrancheDAOImplTest {
 
 	@Before
 	public void setUp() throws Exception {
-		impl=new BrancheDAOImpl();
+		impl=new BrancheDAOImpl(HibernateUtil.getSession());
 		b1=new Branche("libelle1");
 		b2=new Branche("libelle2");
 		impl.addBranche(b1);

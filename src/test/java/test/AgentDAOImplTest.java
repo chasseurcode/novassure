@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import ma.novassure.daoimpl.AgentDAOImpl;
 import ma.novassure.domaine.Agent;
+import ma.novassure.utils.HibernateUtil;
 
 import org.hibernate.SessionFactory;
 import org.junit.After;
@@ -18,7 +19,7 @@ public class AgentDAOImplTest {
 	Agent testAgent;
 	@Before
 	public void setUp() throws Exception {
-		impl=new AgentDAOImpl();	
+		impl=new AgentDAOImpl(HibernateUtil.getSession());	
 		a1=new Agent("001", "ali", "sanogo", "assabah", "ali@gmail.com", "0656282175");
 		a2=new Agent("002", "Mohamed", "Benali", "ocean", "benali@gmail.com", "0246282376");
 		impl.addAgent(a2);

@@ -11,7 +11,7 @@ import org.hibernate.Session;
  * @author TARAM & BODIE
  */
 public class VilleDAOImpl implements VilleDAO {
-	Session session;
+	private Session session;
 
 
 	public VilleDAOImpl(Session session) {
@@ -37,14 +37,22 @@ public class VilleDAOImpl implements VilleDAO {
 	}
 
 	public Ville findVilleByName(String name) {
-		Ville ville=(Ville) session.createQuery("from Ville where nom=?")
-				.setString(0, name).uniqueResult();
+		Ville ville=(Ville) session.createQuery("from Ville where nom= :nom")
+				.setString("nom", name).uniqueResult();
 		return ville;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Ville> findAllVille() {
 		return session.createQuery("From Ville").list();
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
 	}
 
 }

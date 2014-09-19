@@ -9,6 +9,7 @@ import java.util.List;
 import ma.novassure.daoimpl.CategorieDAOImpl;
 import ma.novassure.domaine.Categorie;
 import ma.novassure.domaine.Garantie;
+import ma.novassure.utils.HibernateUtil;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +21,7 @@ public class CategorieDAOImplTest {
    
 	@Before
 	public void setUp() throws Exception {
-		impl=new CategorieDAOImpl();
+		impl=new CategorieDAOImpl(HibernateUtil.getSession());
 		impl.addCategorie(new Categorie("cat1", "10"));
 	}
 

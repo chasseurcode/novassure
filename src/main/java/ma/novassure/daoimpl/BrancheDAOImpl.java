@@ -4,22 +4,17 @@ import java.util.List;
 
 import ma.novassure.dao.BrancheDAO;
 import ma.novassure.domaine.Branche;
-import ma.novassure.utils.HibernateUtil;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  * @author TARAM & BODIE
  */
 public class BrancheDAOImpl implements BrancheDAO {
-	SessionFactory sessionFactory;
-	Session session;
+private	Session session;
 
-	
-    public BrancheDAOImpl() {
-		sessionFactory=HibernateUtil.getSessionFactory();
-		session=sessionFactory.openSession();
+    public BrancheDAOImpl(Session session) {
+		this.session=session;
 
     }
 
@@ -37,14 +32,20 @@ public class BrancheDAOImpl implements BrancheDAO {
 	}
 
 	public Branche findBrancheById(int id) {
-		Branche branche= (Branche) session.createQuery("from Branche where id=?")
-				.setInteger(0, id).uniqueResult();
-		return branche;
+		return (Branche) session.get(Branche.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Branche> findAllBranches() {
 		return session.createQuery("From Branche").list();
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
 	}
 
 }

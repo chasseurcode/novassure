@@ -39,15 +39,14 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	public User findUserByUsername(String username) {
-		User user=(User) session.createQuery("from User where username=?")
-				.setString(0, username).uniqueResult();
-		return user;
+		return (User) session.createQuery("from User where username=:username")
+				.setString("username", username)
+				.uniqueResult();
 	}
 
 	public User findUserByEmail(String email) {
-		User user=(User) session.createQuery("from User where email=?")
-				.setString(0, email).list().get(0);
-		return user;
+		return (User) session.createQuery("from User where email= :mail")
+				.setString("mail", email).uniqueResult(); 
 	}
 
 	@SuppressWarnings("unchecked")

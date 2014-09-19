@@ -16,18 +16,6 @@ public class Entreprise extends Client {
 	}
 
 
-	public Entreprise(String nom, String adresse, 
-			Ville ville, String telephone, String email,
-			String faxe,String nrc, String patente, 
-			String raisonSociale) {
-		
-		super(nom, adresse, ville, telephone, email, faxe);
-		this.nrc=nrc;
-		this.patente=patente;
-		this.raisonSociale=raisonSociale;
-	}
-
-
 	public String getNrc() {
 		return nrc;
 	}

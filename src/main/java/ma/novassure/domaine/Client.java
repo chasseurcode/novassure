@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -19,7 +20,7 @@ import javax.persistence.OneToMany;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Client {
 
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.TABLE)
 	private int id;
 	protected String nom;
 	protected String adresse;
@@ -34,19 +35,6 @@ public abstract class Client {
 
 	public Client() {
 	}
-
-	
-	public Client(String nom, String adresse, Ville ville, String telephone,
-			String email, String faxe) {
-		super();
-		this.nom = nom;
-		this.adresse = adresse;
-		this.ville = ville;
-		this.telephone = telephone;
-		this.email = email;
-		this.faxe = faxe;
-	}
-
 
 	public int getId() {
 		return id;

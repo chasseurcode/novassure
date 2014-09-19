@@ -6,6 +6,8 @@ import org.hibernate.Session;
 
 import ma.novassure.dao.ClientDAO;
 import ma.novassure.domaine.Client;
+import ma.novassure.domaine.Entreprise;
+import ma.novassure.domaine.Particulier;
 
 /**
  * @author TARAM & BODIE
@@ -18,28 +20,43 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
 	public void updateClient(Client client) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.update(client);
+		session.flush();
+		session.getTransaction().commit();
 	}
 
 	public Client findClientById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Client) session.get(Client.class, id);
 	}
 
 	public Client findClientByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return (Client) session.createQuery("From Client where nom= :nom")
+									.setString("nom", name)
+									.uniqueResult();
 	}
 
 	public Client addClient(Client client) {
-		// TODO Auto-generated method stub
-		return null;
+		session.beginTransaction();
+		session.save(client);
+		session.getTransaction().commit();
+		return client;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Client> findAllClients() {
-		// TODO Auto-generated method stub
-		return null;
+		return session.createQuery("From Client").list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Entreprise> findAllEntreprises() {
+		return session.createQuery("From Entreprise").list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Particulier> findAllParticuliers() {
+		return session.createQuery("From Particulier").list();
 	}
 
 }

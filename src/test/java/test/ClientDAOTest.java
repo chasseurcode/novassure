@@ -40,6 +40,7 @@ public class ClientDAOTest {
 		entrep1.setNom("AXA");
 		entrep1.setNrc("10RC");
 		testClient=clientDao.addClient(entrep1);
+		assertNotNull("Le client retourné ne doit pas etre null", testClient);
 		assertNotNull("L'id du cilent ne noi pas etre null", testClient.getId());
 		
 		part2=new Particulier();
@@ -76,7 +77,6 @@ public class ClientDAOTest {
 
 	@Test
 	public void testFindClientByName() {
-
 		Entreprise e1=(Entreprise) clientDao.findClientByName("BoniSoft");
 		assertNotNull("Le client retourné ne doit pas etre null", e1);
 		assertEquals("Le nom du client doit etre ", "002992333", e1.getTelephone());
@@ -87,6 +87,18 @@ public class ClientDAOTest {
 		List<Client> clients=clientDao.findAllClients();
 		assertNotNull("La liste de client ne doit pas etre null", clients);
 		assertNotEquals("La taille de la liste des client doit etre different de 0", 0, clients.size());
+	}
+	
+	public void testFindAllEntreprises() {
+		List<Entreprise> entreprises=clientDao.findAllEntreprises();
+		assertNotNull("La liste d'entreprise ne doit pas ere null", entreprises);
+		assertNotEquals("La taille de la liste doit etre superieur a 0",0, entreprises.size());
+	}
+	
+	public void testFindAllParticuliers() {
+		List<Particulier> particuliers=clientDao.findAllParticuliers();
+		assertNotNull("La liste d'entreprise ne doit pas ere null", particuliers);
+		assertNotEquals("La taille de la liste doit etre superieur a 0",0, particuliers.size());
 	}
 
 }
