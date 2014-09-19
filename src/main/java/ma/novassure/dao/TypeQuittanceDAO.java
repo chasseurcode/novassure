@@ -1,5 +1,7 @@
 package ma.novassure.dao;
 
+import java.util.List;
+
 import ma.novassure.domaine.TypeQuittance;
 
 /**
@@ -7,27 +9,14 @@ import ma.novassure.domaine.TypeQuittance;
  */
 public interface TypeQuittanceDAO {
 
+    public TypeQuittance addTypeQuittance(TypeQuittance typeQuittance);
 
-    /**
-     * @param typeQuittance
-     */
-    public void addTypeQuittance(TypeQuittance typeQuittance);
-
-    /**
-     * @param typeQuittance
-     */
     public void updateTypeQuittance(TypeQuittance typeQuittance);
 
-    /**
-     * @param libelle 
-     * @return
-     */
     public TypeQuittance findTypeQuittanceByLibelle(String libelle);
 
-    /**
-     * @param id 
-     * @return
-     */
     public TypeQuittance findTypeQuittanceById(int id);
+    
+    public List<TypeQuittance> findAllTypes();
 
 }

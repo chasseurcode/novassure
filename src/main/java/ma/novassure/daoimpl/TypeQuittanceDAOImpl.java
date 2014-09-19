@@ -1,5 +1,9 @@
 package ma.novassure.daoimpl;
 
+import java.util.List;
+
+import org.hibernate.Session;
+
 import ma.novassure.dao.TypeQuittanceDAO;
 import ma.novassure.domaine.TypeQuittance;
 
@@ -8,30 +12,37 @@ import ma.novassure.domaine.TypeQuittance;
  */
 public class TypeQuittanceDAOImpl implements TypeQuittanceDAO {
 
-    /**
-     * 
-     */
-    public TypeQuittanceDAOImpl() {
+    private Session session;
+    public TypeQuittanceDAOImpl(Session session) {
+    	this.session=session;
     }
 
-	public void addTypeQuittance(TypeQuittance typeQuittance) {
-		// TODO Auto-generated method stub
-		
+	public TypeQuittance addTypeQuittance(TypeQuittance typeQuittance) {
+		return typeQuittance;
 	}
 
 	public void updateTypeQuittance(TypeQuittance typeQuittance) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public TypeQuittance findTypeQuittanceByLibelle(String libelle) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public TypeQuittance findTypeQuittanceById(int id) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<TypeQuittance> findAllTypes() {
+				return null;
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
 	}
 
 }

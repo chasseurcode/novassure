@@ -18,6 +18,14 @@ public class TypeQuittance {
 
 	public TypeQuittance() {
 	}
+	
+	
+	public TypeQuittance(String libelle) {
+		super();
+		this.libelle = libelle;
+	}
+
+
 	public String getLibelle() {
 		return libelle;
 	}
