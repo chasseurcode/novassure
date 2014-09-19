@@ -1,12 +1,12 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import ma.novassure.dao.VilleDAO;
 import ma.novassure.daoimpl.VilleDAOImpl;
 import ma.novassure.domaine.Ville;
 import ma.novassure.utils.HibernateUtil;
 
-import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

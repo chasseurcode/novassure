@@ -1,5 +1,7 @@
 package ma.novassure.dao;
 
+import java.util.List;
+
 import ma.novassure.domaine.Client;
 
 /**
@@ -7,27 +9,14 @@ import ma.novassure.domaine.Client;
  */
 public interface ClientDAO {
 
+    public Client addClient(Client client);
 
-    /**
-     * @param client
-     */
-    public void addClient(Client client);
-
-    /**
-     * @param client
-     */
     public void updateClient(Client client);
 
-    /**
-     * @param id 
-     * @return
-     */
     public Client findClientById(int id);
 
-    /**
-     * @param name 
-     * @return
-     */
     public Client findClientByName(String name);
+    
+    public List<Client> findAllClients();
 
 }

@@ -36,6 +36,18 @@ public abstract class Client {
 	}
 
 	
+	public Client(String nom, String adresse, Ville ville, String telephone,
+			String email, String faxe) {
+		super();
+		this.nom = nom;
+		this.adresse = adresse;
+		this.ville = ville;
+		this.telephone = telephone;
+		this.email = email;
+		this.faxe = faxe;
+	}
+
+
 	public int getId() {
 		return id;
 	}
