@@ -1,5 +1,6 @@
 package ma.novassure.domaine;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ public class TypeQuittance {
 
 	@Id @GeneratedValue
 	private int id;
+	@Column(unique=true)
 	private String libelle;
 
 	public TypeQuittance() {

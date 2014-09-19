@@ -2,6 +2,7 @@ package ma.novassure.domaine;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ public class Role implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;
+	@Column(unique=true)
 	private String name;
 
 	public Role() {

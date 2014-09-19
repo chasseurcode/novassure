@@ -18,19 +18,27 @@ public class TypeQuittanceDAOImpl implements TypeQuittanceDAO {
     }
 
 	public TypeQuittance addTypeQuittance(TypeQuittance typeQuittance) {
+		session.beginTransaction();
+		session.save(typeQuittance);
+		session.getTransaction().commit();
 		return typeQuittance;
 	}
 
 	public void updateTypeQuittance(TypeQuittance typeQuittance) {
-		
+		session.beginTransaction();
+		session.update(typeQuittance);
+		session.flush();
+		session.getTransaction().commit();
 	}
 
 	public TypeQuittance findTypeQuittanceByLibelle(String libelle) {
-		return null;
+		return (TypeQuittance) session.createQuery("From TypeQuittance where libelle= :lib")
+				.setString("lib", libelle)
+				.uniqueResult();
 	}
 
 	public TypeQuittance findTypeQuittanceById(int id) {
-		return null;
+		return (TypeQuittance) session.get(TypeQuittance.class, id);
 	}
 
 	public List<TypeQuittance> findAllTypes() {
