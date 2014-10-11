@@ -8,6 +8,11 @@
 		<pattern value="/login" />
 		<view-id value="/login.xhtml" />
 	</url-mapping>
+	
+	<url-mapping id="home">
+		<pattern value="/" />
+		<view-id value="/index.xhtml" />
+	</url-mapping>
 
 	<!-- Users -->
 	<url-mapping id="createUser">

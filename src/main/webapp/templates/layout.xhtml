@@ -18,7 +18,7 @@
 		</p:layoutUnit>
 		<p:layoutUnit position="west" size="255">
 			<h:form>
-				<p:panelMenu>
+				<p:panelMenu style="margin-left:10px;">
 					<p:submenu label="Quittances/Polices">
 						<p:submenu label="Affaire">
 							<p:menuitem value="Nouvelle quittances" />
@@ -38,6 +38,10 @@
 							<p:menuitem value="Gestion des utilisateurs" url="/users" />
 						</p:submenu>
 					</sec:ifAnyGranted>
+					<p:submenu label="Administration">
+						<p:menuitem value="Essai" />
+					</p:submenu>
+					
 				</p:panelMenu>
 			</h:form>
 			<ui:insert name="menu" />
