@@ -23,12 +23,16 @@
 		<pattern value="/users" />
 		<view-id value="/pages/users/index.xhtml" />
 	</url-mapping>
-
-
 	<url-mapping id="useredit">
 		<pattern value="/users/#{userBean.findName}" />
 		<view-id value="/pages/users/edit.xhtml" />
 		<action>#{userBean.load}</action>
+	</url-mapping>
+	
+	<!-- Clients  -->
+	<url-mapping id="clients">
+		<pattern value="/clients" />
+		<view-id value="/pages/clients/index.xhtml" />
 	</url-mapping>
 
 </pretty-config>
