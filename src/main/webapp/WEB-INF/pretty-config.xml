@@ -34,5 +34,11 @@
 		<pattern value="/clients" />
 		<view-id value="/pages/clients/index.xhtml" />
 	</url-mapping>
+	
+	<!-- Agents -->
+		<url-mapping id="agents">
+		<pattern value="/agents" />
+		<view-id value="/pages/agents/index.xhtml" />
+	</url-mapping>
 
 </pretty-config>

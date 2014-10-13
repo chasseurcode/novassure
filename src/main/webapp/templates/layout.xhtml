@@ -10,6 +10,7 @@
 	<title>Novassure</title>
 	<h:outputStylesheet name="css/style.css" />
 	<h:outputScript name="js/novassure.js" />
+	<h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
 </h:head>
 <body>
 	<p:layout fullPage="true">
@@ -39,7 +40,7 @@
 						</p:submenu>
 					</sec:ifAnyGranted>
 					<p:submenu label="Administration">
-						<p:menuitem value="Essai" />
+						<p:menuitem value="gérer les agents" url="/agents"/>
 					</p:submenu>
 					
 				</p:panelMenu>
