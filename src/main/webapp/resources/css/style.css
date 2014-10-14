@@ -23,3 +23,15 @@
 .ui-datatable table a{
 	font-size: 0.6em;
 }
+
+.ui-button .ui-button-text{
+	font-size: 0.8em;
+}
+
+.ui-dialog .ui-dialog-titlebar{
+	font-size: 0.8em;
+}
+
+td{
+	font-size: 0.7em;
+}

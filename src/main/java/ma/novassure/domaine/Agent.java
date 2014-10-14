@@ -24,6 +24,7 @@ public class Agent {
     private String adresse;
     private String email;
     private String telephone;
+    private boolean enabled=true;
     @OneToMany(cascade=CascadeType.ALL)
     private List<Quittance> quittances;
     
@@ -94,6 +95,16 @@ public class Agent {
 
 	public void setQuittances(List<Quittance> quittances) {
 		this.quittances = quittances;
+	}
+
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 }

@@ -14,40 +14,63 @@
 <body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="contenu">
-			<p:commandButton value="Nouveau agent" type="button"
-				onclick="PF('nouveuAgent').show();" />
 
-			<p:dialog widgetVar="nouveuAgent" header="Nouveau Agent">
+			<ui:include src="/pages/agents/create.xhtml" />
 
-
-			</p:dialog>
-			<h:form id="newagent">
-				<p:panelGrid columns="2" layout="grid"
-					style="margin:10px;height:500px;width:450px">
-					<h:outputText value="Code" />
-					<p:inputText id="code" value="#{agentBean.agent.code}"
-						required="true" />
-
-					<h:outputText value="Nom" />
-					<p:inputText id="nom" value="#{agentBean.agent.nom}" />
-
-					<h:outputText value="Prénom" />
-					<p:inputText id="prenom" value="#{agentBean.agent.prenom}" />
-
-					<h:outputText value="Adresse" />
-					<p:inputText id="adresse" value="#{agentBean.agent.adresse}" />
-
-					<h:outputText value="E-mail" />
-					<p:inputText id="email" value="#{agentBean.agent.email}" />
-
-					<h:outputText value="Telephone" />
-					<p:inputText id="tel" value="#{agentBean.agent.telephone}" />
-
-					<p:commandButton value="Annuler" />
-					<h:commandButton value="Valider" action="#{agentBean.addAgent}" />
-				</p:panelGrid>
-				<h:messages/>
-			</h:form>
+			<p:dataTable id="listAgent" style="margin:10px;" var="myAgent"
+				value="#{agentBean.agents}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="code" />
+					</f:facet>
+					<h:outputText value="#{myAgent.code}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nom" />
+					</f:facet>
+					<h:outputText value="#{myAgent.nom}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Prénom" />
+					</f:facet>
+					<h:outputText value="#{myAgent.prenom}" />
+				</p:column>
+				<!-- 
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Adresse" />
+					</f:facet>
+					<h:outputText value="#{myAgent.adresse}" />
+				</p:column>
+				 -->
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="E-mail" />
+					</f:facet>
+					<h:outputText value="#{myAgent.email}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Telephone" />
+					</f:facet>
+					<h:outputText value="#{myAgent.telephone}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="" />
+					</f:facet>
+					<p:commandButton icon="ui-icon-pencil" update=":edit" actionListener="#{agentBean.load(myAgent)}" 
+					oncomplete="PF('editAgent').show();">
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-trash" update="listAgent"
+						actionListener="#{agentBean.remove(myAgent)}" />
+				</p:column>
+			</p:dataTable>
+			<ui:include src="/pages/agents/edit.xhtml" />
+			<p:commandButton icon="ui-icon-plusthick" style="margin-left:10px;" value="Nouveau"
+				type="button" onclick="PF('nouveuAgent').show();" />
 		</ui:define>
 	</ui:composition>
 </body>

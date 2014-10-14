@@ -39,5 +39,7 @@ public interface AgentDAO {
     
     public List<Agent> findAllAgents();
     
+    public List<Agent> findAllEnabledAgents();
+    
 
 }

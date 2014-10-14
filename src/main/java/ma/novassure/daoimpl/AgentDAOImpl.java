@@ -12,6 +12,8 @@ import org.hibernate.Session;
  */
 public class AgentDAOImpl implements AgentDAO {
 	private Session session;
+	public AgentDAOImpl() {
+	}
 	
 	public AgentDAOImpl(Session session) {
 		this.session=session;
@@ -56,6 +58,11 @@ public class AgentDAOImpl implements AgentDAO {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Agent> findAllEnabledAgents() {
+		return session.createQuery("From Agent where enabled= :status").setBoolean("status",true).list();
 	}
 
 }
