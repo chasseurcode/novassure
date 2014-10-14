@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+      
+    </h:head>
+     
+    <h:body>		
+			<p:dialog widgetVar="editAgent" header="Edition Agent" draggable="false">
+
+				<h:form id="edit">
+					<h:panelGrid  columns="2" cellpadding="7" style="width:450px;">
+						<h:outputText value="Code" />
+						<p:inputText id="code" value="#{agentBean.agent.code}"
+							required="true" />
+
+						<h:outputText value="Nom" />
+						<p:inputText id="nom" value="#{agentBean.agent.nom}" />
+
+						<h:outputText value="Prénom" />
+						<p:inputText id="prenom" value="#{agentBean.agent.prenom}" />
+
+						<h:outputText value="Adresse" />
+						<p:inputText id="adresse" value="#{agentBean.agent.adresse}" />
+
+						<h:outputText value="E-mail" />
+						<p:inputText id="email" value="#{agentBean.agent.email}" />
+
+						<h:outputText value="Telephone" />
+						<p:inputText id="tel" value="#{agentBean.agent.telephone}" />
+					</h:panelGrid>
+						<p:commandButton style="display:block;margin:auto;" value="Modifier"
+						actionListener="#{agentBean.update}" update=":listAgent" onclick="PF('editAgent').hide();" />
+				</h:form>
+			</p:dialog>
+    </h:body>
+     
+</html>
