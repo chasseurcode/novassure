@@ -8,7 +8,7 @@
 		<pattern value="/login" />
 		<view-id value="/login.xhtml" />
 	</url-mapping>
-	
+
 	<url-mapping id="home">
 		<pattern value="/" />
 		<view-id value="/index.xhtml" />
@@ -28,23 +28,31 @@
 		<view-id value="/pages/users/edit.xhtml" />
 		<action>#{userBean.load}</action>
 	</url-mapping>
-	
-	<!-- Clients  -->
+
+	<!-- Clients -->
 	<url-mapping id="clients">
 		<pattern value="/clients" />
 		<view-id value="/pages/clients/index.xhtml" />
 	</url-mapping>
-	
+
 	<!-- Agents -->
-		<url-mapping id="agents">
+	<url-mapping id="agents">
 		<pattern value="/agents" />
 		<view-id value="/pages/agents/index.xhtml" />
 	</url-mapping>
-	
+
 	<!-- Compagnies -->
-		<url-mapping id="compagnies">
+	<url-mapping id="compagnies">
 		<pattern value="/compagnies" />
 		<view-id value="/pages/compagnies/index.xhtml" />
 	</url-mapping>
+
+
+	<!-- Branches -->
+	<url-mapping id="branches">
+		<pattern value="/branches" />
+		<view-id value="/pages/branches/index.xhtml" />
+	</url-mapping>
+
 
 </pretty-config>
