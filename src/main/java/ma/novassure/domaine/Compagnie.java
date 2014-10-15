@@ -1,5 +1,6 @@
 package ma.novassure.domaine;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,13 +14,18 @@ import javax.persistence.OneToMany;
  * @author TARAM & BODIE
  */
 @Entity
-public class Compagnie {
+public class Compagnie implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
 	private int id;
     private String code;
     private String telephone;
     private String adresse;
+    private boolean enabled=true;
     @ManyToOne
     private Ville ville;
     private String faxe;
@@ -97,6 +103,18 @@ public class Compagnie {
 
 	public void setQuittances(List<Quittance> quittances) {
 		this.quittances = quittances;
+	}
+
+
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
    
 }

@@ -62,5 +62,9 @@ public class Ville {
 	public void setCompagnies(List<Compagnie> compagnies) {
 		this.compagnies = compagnies;
 	}
-
+	
+	@Override
+	public String toString() {
+				return nom;
+	}
 }

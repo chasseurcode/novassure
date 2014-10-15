@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<p:dialog widgetVar="editComp" header="Edition Compagnie"
+		draggable="false">
+		<h:form id="edit">
+		
+			<h:panelGrid columns="2" cellpadding="7" style="width:450px;">
+				<h:outputText value="Code" />
+				<p:inputText id="code" value="#{compagnieBean.compagnie.code}"
+					required="true" />
+				<h:outputText value="Nom" />
+				<p:inputText id="nom" value="#{compagnieBean.compagnie.nom}" />
+
+				<h:outputText value="Ville" />
+				<p:selectOneMenu value="#{compagnieBean.selectedVille}">
+					<f:selectItems value="#{compagnieBean.villes}" var="ville"
+						itemValue="#{ville.id}" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Adresse" />
+				<p:inputText id="adresse" value="#{compagnieBean.compagnie.adresse}" />
+
+				<h:outputText value="Faxe" />
+				<p:inputText id="faxe" value="#{compagnieBean.compagnie.faxe}" />
+
+				<h:outputText value="Telephone" />
+				<p:inputText id="tel" value="#{compagnieBean.compagnie.telephone}" />
+			</h:panelGrid>
+			<p:commandButton style="display:block;margin:auto;" value="Modifier"
+				actionListener="#{compagnieBean.updateCompagnie}" update=":listComp"
+				onclick="PF('editComp').hide();" />
+
+		</h:form>
+	</p:dialog>
+</h:body>
+
+</html>

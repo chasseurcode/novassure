@@ -56,4 +56,9 @@ public class CompagnieDAOImpl implements CompagnieDAO {
 		this.session = session;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Compagnie> findAllEnabledCompagnies() {
+		return session.createQuery("From Compagnie where enabled= :status").setBoolean("status", true).list();
+	}
+
 }

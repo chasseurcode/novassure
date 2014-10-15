@@ -18,5 +18,6 @@ public interface CompagnieDAO {
     public Compagnie findCompagnieByName(String name);
     
     public List<Compagnie> findAllCompagnies();
+    public List<Compagnie> findAllEnabledCompagnies();
     
 }
