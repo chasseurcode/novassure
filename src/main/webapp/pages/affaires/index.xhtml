@@ -14,15 +14,15 @@
 <body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="contenu">
-<!-- 			<ui:include src="/pages/clients/create.xhtml" /> -->
+			<!-- 			<ui:include src="/pages/clients/create.xhtml" /> -->
 
 			<h:form prependId="false">
 
 				<p:wizard flowListener="#{affaireBean.onFlowProcess}"
 					widgetVar="wiz" id="myWizard" showNavBar="false">
 
-	<!--  *********************tab info du client t***************************** -->
-	
+					<!--  *********************tab info du client t***************************** -->
+
 					<p:tab id="infoClient" title="1.Infos client">
 						<p:panel header="Recherche client">
 
@@ -139,7 +139,8 @@
 									<f:facet name="header">
 										<h:outputText value="Sel" />
 									</f:facet>
-									<p:commandButton icon="ui-icon-arrow-4-diag" onclick="PF('wiz').next();" />
+									<p:commandButton icon="ui-icon-arrow-4-diag"
+										onclick="PF('wiz').next();" />
 								</p:column>
 
 							</p:dataTable>
@@ -214,15 +215,15 @@
 
 						<h:panelGrid columns="2"
 							style="margin-left:810px;margin-top:10px;">
-<!-- 							<p:commandButton icon="ui-icon-plusthick" value="Nouveau client" -->
-<!-- 								onclick="PF('newClientDialog').show();" /> -->
-                              <p:button value="Nouveau lient" outcome="pretty:clients" />
+							<!-- 							<p:commandButton icon="ui-icon-plusthick" value="Nouveau client" -->
+							<!-- 								onclick="PF('newClientDialog').show();" /> -->
+							<p:button value="Nouveau lient" outcome="pretty:clients" />
 						</h:panelGrid>
 
 					</p:tab>
 
-    <!--  ********************** tab information contrat ***************************** -->
-                      	
+					<!--  ********************** tab information contrat ***************************** -->
+
 					<p:tab id="infoContrat" title="2.Infos contrat">
 
 						<p:panel header="Information client" id="infoPartEnt"
@@ -275,90 +276,79 @@
 
 						</p:panel>
 
-						<p:panel header="Information quittance" id="infoQuittance">             <!-- Info QUITTAnce -->
-							<h:panelGrid cellpadding="5">
+						<p:panel header="Information quittance" id="infoQuittance">
+							<!-- Info QUITTAnce -->
+							<p:panelGrid columns="6">
+								<h:outputText value="Compagnie: " />
+								<p:autoComplete id="lcomp" dropdown="true"
+									value="#{quittanceBean.compagnieFictive}"
+									completeMethod="#{affaireBean.autoCompletionCompagnie}" />
+								<h:outputText style="font-weight: bold;" value="code Agent: " />
+								<h:inputText value="#{quittanceBean.codeAgent}" />
 
-								<h:panelGrid columns="4">
+								<h:outputText style="font-weight: bold;" value="N° Police: " />
+								<h:inputText value="#{quittanceBean.nPolice}" />
 
-									<h:outputText value="Compagnie: " />
-									<p:autoComplete id="lcomp" dropdown="true"
-										value="#{quittanceBean.compagnieFictive}"
-										completeMethod="#{affaireBean.autoCompletionCompagnie}" />
+								<h:outputText style="font-weight: bold;"
+									value="N° Attestation: " />
+								<h:inputText value="#{quittanceBean.nAttestation}" />
 
-									<h:outputText style="font-weight: bold;" value="code Agent: " />
-									<h:inputText value="#{quittanceBean.codeAgent}" />
+								<h:outputText style="font-weight: bold;" value="Contrat: " />
+								<p:autoComplete dropdown="true" value="affaireBean.contrat"
+									completeMethod="#{quittanceBean.autoCompletionCompagnie}" />
 
-								</h:panelGrid>
+								<h:outputText style="font-weight: bold;" value="N° Quittance: " />
+								<h:inputText value="#{quittanceBean.numQui}" />
 
-								<h:panelGrid columns="6">
+								<h:outputText style="font-weight: bold;" value="Ref Agent: " />
+								<h:inputText value="#{quittanceBean.refAgent}" />
 
-									<h:outputText style="font-weight: bold;" value="N° Police: " />
-									<h:inputText value="#{quittanceBean.nPolice}" />
+								<h:outputText style="font-weight: bold;" value="Type: " />
+								<p:selectOneMenu value="#{quittanceBean.typeQui}">
+									<f:selectItem itemLabel="types" itemValue="" />
+									<f:selectItems itemLabel="#{typeQuit.libelle}"
+										itemValue="#{typeQuit.id}"
+										value="#{quittanceBean.typeQuittances}" var="typeQuit" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							
+							<h:outputText style="font-weight: bold;"
+								value="Période de garantie: " />
+							<p:panelGrid columns="4">
+							<p:selectOneRadio id="pGa" value="#{quittanceBean.periode}"
+								layout="grid" columns="2">
+								<f:selectItem itemLabel="1 mois" itemValue="1mois" />
+								<f:selectItem itemLabel="3 mois" itemValue="3mois" />
+								<f:selectItem itemLabel="6 mois" itemValue="6mois" />
+								<f:selectItem itemLabel="12 mois" itemValue="12mois" />
+							</p:selectOneRadio>
+							<p>
+								<h:outputText style="font-weight: bold;" value="Du: " />
+								<p:calendar id="popup11" value="#{quittanceBean.dateDebut}" />
+</p>
+								<h:outputText style="font-weight: bold;" value="Au: " />
+								<p:calendar id="popup12" value="#{quittanceBean.dateFin}" />
+							
+								<h:outputText style="font-weight: bold;" value="Branche: " />
+								<p:selectOneMenu value="#{quittanceBean.branche}">
+									<f:selectItem itemLabel="branches" itemValue="" />
+									<f:selectItems itemLabel="#{branch.libelle}"
+										itemValue="#{branch.id}" value="#{quittanceBean.branches}"
+										var="branch" />
+								</p:selectOneMenu>
 
-									<h:outputText style="font-weight: bold;"
-										value="N° Attestation: " />
-									<h:inputText value="#{quittanceBean.nAttestation}" />
-
-									<h:outputText style="font-weight: bold;" value="Contrat: " />
-									<p:autoComplete dropdown="true" value="affaireBean.contrat"
-										completeMethod="#{quittanceBean.autoCompletionCompagnie}" />
-
-									<h:outputText style="font-weight: bold;" value="N° Quittance: " />
-									<h:inputText value="#{quittanceBean.numQui}" />
-
-									<h:outputText style="font-weight: bold;" value="Ref Agent: " />
-									<h:inputText value="#{quittanceBean.refAgent}" />
-
-									<h:outputText style="font-weight: bold;" value="Type: " />
-									<p:selectOneMenu value="#{quittanceBean.typeQui}">
-											<f:selectItem itemLabel="types" itemValue="" />
-											<f:selectItems itemLabel="#{typeQuit.libelle}" itemValue="#{typeQuit.id}" 
-				                                      	value="#{quittanceBean.typeQuittances}" var="typeQuit"/>
-										</p:selectOneMenu>
-
-								</h:panelGrid>
-
-							</h:panelGrid>
-							<h:panelGrid>
-								<h:panelGrid columns="4" cellpadding="10">
-									<h:outputText style="font-weight: bold;"
-										value="Période de garantie: " />
-									<p:selectOneRadio id="pGa" value="#{quittanceBean.periode}"
-										layout="grid" columns="2">
-										<f:selectItem itemLabel="1 mois" itemValue="1mois" />
-										<f:selectItem itemLabel="3 mois" itemValue="3mois" />
-										<f:selectItem itemLabel="6 mois" itemValue="6mois" />
-										<f:selectItem itemLabel="12 mois" itemValue="12mois" />
-									</p:selectOneRadio>
-
-									<h:panelGrid rows="2">
-										<h:outputText style="font-weight: bold;" value="Du: " />
-										<p:calendar id="popup11" value="#{quittanceBean.dateDebut}" />
-
-										<h:outputText style="font-weight: bold;" value="Au: " />
-										<p:calendar id="popup12" value="#{quittanceBean.dateFin}" />
-									</h:panelGrid>
-									<h:panelGrid rows="2">
-										<h:outputText style="font-weight: bold;" value="Branche: " />
-										<p:selectOneMenu value="#{quittanceBean.branche}">
-											<f:selectItem itemLabel="branches" itemValue="" />
-											<f:selectItems itemLabel="#{branch.libelle}" itemValue="#{branch.id}" 
-				                                      	value="#{quittanceBean.branches}" var="branch"/>
-										</p:selectOneMenu>
-
-										<h:outputText style="font-weight: bold;" value="Catégorie: " />
-										<p:selectOneMenu 	value="#{quittanceBean.categorie}">
-											<f:selectItem itemLabel="categories" itemValue="" />
-											<f:selectItems itemLabel="#{categ.libelle}" itemValue="#{categ.id}" 
-				                                      	value="#{quittanceBean.categories}" var="categ"/>
-										</p:selectOneMenu>
-									</h:panelGrid>
-								</h:panelGrid>
-
-							</h:panelGrid>
+								<h:outputText style="font-weight: bold;" value="Catégorie: " />
+								<p:selectOneMenu value="#{quittanceBean.categorie}">
+									<f:selectItem itemLabel="categories" itemValue="" />
+									<f:selectItems itemLabel="#{categ.libelle}"
+										itemValue="#{categ.id}" value="#{quittanceBean.categories}"
+										var="categ" />
+								</p:selectOneMenu>
+						</p:panelGrid>
 							<h:panelGrid columns="2"
 								style="margin-left:820px;margin-top:10px;">
-								<p:commandButton value="Valider" actionListener="#{quittanceBean.addQuittance}"/>
+								<p:commandButton value="Valider"
+									actionListener="#{quittanceBean.addQuittance}" />
 							</h:panelGrid>
 						</p:panel>
 
@@ -429,21 +419,22 @@
 							<h:panelGrid columns="3"
 								style="margin-left:550px;margin-top:10px;">
 								<p:commandButton style="display:block;margin:auto;"
-									value="Sauvegarder et Quitter" actionListener="#{quittanceBean.saveAndQuit}" />
+									value="Sauvegarder et Quitter"
+									actionListener="#{quittanceBean.saveAndQuit}" />
 								<p:button value="Annuler" outcome="pretty:affaires" />
 								<p:commandButton style="display:block;margin:auto;"
-									value="Suivant" onclick="PF('wiz').next();"/>
-									
+									value="Suivant" onclick="PF('wiz').next();" />
+
 
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
-					
-	<!--  ****************************tab panier client***************************** -->
-	
+
+					<!--  ****************************tab panier client***************************** -->
+
 					<p:tab id="panClient" title="3.Panier client">
-					
-					
+
+
 						<p:panel header="Information client" id="PanierCli"
 							widgetVar="Panclivar">
 
@@ -483,17 +474,19 @@
 
 							</h:panelGrid>
 
-							<h:panelGrid columns="2" style="margin-left:790px;margin-top:10px;">
+							<h:panelGrid columns="2"
+								style="margin-left:790px;margin-top:10px;">
 								<p:button value="Changer client" outcome="pretty:affaires" />
-								<p:commandButton icon="ui-icon-pencil" value="Modifier" type="submit"
+								<p:commandButton icon="ui-icon-pencil" value="Modifier"
+									type="submit"
 									actionListener="#{affaireBean.load(affaireBean.particulier,affaireBean.entreprise)}"
 									onclick="PF('editClientDialog').show();" />
 							</h:panelGrid>
-							
+
 						</p:panel>
 
 						<p:panel header="Pani">
-						
+
 							<h:panelGrid columns="2" columnClasses="label, value">
 								<h:outputText value="Firstname: *" />
 								<p:inputText value="#{userWizard.user.firstname}"
@@ -515,8 +508,8 @@
 				</p:wizard>
 
 			</h:form>
-                              
-          <ui:include src="/pages/clients/edit.xhtml" /> 
+
+			<ui:include src="/pages/clients/edit.xhtml" />
 
 		</ui:define>
 	</ui:composition>

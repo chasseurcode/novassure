@@ -67,27 +67,12 @@ public class AffaireBean implements Serializable{
 
 	public void searchParticulier(ActionEvent event){
 		particulier=clientDAO.findClientByCin(myCin);
-		nom=particulier.getNom();
-		prenom=particulier.getPrenom();
-		telephone=particulier.getTelephone();
-		email=particulier.getEmail();
-		adresse=particulier.getAdresse();
-		maVille=particulier.getVille().getNom();
-		faxe=particulier.getFaxe();
-		typeClient="particulier";
 		particuliers.add(particulier);
 
 	}
 
 	public void searchEntreprise(ActionEvent event){
 		entreprise=clientDAO.findClientByNrc(myNrc);
-		nom=entreprise.getNom();
-		telephone=entreprise.getTelephone();
-		email=entreprise.getEmail();
-		adresse=entreprise.getAdresse();
-		maVille=entreprise.getVille().getNom();
-		faxe=entreprise.getFaxe();
-		typeClient="entreprise";
 		entreprises.add(entreprise);	
 	}
 

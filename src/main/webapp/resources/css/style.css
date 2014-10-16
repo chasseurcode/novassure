@@ -54,3 +54,7 @@ td{
 .noheader table th{
 	display: none;
 }
+
+.ui-wizard .ui-wizard-step-title{
+	font-size: 0.6em;
+}
