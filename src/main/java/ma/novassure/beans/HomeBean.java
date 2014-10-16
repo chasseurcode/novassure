@@ -25,6 +25,7 @@ public class HomeBean implements Serializable{
 	
 	public HomeBean() {
 		lastQuittances=initLast();
+		echeances=initLast();
 	}
 	
 	private List<Quittance> initLast() {

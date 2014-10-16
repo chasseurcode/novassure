@@ -2,35 +2,26 @@ package ma.novassure.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-
-import org.primefaces.event.FlowEvent;
 
 import ma.novassure.dao.AffaireDAO;
 import ma.novassure.dao.ClientDAO;
-import ma.novassure.dao.CompagnieDAO;
 import ma.novassure.dao.VilleDAO;
 import ma.novassure.daoimpl.AffaireDAOImpl;
 import ma.novassure.daoimpl.ClientDAOImpl;
-import ma.novassure.daoimpl.CompagnieDAOImpl;
 import ma.novassure.daoimpl.VilleDAOImpl;
 import ma.novassure.domaine.Affaire;
-import ma.novassure.domaine.Agent;
-import ma.novassure.domaine.Compagnie;
 import ma.novassure.domaine.Entreprise;
 import ma.novassure.domaine.Particulier;
-import ma.novassure.domaine.Quittance;
-import ma.novassure.domaine.TypeQuittance;
 import ma.novassure.domaine.Ville;
 import ma.novassure.utils.HibernateUtil;
+
+import org.primefaces.event.FlowEvent;
 
 @ManagedBean
 @ViewScoped
@@ -73,8 +64,6 @@ public class AffaireBean implements Serializable{
 		villes=new ArrayList<Ville>();
 		villes=villeDAO.findAllVille();
 	}
-
-
 
 	public void searchParticulier(ActionEvent event){
 		particulier=clientDAO.findClientByCin(myCin);
@@ -261,81 +250,52 @@ public class AffaireBean implements Serializable{
 		this.faxe = faxe;
 	}
 
-
-
 	public String getTypeClient() {
 		return typeClient;
 	}
-
-
-
+	
 	public void setTypeClient(String typeClient) {
 		this.typeClient = typeClient;
 	}
-
-
 
 	public VilleDAO getVilleDAO() {
 		return villeDAO;
 	}
 
-
-
 	public void setVilleDAO(VilleDAO villeDAO) {
 		this.villeDAO = villeDAO;
 	}
-
-
 
 	public Ville getLaVille() {
 		return laVille;
 	}
 
-
-
 	public void setLaVille(Ville laVille) {
 		this.laVille = laVille;
 	}
-
-
 
 	public List<Ville> getVilles() {
 		return villes;
 	}
 
-
-
 	public void setVilles(List<Ville> villes) {
 		this.villes = villes;
 	}
 
-
-
 	public AffaireDAO getAffaireDAO() {
 		return affaireDAO;
 	}
-
-
-
+	
 	public void setAffaireDAO(AffaireDAO affaireDAO) {
 		this.affaireDAO = affaireDAO;
 	}
 
-
-
 	public Affaire getAffaire() {
 		return affaire;
 	}
-
-
-
+	
 	public void setAffaire(Affaire affaire) {
 		this.affaire = affaire;
 	}
-
-
-
-
-
 
 }
