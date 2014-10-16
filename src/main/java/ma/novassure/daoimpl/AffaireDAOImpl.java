@@ -7,90 +7,100 @@ import ma.novassure.domaine.Document;
 import ma.novassure.domaine.Paiement;
 import ma.novassure.domaine.Quittance;
 
+import org.hibernate.Session;
+
 /**
  * @author TARAM & BODIE
  */
 public class AffaireDAOImpl implements AffaireDAO {
 
-    /**
-     * 
-     */
-    public AffaireDAOImpl() {
+	private Session session;
+
+	   
+    public AffaireDAOImpl(Session session) {
+		this.session=session;
     }
 
 	public void createAffaire(Affaire affaire) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.save(affaire);
+		session.getTransaction().commit(); 
 	}
 
 	public void addClient(Client client) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.save(client);
+		session.getTransaction().commit(); 
 	}
 
 	public void updateAffaire(Affaire affaire) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.update(affaire);
+		session.getTransaction().commit();			
 	}
 
 	public Affaire findAffaireById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Affaire) session.get(Affaire.class, id);
 	}
 
 	public void addQuittance(Quittance quittance) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.save(quittance);
+		session.getTransaction().commit(); 
 	}
 
 	public void addDocument(Document document) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.save(document);
+		session.getTransaction().commit(); 		
 	}
 
 	public void addPaiement(Paiement paiement) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.save(paiement);
+		session.getTransaction().commit(); 		
 	}
 
 	public void updateQuittance(Quittance quittance) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.update(quittance);
+		session.getTransaction().commit();
 	}
 
 	public Quittance findQuittanceById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Quittance) session.get(Quittance.class, id);
+
 	}
 
 	public Quittance findQuittanceByNumero(String numero) {
-		// TODO Auto-generated method stub
-		return null;
+		Quittance quittance=(Quittance) session.createQuery("from Quittance where numero= :numero")
+				.setString("numero", numero).uniqueResult();
+		return quittance;
 	}
 
 	public void updateDocument(Document document) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.update(document);
+		session.getTransaction().commit();		
 	}
 
 	public Document findDocumentById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Document) session.get(Document.class, id);
 	}
 
 	public void updatePaiement(Paiement paiement) {
-		// TODO Auto-generated method stub
-		
+		session.beginTransaction();
+		session.update(paiement);
+		session.getTransaction().commit();		
 	}
 
 	public Paiement findPaiementById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Paiement) session.get(Paiement.class, id);
 	}
-
 	public Document findDocumentByTitle(String title) {
-		// TODO Auto-generated method stub
-		return null;
+		Document document=(Document) session.createQuery("from Document where titre= :title")
+				.setString("title", title).uniqueResult();
+		return document;
 	}
 
 }
