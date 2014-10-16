@@ -12,9 +12,29 @@
 <body>
 	<ui:composition template="templates/layout.xhtml">
 		<ui:define name="contenu">
-			<p:dashboard  id="controle" model="#{dashbord.model}">
+			<p:dashboard id="controle" model="#{dashbord.model}">
 				<p:panel id="stat" header="Statistique"></p:panel>
-				<p:panel id="echeance" header="Les quittances arrivée à échéance"></p:panel>
+				<p:panel id="echeance" header="Les quittances arrivée à échéance">
+					<p:dataTable styleClass="noheader" style="margin:0px;" value="#{homeBean.lastQuittances}" var="quittance">
+						<p:column>
+							<span class="ui-icon ui-icon-clock" style="display: inline-block"></span>
+						</p:column>
+						<p:column>
+							<h:outputText value="#{quittance.numPolice}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{quittance.affaire.client.nom}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{quittance.dateFin}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						<p:column>
+							<h:outputText value="#{homeBean.joursRestant(quittance)}" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
 				<p:panel id="tbl_bord" header="Tableau de Bord de Travail"></p:panel>
 				<p:panel id="derniere" header="Les 5 dernière quittances"></p:panel>
 				<p:panel id="attente" header="Les Quittance en attente de Paiement"></p:panel>

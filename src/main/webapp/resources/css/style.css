@@ -50,3 +50,7 @@ td{
 .ui-fieldset-legend{
 	font-size: 0.7em;
 }
+
+.noheader table th{
+	display: none;
+}

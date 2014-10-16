@@ -125,6 +125,5 @@ public class Quittance {
 	public void setAffaire(Affaire affaire) {
 		this.affaire = affaire;
 	}
-    
-	
+ 
 }
