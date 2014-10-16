@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+	<h:outputScript name="js/novassure.js" />
+</h:head>
+<body>
+	<ui:composition template="/templates/layout.xhtml">
+		<ui:define name="titre"> - Gestion des Type de Quittances</ui:define>
+		<ui:define name="contenu">
+				<h:form id="type"  style="margin:10px;">
+					<h:outputText value="Libéllé *" />
+					<p:spacer width="20" height="10" />
+					<p:inputText value="#{typeBean.typeQuittance.libelle}" required="true" />
+					<p:spacer width="40" height="10" />
+					<p:commandButton value="ajouter" actionListener="#{typeBean.addType()}"
+						update=":listTypes,:type"/>
+				</h:form>
+			
+			<p:dataTable emptyMessage="Aucun type de quittance n'a été ajouté." id="listTypes" style="margin:10px;" var="type"
+				value="#{typeBean.typeQuittances}">
+				<p:column>	
+					<h:outputText value="#{type.libelle}" /><p:spacer width="350" height="10" />
+				</p:column>	
+				<p:column>
+					<p:commandButton icon="ui-icon-pencil" update=":typeEdit"
+						actionListener="#{typeBean.load(type)}" value="Editer"
+						oncomplete="PF('editType').show();">
+					</p:commandButton>
+					<p:spacer width="40" height="10" />
+					<p:commandButton  icon="ui-icon-trash" value="Supprimer" update="listTypes"
+						actionListener="#{typeBean.remove(type)}" />
+				</p:column>
+			</p:dataTable>
+			<ui:include src="/pages/typequittances/edit.xhtml"/>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

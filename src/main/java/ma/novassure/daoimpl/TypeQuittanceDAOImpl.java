@@ -41,8 +41,9 @@ public class TypeQuittanceDAOImpl implements TypeQuittanceDAO {
 		return (TypeQuittance) session.get(TypeQuittance.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<TypeQuittance> findAllTypes() {
-				return null;
+				return session.createQuery("From TypeQuittance").list();
 	}
 
 	public Session getSession() {
@@ -51,6 +52,11 @@ public class TypeQuittanceDAOImpl implements TypeQuittanceDAO {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TypeQuittance> findAllEnabledTypes() {
+		return session.createQuery("From TypeQuittance where deleted = :stat").setBoolean("stat", false).list();
 	}
 
 }

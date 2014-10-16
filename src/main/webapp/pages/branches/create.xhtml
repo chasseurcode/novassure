@@ -1,43 +1,21 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:p="http://primefaces.org/ui">
-     
-    <h:head>
-      
-    </h:head>
-     
-    <h:body>
- 			
-			<p:dialog id="popup" widgetVar="nouveuAgent" header="Nouveau Agent" draggable="false">
-
-				<h:form id="newagent">
-					<h:panelGrid id="formulaire" columns="2" cellpadding="7" style="width:450px;">
-						<h:outputText value="Code" />
-						<p:inputText id="code" value="#{agentBean.agent.code}"
-							required="true" />
-
-						<h:outputText value="Nom" />
-						<p:inputText id="nom" value="#{agentBean.agent.nom}" />
-
-						<h:outputText value="Prénom" />
-						<p:inputText id="prenom" value="#{agentBean.agent.prenom}" />
-
-						<h:outputText value="Adresse" />
-						<p:inputText id="adresse" value="#{agentBean.agent.adresse}" />
-
-						<h:outputText value="E-mail" />
-						<p:inputText id="email" value="#{agentBean.agent.email}" />
-
-						<h:outputText value="Telephone" />
-						<p:inputText id="tel" value="#{agentBean.agent.telephone}" />
-					</h:panelGrid>
-
-						<p:commandButton style="display:block;margin:auto;" value="Valider"
-						actionListener="#{agentBean.addAgent}" update=":listAgent" onclick="PF('nouveuAgent').hide();" />
-					
-				</h:form>
-			</p:dialog>
-    </h:body>
-     
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+	<p:dialog id="popup" widgetVar="newBranche" header="Nouvelle Branche"
+		draggable="false">
+		<h:form id="brancheadd">
+			<p:panelGrid columns="2">
+				<h:outputText value="libéllé *" />
+				<p:inputText id="lib" value="#{brancheBean.branche.libelle}"
+					required="true" />
+			</p:panelGrid>
+			<p:commandButton style="display:block;margin:auto;" value="Valider"
+				actionListener="#{brancheBean.addBranche}" update=":brancheList"
+				onclick="PF('newBranche').hide();" />
+		</h:form>
+	</p:dialog>
+</h:body>
 </html>

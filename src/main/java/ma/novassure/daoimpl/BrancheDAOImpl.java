@@ -48,4 +48,9 @@ private	Session session;
 		this.session = session;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Branche> findAllActivedBranches() {
+		return session.createQuery("From Branche where activated= :stat").setBoolean("stat", true).list();
+	}
+
 }

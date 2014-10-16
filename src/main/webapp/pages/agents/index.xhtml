@@ -13,8 +13,8 @@
 </h:head>
 <body>
 	<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="titre"> - Gestion des agents</ui:define>
 		<ui:define name="contenu">
-
 			<ui:include src="/pages/agents/create.xhtml" />
 
 			<p:dataTable id="listAgent" style="margin:10px;" var="myAgent"

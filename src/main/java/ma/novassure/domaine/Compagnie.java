@@ -116,5 +116,5 @@ public class Compagnie implements Serializable {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-   
+  
 }

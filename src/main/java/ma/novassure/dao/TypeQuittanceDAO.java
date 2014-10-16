@@ -18,5 +18,6 @@ public interface TypeQuittanceDAO {
     public TypeQuittance findTypeQuittanceById(int id);
     
     public List<TypeQuittance> findAllTypes();
+    public List<TypeQuittance> findAllEnabledTypes();
 
 }

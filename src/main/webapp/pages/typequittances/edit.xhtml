@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<p:dialog widgetVar="editType" header="Edition Type Quittance"
+		draggable="false">
+		<h:form id="typeEdit">
+			<p>
+				<h:outputText value="libéllé *" />
+				<p:spacer width="20" height="10" />
+				<p:inputText value="#{typeBean.currentType.libelle}"
+					required="true" />
+			</p>
+			<p:commandButton value="valider"
+				actionListener="#{typeBean.update()}" update=":listTypes" 
+				oncomplete="PF('editType').hide()"/>
+		</h:form>
+	</p:dialog>
+</h:body>
+
+</html>

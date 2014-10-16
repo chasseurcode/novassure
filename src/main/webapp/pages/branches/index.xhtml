@@ -8,69 +8,100 @@
 	xmlns:pretty="http://ocpsoft.com/prettyfaces"
 	xmlns:sec="http://www.springframework.org/security/facelets/tags">
 <h:head>
+
 	<h:outputStylesheet name="css/style.css" />
 	<h:outputScript name="js/novassure.js" />
 </h:head>
 <body>
 	<ui:composition template="/templates/layout.xhtml">
+		<ui:define name="titre"> - Gestion des branches</ui:define>
 		<ui:define name="contenu">
 
-			<ui:include src="/pages/agents/create.xhtml" />
+			<ui:include src="/pages/branches/create.xhtml" />
 
-			<p:dataTable id="listAgent" style="margin:10px;" var="myAgent"
-				value="#{agentBean.agents}">
+			<p:dataTable id="brancheList"
+				style="margin-left:10px;margin-right:10px;"
+				emptyMessage="Acune branche n'est disponible."
+				value="#{brancheBean.branches}" var="branche">
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="code" />
+						<h:outputText value="Branches" />
 					</f:facet>
-					<h:outputText value="#{myAgent.code}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Nom" />
-					</f:facet>
-					<h:outputText value="#{myAgent.nom}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Prénom" />
-					</f:facet>
-					<h:outputText value="#{myAgent.prenom}" />
-				</p:column>
-				<!-- 
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Adresse" />
-					</f:facet>
-					<h:outputText value="#{myAgent.adresse}" />
-				</p:column>
-				 -->
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="E-mail" />
-					</f:facet>
-					<h:outputText value="#{myAgent.email}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Telephone" />
-					</f:facet>
-					<h:outputText value="#{myAgent.telephone}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="" />
-					</f:facet>
-					<p:commandButton icon="ui-icon-pencil" update=":edit" actionListener="#{agentBean.load(myAgent)}" 
-					oncomplete="PF('editAgent').show();">
-					</p:commandButton>
-					<p:commandButton icon="ui-icon-trash" update="listAgent"
-						actionListener="#{agentBean.remove(myAgent)}" />
+					<h:form>
+						<b><h:outputText value="#{branche.libelle}" /></b>
+						<p:spacer width="20" height="10" />
+						<p:commandLink update=":brancheEdit"
+							actionListener="#{brancheBean.load(branche)}"
+							oncomplete="PF('editBranche').show();">
+							<h:outputText value="Editer" />
+						</p:commandLink>
+						|<p:commandLink update=":brancheList"
+							actionListener="#{brancheBean.removeBranche(branche)}"
+							value="Supprimer">
+							<p:confirm header="Confirmation"
+								message="Etes-vous sur de vouloir supprimer cette branche?"
+								icon="ui-icon-alert" />
+						</p:commandLink>
+						<p:confirmDialog global="true" closable="false">
+							<p:commandButton value="Oui" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Non" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</h:form>
+
+					<p:column>
+						<p:dataList styleClass="hide-column-names"
+							emptyMessage="Aucne catégorie n'a été ajoutée."
+							value="#{branche.categories}" var="cat">
+							<p:column>
+								<b><i><h:outputText value="#{cat.libelle}" /></i></b>
+							</p:column>
+							<p:column>
+								<h:form>
+									<p:spacer width="20" height="10" />
+									<p:commandLink update=":editCatform"
+										actionListener="#{brancheBean.loadCategorie(cat)}"
+										oncomplete="PF('editCategorie').show();">
+										<h:outputText value="Editer" />
+									</p:commandLink>
+								|<p:commandLink update=":brancheList"
+										actionListener="#{brancheBean.removeCategorie(branche,cat)}"
+										value="Supprimer">
+										<p:confirm header="Confirmation"
+											message="Etes-vous sur de vouloir supprimer cette catégorie?"
+											icon="ui-icon-alert" />
+									</p:commandLink>
+
+									<p:confirmDialog global="true" closable="false">
+										<p:commandButton value="Oui" type="button"
+											styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+										<p:commandButton value="Non" type="button"
+											styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+									</p:confirmDialog>
+								|<p:commandLink actionListener="#{brancheBean.setSelectedCategorie(cat)}"
+										oncomplete="PF('editBranche').show();">
+										<h:outputText value="Editer" />
+									</p:commandLink>
+								</h:form>
+							</p:column>
+						</p:dataList>
+					</p:column>
+					<h:form>
+						<p:commandButton icon="ui-icon-plusthick"
+							style="margin-bottom:10px;" value="Ajouter une catégorie"
+							actionListener="#{brancheBean.setSelectedBranche(branche)}"
+							update=":brancheList" onclick="PF('newCategorie').show();" />
+					</h:form>
 				</p:column>
 			</p:dataTable>
-			<ui:include src="/pages/agents/edit.xhtml" />
-			<p:commandButton icon="ui-icon-plusthick" style="margin-left:10px;" value="Nouveau"
-				type="button" onclick="PF('nouveuAgent').show();" />
+			<ui:include src="/pages/branches/edit.xhtml" />
+			<ui:include src="/pages/branches/newcategorie.xhtml" />
+			<ui:include src="/pages/branches/editcategorie.xhtml" />
+			<ui:include src="/pages/branches/garanties.xhtml" />
+			<p:commandButton icon="ui-icon-plusthick"
+				style="margin-left:10px;margin-top:10px;" value="Nouvelle Branche"
+				type="button" onclick="PF('newBranche').show();" />
 		</ui:define>
 	</ui:composition>
 </body>

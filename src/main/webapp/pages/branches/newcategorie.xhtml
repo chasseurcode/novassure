@@ -2,25 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-
-</h:head>
-
+<h:head></h:head>
 <h:body>
-	<p:dialog widgetVar="editBranche" header="Edition Branche"
+	<p:dialog  widgetVar="newCategorie" header="Nouvelle Categorie"
 		draggable="false">
-		<h:form id="brancheEdit">
+		<h:form id="newCatform">
 			<p:panelGrid columns="2">
 				<h:outputText value="libéllé *" />
-				<p:inputText id="lib" value="#{brancheBean.branche.libelle}"
+				<p:inputText value="#{brancheBean.categorie.libelle}"
 					required="true" />
 			</p:panelGrid>
 			<p:commandButton style="display:block;margin:auto;" value="Valider"
-				actionListener="#{brancheBean.updateBranche()}" update=":brancheList"
-				onclick="PF('editBranche').hide();" />
+				actionListener="#{brancheBean.addCategorie()}" update=":brancheList"
+				oncomplete="PF('newCategorie').hide();" />
 		</h:form>
 	</p:dialog>
 </h:body>
-
 </html>

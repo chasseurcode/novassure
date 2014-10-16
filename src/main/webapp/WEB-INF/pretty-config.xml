@@ -54,5 +54,10 @@
 		<view-id value="/pages/branches/index.xhtml" />
 	</url-mapping>
 
+	<!-- Type de Quittances -->
+	<url-mapping id="tquittances">
+		<pattern value="/types/quittances" />
+		<view-id value="/pages/typequittances/index.xhtml" />
+	</url-mapping>
 
 </pretty-config>

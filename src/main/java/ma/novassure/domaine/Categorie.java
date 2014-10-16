@@ -1,5 +1,6 @@
 package ma.novassure.domaine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ public class Categorie {
 	private String libelle;
 	private String code;
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<Garantie> garanties;
+	private List<Garantie> garanties=new ArrayList<Garantie>();
 
  public Categorie() {}
 	public int getId() {
@@ -53,4 +54,13 @@ public class Categorie {
 	public void setGaranties(List<Garantie> garanties) {
 		this.garanties = garanties;
 	} 
+	
+	 
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof Categorie && ((Categorie) obj).getLibelle().equalsIgnoreCase(this.libelle)) {
+				return true;
+			}
+			return false;
+		}
 }

@@ -18,6 +18,8 @@ public interface CategorieDAO {
 	public Categorie findCategorieByCode(String code);
 
 	public Categorie findCategorieByName(String libelle);
+	
 	public List<Categorie> findAllCategories();
+	
 
 }

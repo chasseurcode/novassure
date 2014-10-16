@@ -1,5 +1,7 @@
 package ma.novassure.domaine;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,14 +15,15 @@ import javax.persistence.OneToMany;
  * @author TARAM & BODIE
  */
 @Entity
-public class Branche {
+public class Branche implements Serializable{
 
-	
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
     private int id;
     private String libelle;
+    private boolean activated=true;
     @OneToMany(cascade=CascadeType.ALL)
-    private List<Categorie> categories;
+    private List<Categorie> categories=new ArrayList<Categorie>();
     
     public Branche() {
     }
@@ -53,6 +56,16 @@ public class Branche {
 
 	public void setCategories(List<Categorie> categories) {
 		this.categories = categories;
+	}
+
+
+	public boolean isActivated() {
+		return activated;
+	}
+
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
 	}
 		
 

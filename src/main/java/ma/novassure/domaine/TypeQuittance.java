@@ -17,6 +17,7 @@ public class TypeQuittance {
 	private int id;
 	@Column(unique=true)
 	private String libelle;
+	private boolean deleted=false;
 
 	public TypeQuittance() {
 	}
@@ -31,14 +32,24 @@ public class TypeQuittance {
 	public String getLibelle() {
 		return libelle;
 	}
+	
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 }

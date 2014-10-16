@@ -35,3 +35,18 @@
 td{
 	font-size: 0.7em;
 }
+
+.hide-column-names div{
+    border: none;
+    margin-left: 150px;
+}
+.hide-column-names div ul li{
+    margin-top: 15px;
+}
+
+.hide-column-names div a{
+    text-decoration: none;
+}
+.ui-fieldset-legend{
+	font-size: 0.7em;
+}

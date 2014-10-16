@@ -7,7 +7,9 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:sec="http://www.springframework.org/security/facelets/tags">
 <h:head>
-	<title>Novassure</title>
+	<title>Novassure
+	<ui:insert name="titre"/>
+	</title>
 	<h:outputStylesheet name="css/style.css" />
 	<h:outputScript name="js/novassure.js" />
 	<h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
@@ -43,6 +45,7 @@
 						<p:menuitem value="Gérer les agents" url="/agents"/>
 						<p:menuitem value="Gérer les compagnies" url="/compagnies"/>
 						<p:menuitem value="Gérer les branches" url="/branches"/>
+						<p:menuitem value="Gérer les types de quittance" url="/types/quittances"/>
 					</p:submenu>
 				</p:panelMenu>
 			</h:form>
