@@ -24,5 +24,9 @@ public interface ClientDAO {
     public List<Entreprise> findAllEntreprises();
     
     public List<Particulier> findAllParticuliers();
+    
+    public Particulier findClientByCin(String cin);
+
+	public Entreprise findClientByNrc(String nrc);
 
 }

@@ -36,6 +36,18 @@ public class ClientDAOImpl implements ClientDAO {
 									.setString("nom", name)
 									.uniqueResult();
 	}
+	
+	 public Particulier findClientByCin(String cin){
+		 return (Particulier) session.createQuery("From Particulier where cin= :cin")
+					.setString("cin", cin)
+					.uniqueResult();
+	 }
+	 
+	 public Entreprise findClientByNrc(String nrc){
+		 return (Entreprise) session.createQuery("From Entreprise where nrc= :nrc")
+					.setString("nrc", nrc)
+					.uniqueResult();
+	 }
 
 	public Client addClient(Client client) {
 		session.beginTransaction();

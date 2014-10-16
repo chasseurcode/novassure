@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<p:dialog  widgetVar="editClientDialog"
+		header="Modifier Client" draggable="false">
+
+		<h:form >
+			<h:panelGrid columns="2" cellpadding="7"
+				style="width:450px;">
+
+				<h:outputText value="Nom" /> 
+				<h:inputText id="nomParti" value="#{affaireBean.nom}" />
+
+				<h:outputText value="Prénom" />
+				<p:inputText id="prenomParti"
+					value="#{affaireBean.particulier.prenom}" />
+
+				<h:outputText value="CIN" />
+				<p:inputText id="cinParti" value="#{affaireBean.particulier.cin}" />
+
+				<h:outputText value="N° RC" />
+				<p:inputText id="nrcEnt" value="#{affaireBean.entreprise.nrc}" />
+
+				<h:outputText value="Patente" />
+				<p:inputText id="patenteEnt"
+					value="#{affaireBean.entreprise.patente}" />
+
+				<h:outputText value="Raison sociale" />
+				<p:inputText id="raisonSocialeEnt"
+					value="#{affaireBean.entreprise.raisonSociale}" />
+
+				<h:outputText value="Adresse" />
+				<p:inputText id="adresseParti" value="#{affaireBean.adresse}" />
+
+				<h:outputText value="Ville" />
+				<p:selectOneMenu id="villeParti" value="#{affaireBean.laVille}">
+					<f:selectItem itemLabel="Choisir" itemValue="" />
+					<f:selectItems itemLabel="#{laville.nom}" itemValue="#{laville.id}"
+						value="#{affaireBean.villes}" var="laville" />
+				</p:selectOneMenu>
+
+				<h:outputText value="E-mail" />
+				<p:inputText id="emailParti" value="#{affaireBean.email}" />
+
+				<h:outputText value="Telephone" />
+				<p:inputText id="telParti"
+					value="#{affaireBean.telephone}" />
+
+				<h:outputText value="Faxe" />
+				<p:inputText id="faxeParti" value="#{affaireBean.faxe}" />
+			</h:panelGrid>
+
+
+			<p:commandButton style="display:block;margin:auto;" value="Valider"
+				actionListener="#{affaireBean.updateClient}"
+				onclick="PF('editClientDialog').hide();" />
+
+		</h:form>
+	</p:dialog>
+
+
+
+</h:body>
+
+</html>

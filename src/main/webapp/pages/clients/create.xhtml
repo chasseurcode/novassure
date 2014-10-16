@@ -9,30 +9,78 @@
 	xmlns:sec="http://www.springframework.org/security/facelets/tags">
 <h:head>
 	<h:outputStylesheet name="css/style.css" />
+	<h:outputScript name="js/novassure.js" />
 </h:head>
 <body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="contenu">
-			<p:panel header="Gestion des utilisateurs">
-				<p:button value="Nouveau" outcome="pretty:createUser" />
-				<p:outputPanel>
-					<p:dataTable style="text-align:center" value="#{userBean.users}"
-						var="user" id="users">
-						<p:column headerText="Nom d'utilisateur">
-							<h:outputText value="#{user.username}" />
-						</p:column>
-						<p:column headerText="E-mail">
-							<h:outputText value="#{user.email}" />
-						</p:column>
-						<p:column headerText="Actions">
-								<pretty:link mappingId="useredit">
-									<f:param value="#{user.username}"/>
-									editer
-								</pretty:link>	
-						</p:column>
-					</p:dataTable>
-				</p:outputPanel>
-			</p:panel>
+			<!-- <p:dialog id="popup" widgetVar="newClientDialog" -->
+			<!-- 		header="Nouveau Client" draggable="false"> -->
+
+			<h:form id="newclientform">
+				<p:panel id="basic" header="Nouveau client" 
+					style="margin-bottom:20px">
+                   
+                   <h:outputText value="Type client:" />
+			<p:selectOneRadio id="typeclient" value="#{clientBean.typeClient}" required="true">
+				<f:selectItem itemLabel="Particulier" itemValue="particulier" />
+				<f:selectItem itemLabel="Entreprise" itemValue="entreprise" />
+			</p:selectOneRadio>
+
+			<h:panelGrid id="formulaireCreatee" columns="2" cellpadding="7"
+				style="width:450px;">
+
+				<h:outputText value="Nom" />
+				<p:inputText id="nomParti" value="#{clientBean.nom}"  />
+
+				<h:outputText value="Prénom" />
+				<p:inputText id="prenomParti"
+					value="#{clientBean.particulier.prenom}" />
+
+				<h:outputText value="CIN" />
+				<p:inputText id="cinParti" value="#{clientBean.particulier.cin}" />
+				
+				<h:outputText value="N° RC" />
+				<p:inputText id="nrcEnt"
+					value="#{clientBean.entreprise.nrc}" />
+
+				<h:outputText value="Patente" />
+				<p:inputText id="patenteEnt" value="#{clientBean.entreprise.patente}" />
+				
+				<h:outputText value="Raison sociale" />
+				<p:inputText id="raisonSocialeEnt" value="#{clientBean.entreprise.raisonSociale}" />
+
+				<h:outputText value="Adresse" />
+				<p:inputText id="adresseParti"
+					value="#{clientBean.adresse}" />
+
+				<h:outputText value="Ville" />
+				<p:selectOneMenu id="villeParti" value="#{clientBean.laVille}" >
+					<f:selectItem itemLabel="Les villes" itemValue="" />
+					<f:selectItems itemLabel="#{laville.nom}" itemValue="#{laville.id}" 
+					value="#{affaireBean.villes}" var="laville"/>
+				</p:selectOneMenu>
+
+				<h:outputText value="E-mail" />
+				<p:inputText id="emailParti" value="#{clientBean.email}" />
+
+				<h:outputText value="Telephone" />
+				<p:inputText id="telParti"
+					value="#{clientBean.telephone}" />
+
+				<h:outputText value="Faxe" />
+				<p:inputText id="faxeParti" value="#{clientBean.faxe}" />
+			</h:panelGrid>
+
+			<p:commandButton style="display:block;margin:auto;" value="Valider"
+				actionListener="#{clientBean.addClient}"	 />
+				</p:panel>
+
+
+			</h:form>
+			<!-- 	</p:dialog> -->
+
+
 		</ui:define>
 	</ui:composition>
 </body>
