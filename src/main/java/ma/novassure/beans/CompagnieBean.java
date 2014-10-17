@@ -97,5 +97,5 @@ public class CompagnieBean implements Serializable {
 	public void setDao(CompagnieDAO dao) {
 		this.dao = dao;
 	}
-	
+
 }

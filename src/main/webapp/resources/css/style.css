@@ -58,3 +58,11 @@ td{
 .ui-wizard .ui-wizard-step-title{
 	font-size: 0.6em;
 }
+
+.noborder tbody tr td{
+	border: none;
+}
+
+.noborder tbody tr{
+	border: none;
+}

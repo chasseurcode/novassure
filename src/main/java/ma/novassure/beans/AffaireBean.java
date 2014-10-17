@@ -30,6 +30,7 @@ public class AffaireBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Logger logger=Logger.getLogger(AffaireBean.class.getName());
+	
 	private ClientDAO clientDAO;
 	private VilleDAO villeDAO;
 	private AffaireDAO affaireDAO;
@@ -282,5 +283,4 @@ public class AffaireBean implements Serializable{
 	public void setAffaire(Affaire affaire) {
 		this.affaire = affaire;
 	}
-
 }

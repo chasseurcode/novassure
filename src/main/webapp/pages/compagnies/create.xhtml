@@ -5,16 +5,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
 </h:head>
 
 <h:body>
 
 	<p:dialog widgetVar="newComp" header="Nouvelle Compagnie"
 		draggable="false">
-
 		<h:form>
-			<h:panelGrid columns="2" cellpadding="7" style="width:450px;">
+			<h:panelGrid  columns="2" cellpadding="7" style="width:450px;">
 				<h:outputText value="Code" />
 				<p:inputText id="code" value="#{compagnieBean.compagnie.code}"
 					required="true" />
@@ -38,9 +36,7 @@
 			<p:commandButton style="display:block;margin:auto;" value="Valider"
 				action="#{compagnieBean.addCompagnie}" update=":listComp"
 				onclick="PF('newComp').hide();" />
-
 		</h:form>
-
 	</p:dialog>
 </h:body>
 

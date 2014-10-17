@@ -72,8 +72,8 @@ public class AffaireDAOImpl implements AffaireDAO {
 
 	}
 
-	public Quittance findQuittanceByNumero(String numero) {
-		Quittance quittance=(Quittance) session.createQuery("from Quittance where numero= :numero")
+	public Quittance findQuittanceByNumPolice(String numero) {
+		Quittance quittance=(Quittance) session.createQuery("from Quittance where numPolice= :numero")
 				.setString("numero", numero).uniqueResult();
 		return quittance;
 	}

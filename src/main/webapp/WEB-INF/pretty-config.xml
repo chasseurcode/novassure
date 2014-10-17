@@ -55,13 +55,18 @@
 		<view-id value="/pages/compagnies/index.xhtml" />
 	</url-mapping>
 
-
 	<!-- Branches -->
 	<url-mapping id="branches">
 		<pattern value="/branches" />
 		<view-id value="/pages/branches/index.xhtml" />
 	</url-mapping>
 
+	<!--Quittances -->
+	<url-mapping id="quittances">
+		<pattern value="/quittances/#{quittanceBean.numPolice}" />
+		<view-id value="/pages/quittances/detail.xhtml" />
+	</url-mapping>
+	
 	<!-- Type de Quittances -->
 	<url-mapping id="tquittances">
 		<pattern value="/types/quittances" />

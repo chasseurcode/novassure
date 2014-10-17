@@ -114,11 +114,9 @@ public class Affaire {
 		documents.remove(document);
 	}
 
-
 	public List<Document> getDocuments() {
 		return documents;
 	}
-
 
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
