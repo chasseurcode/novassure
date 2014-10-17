@@ -37,40 +37,46 @@ public class HomeBean implements Serializable{
 		Particulier part1=new Particulier();
 		part1.setNom("Sanogo");
 		part1.setPrenom("Sori");
-		
+		part1.setId(1);
 		try {
 			Affaire aff=new Affaire();
 			aff.setClient(part1);
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Quittance q4=new Quittance();
 			q4.setAffaire(aff);
 			q4.setNumPolice("NA321443321233");
 			q4.setDateDebut(sdf.parse("16/09/2014"));
 			q4.setDateFin(sdf.parse("20/09/2014"));
+			q4.setId(1);
 			
 			Quittance q2=new Quittance();
 			q2.setAffaire(aff);
 			q2.setNumPolice("NA321443321233");
 			q2.setDateDebut(sdf.parse("16/09/2014"));
 			q2.setDateFin(sdf.parse("18/09/2014"));
+			q2.setId(2);
 			
 			Quittance q3=new Quittance();
 			q3.setAffaire(aff);
 			q3.setNumPolice("NA321443321233");
 			q3.setDateDebut(sdf.parse("16/09/2014"));
 			q3.setDateFin(sdf.parse("19/09/2014"));
-			
+			q3.setId(3);
+
 			Quittance q31=new Quittance();
 			q31.setAffaire(aff);
 			q31.setNumPolice("NA321443321233");
 			q31.setDateDebut(sdf.parse("16/09/2014"));
 			q31.setDateFin(sdf.parse("30/09/2014"));
+			q31.setId(4);
 			
 			Quittance q41=new Quittance();
 			q41.setAffaire(aff);
 			q41.setNumPolice("NA321443321233");
 			q41.setDateDebut(sdf.parse("16/09/2014"));
 			q41.setDateFin(sdf.parse("22/09/2014"));
+			q41.setId(5);
 			
 			dernier.add(q4);
 			dernier.add(q2);

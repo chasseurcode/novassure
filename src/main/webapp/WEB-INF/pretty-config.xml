@@ -34,7 +34,10 @@
 		<pattern value="/clients/create" />
 		<view-id value="/pages/clients/create.xhtml" />
 	</url-mapping>
-	
+		<url-mapping id="ficheclient">
+		<pattern value="/clients/#{cliendId}/fiche" />
+		<view-id value="/pages/clients/fiche.xhtml" />
+	</url-mapping>
 	
 	<!-- Affaires -->
 	<url-mapping id="affaires">

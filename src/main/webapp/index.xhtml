@@ -27,7 +27,10 @@
 						</pretty:link>	
 						</p:column>
 						<p:column>
+						<pretty:link mappingId="ficheclient">
+							<f:param value="#{quittance.affaire.client.id}" />
 							<h:outputText value="#{quittance.affaire.client.nom}" />
+						</pretty:link>
 						</p:column>
 						<p:column>
 							<h:outputText value="#{quittance.dateFin}" >

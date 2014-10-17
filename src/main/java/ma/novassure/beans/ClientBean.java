@@ -31,6 +31,7 @@ public class ClientBean implements Serializable {
 	private String nom;
 	private String faxe;
 	private Ville laVille;
+	private String ClientId;
 	
 	public ClientBean() {
 		clientDAO=new ClientDAOImpl(HibernateUtil.getSession());
@@ -161,6 +162,16 @@ public class ClientBean implements Serializable {
 
 	public void setLaVille(Ville laVille) {
 		this.laVille = laVille;
+	}
+
+
+	public String getClientId() {
+		return ClientId;
+	}
+
+
+	public void setClientId(String clientId) {
+		ClientId = clientId;
 	}
 	
 	
