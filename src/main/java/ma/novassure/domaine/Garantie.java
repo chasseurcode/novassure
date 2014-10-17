@@ -1,5 +1,6 @@
 package ma.novassure.domaine;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +17,8 @@ public class Garantie {
 	@Id @GeneratedValue
 	private int id;
 	private String libelle;
-	@ManyToOne
+	private boolean deleted=false;
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Categorie categorie;
 
 	public Garantie() {
@@ -50,4 +52,11 @@ public class Garantie {
 		this.categorie = categorie;
 	}
 
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 }

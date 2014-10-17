@@ -4,6 +4,7 @@ import java.util.List;
 
 import ma.novassure.dao.BrancheDAO;
 import ma.novassure.domaine.Branche;
+import ma.novassure.domaine.Categorie;
 
 import org.hibernate.Session;
 
@@ -51,6 +52,12 @@ private	Session session;
 	@SuppressWarnings("unchecked")
 	public List<Branche> findAllActivedBranches() {
 		return session.createQuery("From Branche where activated= :stat").setBoolean("stat", true).list();
+	}
+
+	public void updateCategorie(Categorie categorie) {
+		session.beginTransaction();
+		session.save(categorie);
+		session.getTransaction().commit();
 	}
 
 }

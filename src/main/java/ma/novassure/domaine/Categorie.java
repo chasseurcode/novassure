@@ -23,11 +23,11 @@ public class Categorie {
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<Garantie> garanties=new ArrayList<Garantie>();
 
- public Categorie() {}
+	public Categorie() {}
 	public int getId() {
 		return id;
 	}
-	
+
 	public Categorie(String libelle, String code) {
 		this.libelle = libelle;
 		this.code = code;
@@ -54,13 +54,21 @@ public class Categorie {
 	public void setGaranties(List<Garantie> garanties) {
 		this.garanties = garanties;
 	} 
-	
-	 
-		@Override
-		public boolean equals(Object obj) {
-			if (obj instanceof Categorie && ((Categorie) obj).getLibelle().equalsIgnoreCase(this.libelle)) {
-				return true;
-			}
-			return false;
+
+	public List<Garantie> getActivedGaranties() {
+		List<Garantie> gaList=new ArrayList<Garantie>();
+		for(Garantie g: this.garanties){
+			if(!g.isDeleted())
+				gaList.add(g);
 		}
+		return gaList;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Categorie && ((Categorie) obj).getLibelle().equalsIgnoreCase(this.libelle)) {
+			return true;
+		}
+		return false;
+	}
 }

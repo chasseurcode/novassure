@@ -19,7 +19,7 @@
 
 			<ui:include src="/pages/branches/create.xhtml" />
 
-			<p:dataTable id="brancheList"
+			<p:dataTable id="brancheList" styleClass="noheader"
 				style="margin-left:10px;margin-right:10px;"
 				emptyMessage="Acune branche n'est disponible."
 				value="#{brancheBean.branches}" var="branche">
@@ -79,9 +79,10 @@
 										<p:commandButton value="Non" type="button"
 											styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 									</p:confirmDialog>
-								|<p:commandLink actionListener="#{brancheBean.setSelectedCategorie(cat)}"
-										oncomplete="PF('editBranche').show();">
-										<h:outputText value="Editer" />
+								|<p:commandLink actionListener="#{brancheBean.setSelectedCatego(cat)}"
+									update=":garantiesList,:garanties"
+										oncomplete="PF('garantiesPop').show();">
+										<h:outputText value="Garanties" />
 									</p:commandLink>
 								</h:form>
 							</p:column>

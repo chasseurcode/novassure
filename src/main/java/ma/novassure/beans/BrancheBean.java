@@ -10,6 +10,7 @@ import ma.novassure.dao.BrancheDAO;
 import ma.novassure.daoimpl.BrancheDAOImpl;
 import ma.novassure.domaine.Branche;
 import ma.novassure.domaine.Categorie;
+import ma.novassure.domaine.Garantie;
 import ma.novassure.utils.HibernateUtil;
 
 @ManagedBean
@@ -21,12 +22,16 @@ public class BrancheBean implements Serializable {
 	private BrancheDAO brancheDAO;
 	private Categorie categorie;
 	private Branche seletedBranche;
-	private Categorie selectedCat;
-
+	private Categorie currentCatego;
+	private Garantie updateGarantie;
+	private Garantie garantie;
+	private List<Garantie> garanties;
+	
 	public BrancheBean() {
 		setBrancheDAO(new BrancheDAOImpl(HibernateUtil.getSession()));
 		refreshList();
 		branche=new Branche();
+		garantie=new Garantie();
 		seletedBranche=new Branche();
 	}
 
@@ -100,13 +105,54 @@ public class BrancheBean implements Serializable {
 		refreshList();
 	}
 
+
 	/*
 	 * Gestion des garanties
 	 */
-	public void setSelectedCategorie(Categorie c) {
-		setSelectedCategorie(c);
-		System.out.println(c.getLibelle());
+	public void setSelectedCatego(Categorie c) {
+		setCurrentCatego(c);
+		setGaranties(c.getActivedGaranties());
 	}
+
+	public void addGarantie() {
+		currentCatego.getGaranties().add(garantie);
+		brancheDAO.updateCategorie(currentCatego);
+		garantie=new Garantie();
+		refreshGaranties();
+	}
+
+	public void loadGarantie(Garantie garantie) {
+		setUpdateGarantie(garantie);
+	}
+
+	public void updateGarantie() {
+		for (int i = 0; i < currentCatego.getGaranties().size(); i++) {
+			if(currentCatego.getGaranties().get(i).getLibelle().equalsIgnoreCase(updateGarantie.getLibelle())){
+				currentCatego.getGaranties().get(i).setLibelle(updateGarantie.getLibelle());
+				brancheDAO.updateCategorie(currentCatego);
+				setUpdateGarantie(new Garantie());
+				refreshGaranties();
+				break;
+			}
+		}
+	}
+
+	public void removeGarantie(Garantie garantie) {
+		for (int i = 0; i < currentCatego.getGaranties().size(); i++) {
+			if(currentCatego.getGaranties().get(i).getLibelle().equalsIgnoreCase(garantie.getLibelle())){
+				currentCatego.getGaranties().get(i).setDeleted(true);
+				brancheDAO.updateCategorie(currentCatego);
+				setUpdateGarantie(new Garantie());
+				refreshGaranties();
+				break;
+			}
+		}
+	}
+
+	private void refreshGaranties() {
+		setGaranties(currentCatego.getActivedGaranties());
+	}
+
 	
 	/*
 	 * Getter & Setter
@@ -151,9 +197,38 @@ public class BrancheBean implements Serializable {
 		this.seletedBranche = seletedBranche;
 	}
 
-	public Categorie getSelectedCat() {
-		return selectedCat;
+	public Categorie getCurrentCatego() {
+		return currentCatego;
 	}
+
+	public void setCurrentCatego(Categorie currentCatego) {
+		this.currentCatego = currentCatego;
+	}
+
+	public Garantie getGarantie() {
+		return garantie;
+	}
+
+	public void setGarantie(Garantie garantie) {
+		this.garantie = garantie;
+	}
+
+	public Garantie getUpdateGarantie() {
+		return updateGarantie;
+	}
+
+	public void setUpdateGarantie(Garantie updateGarantie) {
+		this.updateGarantie = updateGarantie;
+	}
+
+	public List<Garantie> getGaranties() {
+		return garanties;
+	}
+
+	public void setGaranties(List<Garantie> garanties) {
+		this.garanties = garanties;
+	}     
 	
 	
+
 }
