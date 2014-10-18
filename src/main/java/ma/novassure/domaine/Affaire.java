@@ -23,6 +23,9 @@ public class Affaire {
     
     private Date createdDate;
     private Date updatedDate;
+    private int step;
+    private boolean validete=false;
+    private User user;
     @ManyToOne
     private Client client;
     @OneToMany(cascade=CascadeType.ALL)
@@ -33,6 +36,8 @@ public class Affaire {
     private List<Document> documents;
     
     public Affaire() {
+    	this.createdDate=new Date();
+    	this.updatedDate=new Date();
     	this.quittances=new ArrayList<Quittance>();
     	this.paiements=new ArrayList<Paiement>();
     }
@@ -121,5 +126,37 @@ public class Affaire {
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
 	}
+
+
+	public int getStep() {
+		return step;
+	}
+
+
+	public void setStep(int step) {
+		this.step = step;
+	}
+
+
+	public boolean isValidete() {
+		return validete;
+	}
+
+
+	public void setValidete(boolean validete) {
+		this.validete = validete;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 	
 }

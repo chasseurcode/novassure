@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+
+</h:head>
+<body>
+
+	<!--  ********************** tab information contrat ***************************** -->
+
+	<p:tab id="infoContrat" title="2.Infos contrat">
+		<h:form id="formContrat">
+		
+			<p:panel header="Information client" widgetVar="infoclientPartEnt">
+
+				<h:panelGrid columns="8" layout="grid" cellpadding="5">
+
+					<h:outputText style="font-weight: bold;" value="CIN: " />
+					<h:outputText value="#{affaireBean.particulier.cin}" />
+
+					<h:outputText style="font-weight: bold;" value="Nom: " />
+					<h:outputText value="#{affaireBean.nom}" />
+
+					<h:outputText style="font-weight: bold;" value="Prénom: " />
+					<h:outputText value="#{affaireBean.particulier.prenom}" />
+
+					<h:outputText style="font-weight: bold;" value="Ville: " />
+					<h:outputText value="#{affaireBean.maVille}" />
+
+					<h:outputText style="font-weight: bold;" value="N° RC: " />
+					<h:outputText value="#{affaireBean.entreprise.nrc}" />
+
+					<h:outputText style="font-weight: bold;" value="Patente: " />
+					<h:outputText value="#{affaireBean.entreprise.patente}" />
+
+					<h:outputText style="font-weight: bold;" value="Raison sociale: " />
+					<h:outputText value="#{affaireBean.entreprise.raisonSociale}" />
+
+					<h:outputText style="font-weight: bold;" value="Adresse: " />
+					<h:outputText value="#{affaireBean.adresse}" />
+
+					<h:outputText style="font-weight: bold;" value="Téléphone: " />
+					<h:outputText value="#{affaireBean.telephone}" />
+
+					<h:outputText style="font-weight: bold;" value="Email: " />
+					<h:outputText value="#{affaireBean.email}" />
+
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" style="margin-left:790px;margin-top:10px;">
+					<p:button value="Changer client" outcome="pretty:affaires" />
+					<p:commandButton icon="ui-icon-pencil" value="Modifier"
+						actionListener="#{affaireBean.load(affaireBean.particulier,affaireBean.entreprise)}"
+						onclick="PF('editClientDialog').show();" />
+				</h:panelGrid>
+
+			</p:panel>
+
+
+			<p:panel header="Information quittance" >
+				<p:panelGrid columns="6">
+				
+					<h:outputText style="font-weight: bold;" value="Compagnie: " />
+					<p:selectOneMenu value="#{affaireBean.compagnie}">
+					<p:ajax  listener="#{affaireBean.loadCategories}" />
+					<f:selectItem itemLabel="Selectionner une compagnie" itemValue="null" />
+						<f:selectItems itemLabel="#{comp.nom}" itemValue="#{comp.id}"
+							value="#{affaireBean.compagnies}" var="comp" />
+					</p:selectOneMenu>
+					<h:outputText style="font-weight: bold;" value="code Agent: " />
+					<h:inputText value="#{affaireBean.codeAgent}" >	
+					<p:ajax event="blur" listener="#{affaireBean.loadCategories}" />
+					</h:inputText>
+
+					<h:outputText style="font-weight: bold;" value="N° Police: " />
+					<h:inputText value="#{affaireBean.quittance.numPolice}" >
+					 <p:ajax event="blur" listener="#{affaireBean.loadCategories}" />
+					</h:inputText>
+
+					<h:outputText style="font-weight: bold;" value="N° Attestation: " />
+					<h:inputText value="#{affaireBean.quittance.numAttestation}">
+					<p:ajax event="blur" listener="#{affaireBean.loadCategories}" />
+					</h:inputText>
+
+					<h:outputText style="font-weight: bold;" value="Contrat: " />
+					<h:inputText value="#{affaireBean.contrat}" />
+
+					<h:outputText style="font-weight: bold;" value="N° Quittance: " />
+					<h:inputText value="#{affaireBean.quittance.numero}" >
+					<p:ajax event="blur" listener="#{affaireBean.loadCategories}" />
+					</h:inputText>
+
+					<h:outputText style="font-weight: bold;" value="Ref Agent: " />
+					<h:inputText value="#{affaireBean.refag}" />
+
+					<h:outputText style="font-weight: bold;" value="Type: " />
+					<p:selectOneMenu value="#{affaireBean.typeQui}">
+					<f:selectItem itemLabel="choisir type quittance" itemValue="null" />
+					<p:ajax listener="#{affaireBean.loadCategories}" />
+					<f:selectItems itemLabel="#{typeQuit.libelle}"
+							itemValue="#{typeQuit.id}" value="#{affaireBean.typeQuittances}"
+							var="typeQuit" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+
+				<h:outputText style="font-weight: bold;"
+					value="Période de garantie: " />
+				<p:panelGrid columns="4">
+					<p:selectOneRadio id="pGa" value="#{affaireBean.duree}" layout="grid" columns="2">
+					<p:ajax update ="calend1,calend2" listener ="#{affaireBean.setCalendar}" />
+						<f:selectItem itemLabel="1 mois" itemValue="1" />
+						<f:selectItem itemLabel="3 mois" itemValue="3" />
+						<f:selectItem itemLabel="6 mois" itemValue="6" />
+						<f:selectItem itemLabel="12 mois" itemValue="12" />
+					</p:selectOneRadio>
+					<h:outputText style="font-weight: bold;" value="Du: " />
+					<p:calendar id="calend1" value="#{affaireBean.quittance.dateDebut}" >
+					<p:ajax listener="#{affaireBean.loadCategories}" />
+					</p:calendar>
+
+					<h:outputText style="font-weight: bold;" value="Au: " />
+					<p:calendar id="calend2" value="#{affaireBean.quittance.dateFin}" >
+					<p:ajax listener="#{affaireBean.loadCategories}" />
+					</p:calendar>
+					
+					<h:outputText style="font-weight: bold;" value="Branche:" />
+					<p:selectOneMenu value="#{affaireBean.brancheId}" >
+					<p:ajax update ="categories" listener="#{affaireBean.loadCategories}" />
+					<f:selectItem itemLabel="Selectionner une branche" itemValue="null" />
+					<f:selectItems value="#{affaireBean.branches}" var="branch"
+							itemValue="#{branch.id}" itemLabel="#{branch.libelle}" />
+					</p:selectOneMenu>
+
+					<h:outputText style="font-weight: bold;" value="Catégorie: " />
+					<p:selectOneMenu value="#{affaireBean.categorie}" id="categories">
+					<p:ajax listener="#{affaireBean.loadCategories}" />
+					<f:selectItem itemLabel="Selectionner une categorie" itemValue="null" />
+					<f:selectItems itemLabel="#{categ.libelle}" itemValue="#{categ.id}"
+							value="#{affaireBean.categories}" var="categ" />
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+				<h:panelGrid columns="2" style="margin-left:820px;margin-top:10px;">
+					
+					<p:commandButton style="display:block;margin:auto;" value="Valider"
+						actionlistener="#affaireBean.addQuittance">
+						<p:ajax update="listGarantie" listener="#{affaireBean.addQuittance}" />
+					</p:commandButton>
+
+				</h:panelGrid>
+			</p:panel>
+			
+                       <!--   +++++++++++++++++Listes de garanties++++++++++++++++++++++  -->
+                       
+                       <p:panel header="Veuillez renseigner les garanties">
+
+				<p:dataTable id="listGarantie" style="margin:10px;" var="mylgarantie" rowIndexVar="rowIndex"
+					value="#{affaireBean.ligneGaranties}" editable="true" editMode="cell" widgetVar="ligneGa">
+				<p:ajax event="cellEdit" listener="#{affaireBean.onCellEdit}" update="pt" />
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="N°" />
+						</f:facet>
+						<h:outputText value="#{rowIndex+1}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Garantie" />
+						</f:facet>
+						<h:outputText value="#{mylgarantie.garantie.libelle}" />
+					</p:column>
+					<p:column headerText="Prime nette">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{mylgarantie.primeNette}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{mylgarantie.primeNette}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Taxes">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{mylgarantie.taxe}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{mylgarantie.taxe}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Accessoires">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{mylgarantie.accessoire}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText  value="#{mylgarantie.accessoire}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Timbres">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{mylgarantie.timbre}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText  value="#{mylgarantie.timbre}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Commision">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{mylgarantie.commission}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText  value="#{mylgarantie.commission}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Prime Totale" />
+						</f:facet>
+						<h:outputText id="pt" value="#{affaireBean.primeTotale}" />
+					</p:column>
+					<p:column headerText="Gratuit">
+						<p:cellEditor>
+							<f:facet name="output">
+							<p:selectBooleanCheckbox value="#{affaireBean.gratuit}" />
+							</f:facet>
+							<f:facet name="input">
+					    	<p:selectBooleanCheckbox value="#{affaireBean.gratuit}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					</p:dataTable>
+
+				<p:dataTable id="Totale" style="margin:10px;" value="ok"
+					widgetVar="totale">
+					<p:column>
+						<h:outputText value=" " />
+					</p:column>
+					<p:column>
+						<h:outputText value="Totale  " />
+					</p:column>
+					<p:column>
+						<h:outputText value="ok1     " />
+					</p:column>
+					<p:column>
+						<h:outputText value="ok2      " />
+					</p:column>
+
+					<p:column>
+						<h:outputText value="ok3        " />
+					</p:column>
+					<p:column>
+						<h:outputText value="ok4         " />
+					</p:column>
+					<p:column>
+						<h:outputText value="ok5        " />
+					</p:column>
+					<p:column>
+						<h:outputText value="ok 6        " />
+					</p:column>
+					<p:column>
+						<h:outputText value="       " />
+					</p:column>
+				</p:dataTable>
+
+				<h:panelGrid columns="3" style="margin-left:550px;margin-top:10px;">
+				<p:commandButton immediate="true" value="Sauvegarder et Quitter"
+						actionListener="#{affaireBean.saveAndQuit}">
+						<p:ajax update="listGarantie" listener="#{affaireBean.saveAndQuit}"
+							oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)" />
+					</p:commandButton>
+					<p:commandButton immediate="true" value="Annuler"
+						actionListener="#{affaireBean.annuller}">
+						<p:ajax update="listGarantie" listener="#{affaireBean.annuller}"
+							oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)" />
+					</p:commandButton>
+					<p:commandButton style="display:block;margin:auto;" value="Suivant"
+						onclick="PF('wiz').next();" />
+
+
+				</h:panelGrid>
+			</p:panel>
+                       
+			
+		</h:form>
+				
+		
+	</p:tab>
+
+
+</body>
+</html>
