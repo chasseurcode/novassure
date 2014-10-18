@@ -66,3 +66,8 @@ td{
 .noborder tbody tr{
 	border: none;
 }
+
+.noborder tbody tr td  a{
+	font-size: 0.9em;
+	text-decoration: none;
+}

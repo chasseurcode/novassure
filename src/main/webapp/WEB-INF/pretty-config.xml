@@ -15,18 +15,9 @@
 	</url-mapping>
 
 	<!-- Users -->
-	<url-mapping id="createUser">
-		<pattern value="/users/create" />
-		<view-id value="/pages/users/create.xhtml" />
-	</url-mapping>
-	<url-mapping id="users">
-		<pattern value="/users" />
-		<view-id value="/pages/users/index.xhtml" />
-	</url-mapping>
-	<url-mapping id="useredit">
-		<pattern value="/users/#{userBean.findName}" />
-		<view-id value="/pages/users/edit.xhtml" />
-		<action>#{userBean.load}</action>
+	<url-mapping id="clients">
+		<pattern value="/clients/create" />
+		<view-id value="/pages/clients/create.xhtml" />
 	</url-mapping>
 
 	<!-- Clients -->
@@ -34,17 +25,17 @@
 		<pattern value="/clients/create" />
 		<view-id value="/pages/clients/create.xhtml" />
 	</url-mapping>
-		<url-mapping id="ficheclient">
+	<url-mapping id="ficheclient">
 		<pattern value="/clients/#{cliendId}/fiche" />
 		<view-id value="/pages/clients/fiche.xhtml" />
 	</url-mapping>
-	
+
 	<!-- Affaires -->
 	<url-mapping id="affaires">
 		<pattern value="/affaires" />
 		<view-id value="/pages/affaires/index.xhtml" />
 	</url-mapping>
-	
+
 
 	<!-- Agents -->
 	<url-mapping id="agents">
@@ -69,7 +60,7 @@
 		<pattern value="/quittances/#{quittanceBean.numPolice}" />
 		<view-id value="/pages/quittances/detail.xhtml" />
 	</url-mapping>
-	
+
 	<!-- Type de Quittances -->
 	<url-mapping id="tquittances">
 		<pattern value="/types/quittances" />

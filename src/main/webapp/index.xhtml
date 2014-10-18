@@ -15,8 +15,8 @@
 		<ui:define name="contenu">
 			<p:dashboard id="controle" model="#{dashbord.model}">
 				<p:panel id="stat" header="Statistique"></p:panel>
-				<p:panel style="margin-top:20px;" id="echeance" header="Les quittances arrivée à échéance">
-					<p:dataTable styleClass="noheader" style="margin:0px;" value="#{homeBean.echeances}" var="quittance">
+				<p:panel style="margin-top:20px;padding:0px;" id="echeance" header="Les quittances arrivée à échéance">
+					<p:dataTable styleClass="noheader noborder" style="margin:0px;" value="#{homeBean.echeances}" var="quittance">
 						<p:column>
 							<span class="ui-icon ui-icon-clock" style="display: inline-block"></span>
 						</p:column>

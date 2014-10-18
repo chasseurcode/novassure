@@ -15,8 +15,7 @@
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="titre"> - Quittance</ui:define>
 		<ui:define name="contenu">
-			<p:panel header="Détails Quittance - #{quittanceBean.numPolice}">
-				
+			<p:panel header="Détails Quittance - #{quittanceBean.numPolice}">		
 				Quittance
 				<p:separator />
 				<p:panelGrid styleClass="noborder" columns="3">
@@ -26,7 +25,6 @@
 						value="#{quittanceBean.quittance.affaire.client.nom}" />
 				</p:panelGrid>
 			</p:panel>
-
 		</ui:define>
 	</ui:composition>
 </body>
