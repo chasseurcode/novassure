@@ -20,15 +20,10 @@
 		<p:panel id="panelSearch" header="Recherche client">
 
 			<h:panelGrid columns="3" columnClasses="label, value">
-<!-- 				<h:outputText value="Type client:" /> -->
-<!--                                 Particulier<input type="radio" -->
-<!-- 					name="typeCli" value="Particulier" id="particulier" -->
-<!-- 					checked="checked" /> -->
-<!-- 			                    Entreprise<input type="radio" name="typeCli" -->
-<!-- 					value="Entreprise" id="entreprise" /> -->
+
 					<p:selectOneRadio id="typeclient" value="#{clientBean.typeClient}"
 						 required="true">
-						<p:ajax event="click" listener="#{affaireBean.checkForm}" update="panelSearch"/>
+						<p:ajax event="click" listener="#{affaireBean.checkForm}" update="panelSearch,pantrouver"/>
 						<f:selectItem itemLabel="Particulier" itemValue="particulier" />
 						<f:selectItem itemLabel="Entreprise" itemValue="entreprise" noSelectionOption="false" />
 					</p:selectOneRadio>
@@ -78,10 +73,10 @@
 			</h:panelGrid>
 		</p:panel>
 
-		<p:panel header="Client trouvé">
+		<p:panel header="Client trouvé" id="pantrouver">
 			<p:dataTable id="listParticulier" style="margin:10px;"
 				var="myParticulier" value="#{affaireBean.particuliers}"
-				widgetVar="particulierDataTable">
+				widgetVar="particulierDataTable" rendered="#{!affaireBean.checkedPane}">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Afficher" />
@@ -142,7 +137,7 @@
 
 			<p:dataTable id="listEntreprise" style="margin:10px;"
 				var="myEntreprise" value="#{affaireBean.entreprises}"
-				widgetVar="entrepriseDataTable">
+				widgetVar="entrepriseDataTable"  rendered="#{affaireBean.checkedPane}">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Afficher" />
