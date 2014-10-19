@@ -35,7 +35,7 @@
 				</p:selectCheckboxMenu>
 			</h:panelGrid>
 			<p:commandButton style="display:block;margin:auto;margin-bottom:20px;" value="Valider"
-				actionListener="#{userBean.createUser()}" update=":users"
+				actionListener="#{userBean.createUser}" update=":users"
 				oncomplete="PF('popnewuser').hide();" />
 		</h:form>
 	</p:dialog>
