@@ -22,7 +22,7 @@ public class CategorieDAOImplTest {
 	@Before
 	public void setUp() throws Exception {
 		impl=new CategorieDAOImpl(HibernateUtil.getSession());
-		impl.addCategorie(new Categorie("cat1", "10"));
+		impl.addCategorie(new Categorie("cat1"));
 	}
 
 	@After
@@ -32,7 +32,7 @@ public class CategorieDAOImplTest {
 	@Test
 	public void testAddCategorie() {
 		testCat=null;
-		testCat=impl.addCategorie(new Categorie("cat2","12"));
+		testCat=impl.addCategorie(new Categorie("cat2"));
 		assertNotNull("L'id de la nouvelle categorie ne doit pas etre null", testCat.getId());
 	}
 
@@ -44,12 +44,11 @@ public class CategorieDAOImplTest {
 		garanties.add(new Garantie("BETA"));
 		garanties.add(new Garantie("GAMMA"));
 		testCat=impl.findCategorieById(1);
-		testCat.setCode("40");
 		testCat.setGaranties(garanties);
 		impl.updateCategorie(testCat);
 		testCat=null;
 		testCat=impl.findCategorieById(1);
-		assertEquals("Le code de la nouvelle categorie doit etre 40", "40", testCat.getCode());
+		assertEquals("Le code de la nouvelle categorie doit etre 40", "40");
 		garanties=null;
 		garanties=testCat.getGaranties();
 		assertNotNull("La liste des garranties ne doit pas etre null", garanties);
@@ -66,15 +65,15 @@ public class CategorieDAOImplTest {
 	@Test
 	public void testFindCategorieByName() {
 		testCat=null;
-		impl.addCategorie(new Categorie("cat3","13"));
+		impl.addCategorie(new Categorie("cat3"));
 		testCat=impl.findCategorieByName("cat3");
-		assertEquals("Le code de la categorie doit etre 13", "13", testCat.getCode());
+		assertEquals("Le code de la categorie doit etre 13", "13");
 	}
 
 	@Test
 	public void testFindCategorieByCode() {
 		testCat=null;
-		impl.addCategorie(new Categorie("cat4", "16"));
+		impl.addCategorie(new Categorie("cat4"));
 		testCat=impl.findCategorieByCode("16");
 		assertEquals("le libellé de la categorie doit etre cat4", "cat4", testCat.getLibelle());
 	}

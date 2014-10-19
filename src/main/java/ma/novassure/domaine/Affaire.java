@@ -19,28 +19,28 @@ import javax.persistence.OneToMany;
 public class Affaire {
 
 	@Id @GeneratedValue
-    private int id;
-    
-    private Date createdDate;
-    private Date updatedDate;
-    private int step;
-    private boolean validete=false;
-    private User user;
-    @ManyToOne
-    private Client client;
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Quittance> quittances;
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Paiement> paiements;
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Document> documents;
-    
-    public Affaire() {
-    	this.createdDate=new Date();
-    	this.updatedDate=new Date();
-    	this.quittances=new ArrayList<Quittance>();
-    	this.paiements=new ArrayList<Paiement>();
-    }
+	private int id;
+
+	private Date createdDate;
+	private Date updatedDate;
+	private int step;
+	private boolean validete=false;
+	private User user;
+	@ManyToOne
+	private Client client;
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Quittance> quittances;
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Paiement> paiements;
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Document> documents;
+
+	public Affaire() {
+		this.createdDate=new Date();
+		this.updatedDate=new Date();
+		this.quittances=new ArrayList<Quittance>();
+		this.paiements=new ArrayList<Paiement>();
+	}
 
 
 	public int getId() {
@@ -50,7 +50,7 @@ public class Affaire {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -77,11 +77,12 @@ public class Affaire {
 	public void setQuittances(List<Quittance> quittances) {
 		this.quittances = quittances;
 	}
-	
+
 	public void addQuittance(Quittance quittance) {
+		quittance.setAffaire(this);
 		quittances.add(quittance);
 	}
-	
+
 	public void removeQuitance(Quittance quittance) {
 		this.quittances.remove(quittance);
 	}
@@ -93,7 +94,7 @@ public class Affaire {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
+
 	public List<Paiement> getPaiements() {
 		return paiements;
 	}
@@ -106,15 +107,15 @@ public class Affaire {
 	public void addPaiement(Paiement paiement) {
 		paiements.add(paiement);
 	}
-	
+
 	public void removeQuitance(Paiement paiement) {
 		this.paiements.remove(paiement);
 	}
-	
+
 	public void addDocument(Document document) {
 		documents.add(document);
 	}
-	
+
 	public void removeDocument(Document document) {
 		documents.remove(document);
 	}
@@ -156,7 +157,7 @@ public class Affaire {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
+
+
+
 }

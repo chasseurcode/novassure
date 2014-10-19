@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
@@ -19,7 +20,8 @@ public class Categorie {
 	@Id @GeneratedValue
 	private int id;
 	private String libelle;
-	private String code;
+	@ManyToOne
+	private Branche branche;
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<Garantie> garanties=new ArrayList<Garantie>();
 
@@ -28,9 +30,8 @@ public class Categorie {
 		return id;
 	}
 
-	public Categorie(String libelle, String code) {
+	public Categorie(String libelle) {
 		this.libelle = libelle;
-		this.code = code;
 	}
 
 	public void setId(int id) {
@@ -42,11 +43,12 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	public String getCode() {
-		return code;
+	
+	public Branche getBranche() {
+		return branche;
 	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setBranche(Branche branche) {
+		this.branche = branche;
 	}
 	public List<Garantie> getGaranties() {
 		return garanties;
@@ -70,5 +72,10 @@ public class Categorie {
 			return true;
 		}
 		return false;
+	}
+	
+	public void addGarantie(Garantie garantie){
+		garantie.setCategorie(this);
+		garanties.add(garantie);
 	}
 }
