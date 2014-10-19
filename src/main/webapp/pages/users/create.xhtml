@@ -7,15 +7,37 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:sec="http://www.springframework.org/security/facelets/tags">
 <h:head>
-	<h:outputStylesheet name="css/style.css" />
 </h:head>
 <body>
-	<ui:composition template="/templates/layout.xhtml">
-		<ui:define name="contenu">
-			<p:panel header="Gestion des utilisateurs">
-				
-			</p:panel>
-		</ui:define>
-	</ui:composition>
+
+	<p:dialog id="popup" widgetVar="popnewuser"
+		header="Création utilisateur" draggable="false">
+		<h:form id="newUser">
+			<h:panelGrid columns="2" cellpadding="7" style="width:400px;height:300px;margin-bottom:20px;">
+				<p:outputLabel value="Nom d'utilisateur :" />
+				<p:inputText value="#{userBean.currentUser.username}" />
+
+				<p:outputLabel value="E-mail :" />
+				<p:inputText value="#{userBean.currentUser.email}" />
+
+				<p:outputLabel value="Mot de passe :" />
+				<p:password value="#{userBean.currentUser.password}" />
+
+				<p:outputLabel value="Confirmer le mot de passe :" />
+				<p:password value="#{userBean.currentUser.password}" />
+
+				<h:outputLabel for="menu" value="Selection des Role:" />
+				<p:selectCheckboxMenu id="menu" style="width:150px;"
+					value="#{userBean.selectedRole}" label="Roles" filter="true"
+					filterMatchMode="startsWith" panelStyle="width:250px">
+					<f:selectItems value="#{userBean.roles}" var="role"
+						itemLabel="#{role.name}" itemValue="#{role.id}" />
+				</p:selectCheckboxMenu>
+			</h:panelGrid>
+			<p:commandButton style="display:block;margin:auto;margin-bottom:20px;" value="Valider"
+				actionListener="#{userBean.createUser()}" update=":users"
+				oncomplete="PF('popnewuser').hide();" />
+		</h:form>
+	</p:dialog>
 </body>
 </html>

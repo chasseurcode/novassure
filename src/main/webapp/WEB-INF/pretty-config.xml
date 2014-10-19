@@ -15,9 +15,9 @@
 	</url-mapping>
 
 	<!-- Users -->
-	<url-mapping id="clients">
-		<pattern value="/clients/create" />
-		<view-id value="/pages/clients/create.xhtml" />
+	<url-mapping id="utilisateurs">
+		<pattern value="/utilisateurs" />
+		<view-id value="/pages/users/index.xhtml" />
 	</url-mapping>
 
 	<!-- Clients -->

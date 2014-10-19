@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class User implements Serializable {
@@ -21,8 +20,8 @@ public class User implements Serializable {
 	private String username;
 	private String password;
 	private String email;
-	private boolean enabled;
-	@OneToMany(cascade=CascadeType.ALL)
+	private boolean enabled=true;
+	@ManyToMany
 	private List<Role> roles=new ArrayList<Role>();
 	
 	public User() {

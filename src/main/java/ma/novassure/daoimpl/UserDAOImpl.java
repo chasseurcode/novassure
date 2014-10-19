@@ -9,7 +9,7 @@ import ma.novassure.utils.HibernateUtil;
 import org.hibernate.Session;
 
 public class UserDAOImpl implements UserDAO{
-	Session session;
+	private Session session;
 	
 	public UserDAOImpl() {
 		session=HibernateUtil.getSession();
@@ -34,6 +34,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	public void updateUser(User user) {
+		session.beginTransaction();
 		session.update(user);
 		session.getTransaction().commit();
 	}
@@ -52,6 +53,14 @@ public class UserDAOImpl implements UserDAO{
 	@SuppressWarnings("unchecked")
 	public List<User> getAll() {
 		return session.createQuery("From User").list();
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
 	}
 
 }

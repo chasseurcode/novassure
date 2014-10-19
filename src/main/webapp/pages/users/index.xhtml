@@ -13,26 +13,62 @@
 <body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="contenu">
-			<p:panel header="Gestion des utilisateurs">
-				<p:button value="Nouveau" outcome="pretty:createUser" />
+			<p:panel header="Gérer des utilisateurs">
 				<p:outputPanel>
-					<p:dataTable style="text-align:center" value="#{userBean.users}"
-						var="user" id="users">
+					<p:dataTable emptyMessage="Aucun utilisateur pour le moment."
+						style="margin-left:10px;" value="#{userBean.users}" var="user"
+						id="users">
 						<p:column headerText="Nom d'utilisateur">
-							<h:outputText value="#{user.username}" />
+							<i><h:outputText value="#{user.username}" /></i>
 						</p:column>
 						<p:column headerText="E-mail">
 							<h:outputText value="#{user.email}" />
 						</p:column>
-						<p:column headerText="Actions">
-								<pretty:link mappingId="useredit">
-									<f:param value="#{user.username}"/>
-									editer
-								</pretty:link>	
+						<p:column headerText="ROLE">
+							<p:dataList styleClass="noheader hide" value="#{user.roles}"
+								var="rol">
+								<p:column>
+									<p:outputLabel value="#{rol.name}" />
+								</p:column>
+							</p:dataList>
+						</p:column>
+						<p:column>
+							<p:commandButton styleClass="boutton-large" icon="ui-icon-pencil"
+								value="Editer" onclick="PF('popnewuser').show();" />
+								
+							<p:commandButton styleClass="boutton-large"
+								rendered="#{user.enabled}" update=":users"
+								actionListener="#{userBean.enableUser(user)}" value="Desactiver"
+								icon="ui-icon-locked">
+								<p:confirm header="Confirmation"
+									message="Voulez-vous desactiver cet utilisateur?"
+									icon="ui-icon-alert" />
+							</p:commandButton>
+							
+							<p:commandButton styleClass="boutton-large"
+								rendered="#{!user.enabled}" update=":users"
+								actionListener="#{userBean.desableUser(user)}" value="Activer"
+								icon="ui-icon-unlocked">
+								<p:confirm header="Confirmation"
+									message="Voulez-vous activez cet utilisateur?"
+									icon="ui-icon-alert" />
+							</p:commandButton>
+
+							<p:confirmDialog global="true" closable="false">
+								<p:commandButton value="Oui" type="button"
+									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<p:commandButton value="Non" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>
+							
 						</p:column>
 					</p:dataTable>
+					<p:commandButton style="margin-left:10px;margin-top:10px;"
+						value="Créer un utilisateur" onclick="PF('popnewuser').show();" />
+
 				</p:outputPanel>
 			</p:panel>
+			<ui:include src="/pages/users/create.xhtml" />
 		</ui:define>
 	</ui:composition>
 </body>

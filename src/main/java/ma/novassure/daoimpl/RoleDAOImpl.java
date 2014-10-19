@@ -1,17 +1,19 @@
 package ma.novassure.daoimpl;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import java.util.List;
 
 import ma.novassure.dao.RoleDAO;
 import ma.novassure.domaine.Role;
-import ma.novassure.utils.HibernateUtil;
+
+import org.hibernate.Session;
 
 public class RoleDAOImpl implements RoleDAO {
-	SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
+	private Session session;
+	public RoleDAOImpl(Session session) {
+		this.session=session;
+	}
 	
 	public void addRole(Role role) {
-		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(role);
 		session.getTransaction().commit();
@@ -24,8 +26,16 @@ public class RoleDAOImpl implements RoleDAO {
 	}
 
 	public Role getRoleByName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Role> findAllRoles() {
+		return session.createQuery("From Role").list();
+	}
+
+	public Role findRoleById(int id) {
+		return (Role) session.get(Role.class, id);
+	}
+	
 }

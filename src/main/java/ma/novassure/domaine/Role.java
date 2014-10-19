@@ -1,11 +1,13 @@
 package ma.novassure.domaine;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Role implements Serializable{
@@ -16,6 +18,9 @@ public class Role implements Serializable{
 	private int id;
 	@Column(unique=true)
 	private String name;
+	@OneToMany(mappedBy="roles")
+	private List<User> users;
+
 
 	public Role() {
 	}
@@ -43,4 +48,15 @@ public class Role implements Serializable{
 		this.name = name;
 	}
 
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	
+	
 }
