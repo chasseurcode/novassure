@@ -16,7 +16,7 @@
 	<!--  ********************** tab Panier client ***************************** -->
 
 	<p:tab id="paiement" title="5.Paiements >">
-		<h:form id="formPani">
+		<h:form id="formPaie">
 
 			<p:panel header="Information client" widgetVar="infoclientPartEnt">
 
@@ -132,7 +132,7 @@
 				<h:panelGrid columns="6" layout="grid" cellpadding="5">
 
 					<h:outputText style="font-weight: bold;" value="Montant à payer " />
-					<h:outputText value="#{affaireBean.document.montant}" />
+					<h:outputText value="#{affaireBean.paiement.montant}" />
 
 					<h:outputText style="font-weight: bold;" value="Montant payer " />
 					<p:inputText value="#{affaireBean.payer}" />
@@ -141,7 +141,7 @@
 					<h:inputText value="#{affaireBean.resteaPayer}" />
 
 					<h:outputText style="font-weight: bold;" value="Mode de paiement " />
-					<p:selectOneMenu value="#{affaireBean.document.mode}">
+					<p:selectOneMenu value="#{affaireBean.paiement.mode}">
 						<f:selectItem itemLabel="Chéque" itemValue="cheque" />
 						<f:selectItem itemLabel="espèce" itemValue="espece" />
 					</p:selectOneMenu>
@@ -150,8 +150,9 @@
 					<h:inputText value="123456" />
 
 					<h:outputText style="font-weight: bold;" value="Date chèque: " />
-					<p:calendar value="#{affaireBean.document.datePaiement}" />
-
+					<p:calendar value="#{affaireBean.paiement.datePaiement}" />
+				</h:panelGrid>
+				<h:panelGrid>
 					<p:dataTable style="margin:10px;" var="mypaiement"
 						rowIndexVar="rowIndex" value="#{affaireBean.paiements}"
 						widgetVar="lignePai">
@@ -217,8 +218,8 @@
 							oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)" />
 					</p:commandButton>
 
-				</h:panelGrid>
 
+				</h:panelGrid>
 				<h:panelGrid columns="3" style="margin-left:550px;margin-top:10px;">
 					<p:commandButton value="Sauvegarder et Quitter"
 						actionListener="#{affaireBean.saveAndQuit}">
@@ -230,8 +231,8 @@
 						<p:ajax listener="#{affaireBean.annuller}"
 							oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)" />
 					</p:commandButton>
-					<p:commandButton style="display:block;margin:auto;" value="Suivant"
-						onclick="PF('wiz').next();" />
+					<p:commandButton style="display:block;margin:auto;"
+						value="Finaliser" />
 
 
 				</h:panelGrid>

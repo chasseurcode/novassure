@@ -99,6 +99,7 @@ public class AffaireBean implements Serializable{
 	private boolean gratuit;
 	private Document document;
 	private Paiement paiement;
+	private List<Paiement> paiements;
 	private double resteaPayer;
 	private double payer;
 	//-----------fact-----------
@@ -120,6 +121,7 @@ public class AffaireBean implements Serializable{
 		quittance=new Quittance();
 		document=new Document();
 		paiement=new Paiement();
+		paiements=new ArrayList<Paiement>();
 		ligneGaranties=new ArrayList<LigneGarantie>();
 		garanties=new ArrayList<Garantie>();
 		branches=new ArrayList<Branche>();
@@ -391,6 +393,7 @@ public class AffaireBean implements Serializable{
 	 */
 
 	public void addDoc(FileUploadEvent event){
+		System.out.println("ds add doc");
 		try {
 			copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
 		} catch (IOException e) {
@@ -398,13 +401,15 @@ public class AffaireBean implements Serializable{
 		}
 	}
 
-	public void copyFile(String fileName, InputStream in) {
+	 private void copyFile(String fileName, InputStream in) {
+		//private String dest=getClass().getResource("/documents/");
+		
 		try {
 
 
 			// write the inputStream to a FileOutputStream
 			OutputStream out = new FileOutputStream(new File(fileName));
-
+                   System.out.println(getClass().getResource("/documents/test.text").getPath());
 			int read = 0;
 			byte[] bytes = new byte[1024];
 
@@ -423,6 +428,11 @@ public class AffaireBean implements Serializable{
 		}
 	}
 
+	public void download(){
+		
+	}
+	
+	
 	/**
 	 * 
 	 * Gestion de paiement
@@ -918,6 +928,16 @@ public class AffaireBean implements Serializable{
 
 	public void setPayer(double payer) {
 		this.payer = payer;
+	}
+
+
+	public List<Paiement> getPaiements() {
+		return paiements;
+	}
+
+
+	public void setPaiements(List<Paiement> paiements) {
+		this.paiements = paiements;
 	}
 
 

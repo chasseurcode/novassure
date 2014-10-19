@@ -119,9 +119,8 @@
 					</p:column>
 
 				</p:dataTable>
-				<p:commandButton value="Modifier le panier" style="margin-left:850;">
-					<p:ajax listener="#{affaireBean.addNewQuittance}"
-						oncomplete="wiz.loadStep (wiz.cfg.steps [2], true)" />
+				<p:commandButton value="Modifier le panier" style="margin-left:850;"
+					oncomplete="wiz.loadStep (wiz.cfg.steps [2], true)">
 				</p:commandButton>
 
 			</p:panel>
@@ -129,12 +128,20 @@
 
 		<p:panel header="Pieces justificatives">
 			<h:form enctype="multipart/form-data">
-				<h:panelGrid columns="3">
+
+				<h:panelGrid columns="2">
 					<h:outputText value="Permis de conduire" />
 					<h:outputText value="Catre grise" />
-					<p:fileUpload fileUploadListener="#{affaireBean.addDoc}"
-						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"
-						description="ajouter" />
+					<p:fileUpload
+						fileUploadListener="#{affaireBean.addDoc}"
+						mode="advanced" dragDropSupport="false" sizeLimit="100000" fileLimit="3"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+
+					<p:commandLink ajax="false" title="Download">
+						<p:fileDownload value="ok" />
+					</p:commandLink>
+
 				</h:panelGrid>
 
 				<h:panelGrid columns="3" style="margin-left:550px;margin-top:10px;">
