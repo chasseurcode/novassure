@@ -54,7 +54,7 @@ import org.primefaces.event.FlowEvent;
 public class AffaireBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	private boolean checkedPane=false;
 	private ClientDAO clientDAO;
 	private VilleDAO villeDAO;
 	private AffaireDAO affaireDAO;
@@ -136,7 +136,7 @@ public class AffaireBean implements Serializable{
 		compagnies=compagnieDAO.findAllCompagnies();
 		setPrimeTotale(1);
 	}
-	
+
 	/**
 	 * 
 	 * Gestion du client
@@ -218,7 +218,7 @@ public class AffaireBean implements Serializable{
 		}
 	}
 
-	
+
 	/****
 	 * Gestion des quittances
 	 */
@@ -321,7 +321,7 @@ public class AffaireBean implements Serializable{
 		}
 
 	}
-	
+
 	public void setCalendar(){
 		if(duree!=null){
 			Calendar cal = Calendar.getInstance();
@@ -396,14 +396,14 @@ public class AffaireBean implements Serializable{
 		}
 	}
 
-	 private void copyFile(String fileName, InputStream in) {
-		
+	private void copyFile(String fileName, InputStream in) {
+
 		try {
 
 
 			// write the inputStream to a FileOutputStream
 			OutputStream out = new FileOutputStream(new File(fileName));
-                   System.out.println(getClass().getResource("/documents/test.text").getPath());
+			System.out.println(getClass().getResource("/documents/test.text").getPath());
 			int read = 0;
 			byte[] bytes = new byte[1024];
 
@@ -423,10 +423,10 @@ public class AffaireBean implements Serializable{
 	}
 
 	public void download(){
-		
+
 	}
-	
-	
+
+
 	/**
 	 * 
 	 * Gestion de paiement
@@ -440,9 +440,9 @@ public class AffaireBean implements Serializable{
 	public void removePaiement(Paiement paiement){
 		System.out.println("remove paiement");
 	}
-	
-	
-	
+
+
+
 	//-----------------------getters et setters------------------------
 
 	public ClientDAO getClientDAO() {
@@ -934,7 +934,31 @@ public class AffaireBean implements Serializable{
 		this.paiements = paiements;
 	}
 
+	public boolean isCheckedPane() {
+		return checkedPane;
+	}
 
+	public void setCheckedPane(boolean checkedPane) {
+		this.checkedPane = checkedPane;
+	}
+
+	/*
+	 * checked form
+	 */
+
+	public void checkForm() {
+	//	RequestContext ctx=RequestContext.getCurrentInstance();
+		
+		if(checkedPane){
+			setCheckedPane(false);
+			//ctx.update("panelSearch");
+		}
+		else{
+			setCheckedPane(true);
+			//ctx.update("panelSearch");
+		}
+		System.out.println("checked");
+	}
 
 
 }

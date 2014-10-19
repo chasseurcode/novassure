@@ -15,26 +15,27 @@
 
 	<!--  *************************tab info du client t***************************** -->
 
-	<p:tab id="infoClient" title="1.Infos client >">
-	   <h:form id="formClient">
-		<p:panel header="Recherche client">
+	<p:tab title="1.Infos client >">
+	   <h:form >
+		<p:panel id="panelSearch" header="Recherche client">
 
 			<h:panelGrid columns="3" columnClasses="label, value">
-				<h:outputText value="Type client:" />
+<!-- 				<h:outputText value="Type client:" /> -->
 <!--                                 Particulier<input type="radio" -->
 <!-- 					name="typeCli" value="Particulier" id="particulier" -->
 <!-- 					checked="checked" /> -->
 <!-- 			                    Entreprise<input type="radio" name="typeCli" -->
 <!-- 					value="Entreprise" id="entreprise" /> -->
-<!-- 					<p:selectOneRadio id="typeclient" value="#{clientBean.typeClient}" -->
-<!-- 						required="true"> -->
-<!-- 						<f:selectItem itemLabel="Particulier" itemValue="particulier" /> -->
-<!-- 						<f:selectItem itemLabel="Entreprise" itemValue="entreprise" /> -->
-<!-- 					</p:selectOneRadio> -->
+					<p:selectOneRadio id="typeclient" value="#{clientBean.typeClient}"
+						 required="true">
+						<p:ajax event="click" listener="#{affaireBean.checkForm}" update="panelSearch"/>
+						<f:selectItem itemLabel="Particulier" itemValue="particulier" />
+						<f:selectItem itemLabel="Entreprise" itemValue="entreprise" noSelectionOption="false" />
+					</p:selectOneRadio>1
 				</h:panelGrid>
 
 			<h:panelGrid rows="2" cellpadding="5" id="particulierPanelGrid"
-				widgetVar="particulierPanel">
+				widgetVar="particulierPanel" rendered="#{!affaireBean.checkedPane}">
 
 				<h:panelGrid columns="6">
 					<h:outputText value="N° CIN:" />
@@ -55,7 +56,7 @@
 			</h:panelGrid>
 
 			<h:panelGrid rows="2" cellpadding="5" id="entreprisePanelGrid"
-				widgetVar="entreprisePanel">
+				widgetVar="entreprisePanel" rendered="#{affaireBean.checkedPane}" >
 
 				<h:panelGrid columns="6">
 					<h:outputText value="N° RC:" />
