@@ -26,8 +26,8 @@ public class QuittanceBean {
 	
 	public QuittanceBean() {
 		setDao(new AffaireDAOImpl(HibernateUtil.getSession()));
-		//setQuittance(dao.findQuittanceByNumPolice(numPolice));
-		initLast();
+		setQuittance(dao.findQuittanceByNumPolice(numPolice));
+		//initLast();
 	}
 	
 	public String getNumPolice() {

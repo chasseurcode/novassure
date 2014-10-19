@@ -15,7 +15,7 @@
 
 	<!--  ********************** tab information contrat ***************************** -->
 
-	<p:tab id="infoContrat" title="2.Infos contrat">
+	<p:tab id="infoContrat" title="2.Infos contrat >">
 		<h:form id="formContrat">
 		
 			<p:panel header="Information client" widgetVar="infoclientPartEnt">
@@ -160,11 +160,11 @@
 			
                        <!--   +++++++++++++++++Listes de garanties++++++++++++++++++++++  -->
                        
-                       <p:panel header="Veuillez renseigner les garanties">
+                       <p:panel id="pan" header="Veuillez renseigner les garanties">
 
 				<p:dataTable id="listGarantie" style="margin:10px;" var="mylgarantie" rowIndexVar="rowIndex"
 					value="#{affaireBean.ligneGaranties}" editable="true" editMode="cell" widgetVar="ligneGa">
-				<p:ajax event="cellEdit" listener="#{affaireBean.onCellEdit}" update="pt" />
+				<p:ajax event="cellEdit" listener="#{affaireBean.onCellEdit(mylgarantie)}" />
 					<p:column>
 						<f:facet name="header">
 							<h:outputText value="N°" />
@@ -233,7 +233,7 @@
 						<f:facet name="header">
 							<h:outputText value="Prime Totale" />
 						</f:facet>
-						<h:outputText id="pt" value="#{affaireBean.primeTotale}" />
+						<h:outputText  value="#{affaireBean.primeTotale}" />
 					</p:column>
 					<p:column headerText="Gratuit">
 						<p:cellEditor>
@@ -247,47 +247,17 @@
 					</p:column>
 					</p:dataTable>
 
-				<p:dataTable id="Totale" style="margin:10px;" value="ok"
-					widgetVar="totale">
-					<p:column>
-						<h:outputText value=" " />
-					</p:column>
-					<p:column>
-						<h:outputText value="Totale  " />
-					</p:column>
-					<p:column>
-						<h:outputText value="ok1     " />
-					</p:column>
-					<p:column>
-						<h:outputText value="ok2      " />
-					</p:column>
-
-					<p:column>
-						<h:outputText value="ok3        " />
-					</p:column>
-					<p:column>
-						<h:outputText value="ok4         " />
-					</p:column>
-					<p:column>
-						<h:outputText value="ok5        " />
-					</p:column>
-					<p:column>
-						<h:outputText value="ok 6        " />
-					</p:column>
-					<p:column>
-						<h:outputText value="       " />
-					</p:column>
-				</p:dataTable>
+			
 
 				<h:panelGrid columns="3" style="margin-left:550px;margin-top:10px;">
-				<p:commandButton immediate="true" value="Sauvegarder et Quitter"
+				<p:commandButton  value="Sauvegarder et Quitter"
 						actionListener="#{affaireBean.saveAndQuit}">
-						<p:ajax update="listGarantie" listener="#{affaireBean.saveAndQuit}"
+						<p:ajax  listener="#{affaireBean.saveAndQuit}"
 							oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)" />
 					</p:commandButton>
 					<p:commandButton immediate="true" value="Annuler"
 						actionListener="#{affaireBean.annuller}">
-						<p:ajax update="listGarantie" listener="#{affaireBean.annuller}"
+						<p:ajax  listener="#{affaireBean.annuller}"
 							oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)" />
 					</p:commandButton>
 					<p:commandButton style="display:block;margin:auto;" value="Suivant"

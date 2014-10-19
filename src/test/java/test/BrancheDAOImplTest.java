@@ -42,8 +42,8 @@ public class BrancheDAOImplTest {
 	public void testUpdateBranche() {
 		testBranche=null;
 		List<Categorie> categories=new ArrayList<Categorie>();
-		categories.add(new Categorie("Solde", "001"));
-		categories.add(new Categorie("Primaire", "002"));
+		categories.add(new Categorie("Sol"));
+		categories.add(new Categorie("Primaire"));
 		
 		testBranche=impl.findBrancheById(1);
 		assertNotNull("la branche retourné ne doit pas etre null",testBranche);

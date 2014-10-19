@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+
+</h:head>
+<body>
+
+	<!--  ********************** tab Panier client ***************************** -->
+
+	<p:tab id="piecesJoint" title="4.Pièces jointes >">
+		<h:form id="formPani">
+
+			<p:panel header="Information client" widgetVar="infoclientPartEnt">
+
+				<h:panelGrid columns="8" layout="grid" cellpadding="5">
+
+					<h:outputText style="font-weight: bold;" value="CIN: " />
+					<h:outputText value="#{affaireBean.particulier.cin}" />
+
+					<h:outputText style="font-weight: bold;" value="Nom: " />
+					<h:outputText value="#{affaireBean.nom}" />
+
+					<h:outputText style="font-weight: bold;" value="Prénom: " />
+					<h:outputText value="#{affaireBean.particulier.prenom}" />
+
+					<h:outputText style="font-weight: bold;" value="Ville: " />
+					<h:outputText value="#{affaireBean.maVille}" />
+
+					<h:outputText style="font-weight: bold;" value="N° RC: " />
+					<h:outputText value="#{affaireBean.entreprise.nrc}" />
+
+					<h:outputText style="font-weight: bold;" value="Patente: " />
+					<h:outputText value="#{affaireBean.entreprise.patente}" />
+
+					<h:outputText style="font-weight: bold;" value="Raison sociale: " />
+					<h:outputText value="#{affaireBean.entreprise.raisonSociale}" />
+
+					<h:outputText style="font-weight: bold;" value="Adresse: " />
+					<h:outputText value="#{affaireBean.adresse}" />
+
+					<h:outputText style="font-weight: bold;" value="Téléphone: " />
+					<h:outputText value="#{affaireBean.telephone}" />
+
+					<h:outputText style="font-weight: bold;" value="Email: " />
+					<h:outputText value="#{affaireBean.email}" />
+
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" style="margin-left:790px;margin-top:10px;">
+					<p:button value="Changer client" outcome="pretty:affaires" />
+					<p:commandButton icon="ui-icon-pencil" value="Modifier"
+						actionListener="#{affaireBean.load(affaireBean.particulier,affaireBean.entreprise)}"
+						onclick="PF('editClientDialog').show();" />
+				</h:panelGrid>
+
+			</p:panel>
+
+			<!--     ***************** Panier quittance ****************************** -->
+
+			<p:panel header="Panier quittance">
+
+				<p:dataTable id="listQuittance2" style="margin:10px;"
+					var="myQuittances" value="#{affaireBean.quittances}">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="N° Quittance" />
+						</f:facet>
+						<h:outputText value="#{myQuittances.numPolice}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Branche" />
+						</f:facet>
+						<h:outputText value="#{affaireBean.getBrancheName(myQuittances)}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Catégorie" />
+						</f:facet>
+						<h:outputText
+							value="#{affaireBean.getCategorieName(myQuittances)}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Début" />
+						</f:facet>
+						<h:outputText value="#{myQuittances.dateDebut}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Fin" />
+						</f:facet>
+						<h:outputText value="#{myQuittances.dateFin}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Prime" />
+						</f:facet>
+						<h:outputText value="#{affaireBean.primeTotale}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Afficher" />
+						</f:facet>
+
+					</p:column>
+
+				</p:dataTable>
+				<p:commandButton value="Modifier le panier" style="margin-left:850;">
+					<p:ajax listener="#{affaireBean.addNewQuittance}"
+						oncomplete="wiz.loadStep (wiz.cfg.steps [2], true)" />
+				</p:commandButton>
+
+			</p:panel>
+		</h:form>
+
+		<p:panel header="Pieces justificatives">
+			<h:form enctype="multipart/form-data">
+				<h:panelGrid columns="3">
+					<h:outputText value="Permis de conduire" />
+					<h:outputText value="Catre grise" />
+					<p:fileUpload fileUploadListener="#{affaireBean.addDoc}"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"
+						description="ajouter" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="3" style="margin-left:550px;margin-top:10px;">
+					<p:commandButton value="Sauvegarder et Quitter"
+						actionListener="#{affaireBean.saveAndQuit}">
+						<p:ajax listener="#{affaireBean.saveAndQuit}"
+							oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)" />
+					</p:commandButton>
+					<p:commandButton immediate="true" value="Annuler"
+						actionListener="#{affaireBean.annuller}">
+						<p:ajax listener="#{affaireBean.annuller}"
+							oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)" />
+					</p:commandButton>
+					<p:commandButton style="display:block;margin:auto;" value="Suivant"
+						onclick="wiz.loadStep (wiz.cfg.steps [4], true)" />
+
+
+				</h:panelGrid>
+
+
+			</h:form>
+
+		</p:panel>
+
+
+
+
+	</p:tab>
+
+
+</body>
+</html>

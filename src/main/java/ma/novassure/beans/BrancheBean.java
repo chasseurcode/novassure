@@ -74,7 +74,7 @@ public class BrancheBean implements Serializable {
 
 
 	/*
-	 * Gestion des catÃ©gories d'une branche
+	 * Gestion des catégories d'une branche
 	 */
 	public void setSelectedBranche(Branche branche) {
 		setSeletedBranche(branche);
@@ -82,7 +82,7 @@ public class BrancheBean implements Serializable {
 	}
 
 	public void addCategorie() {
-		seletedBranche.getCategories().add(categorie);
+		seletedBranche.addCategorie(categorie);
 		brancheDAO.updateBranche(seletedBranche);
 	}
 
@@ -115,7 +115,7 @@ public class BrancheBean implements Serializable {
 	}
 
 	public void addGarantie() {
-		currentCatego.getGaranties().add(garantie);
+		currentCatego.addGarantie(garantie);
 		brancheDAO.updateCategorie(currentCatego);
 		garantie=new Garantie();
 		refreshGaranties();

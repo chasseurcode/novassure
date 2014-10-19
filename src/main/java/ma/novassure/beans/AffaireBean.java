@@ -1,5 +1,10 @@
 package ma.novassure.beans;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,16 +35,18 @@ import ma.novassure.domaine.Branche;
 import ma.novassure.domaine.Categorie;
 import ma.novassure.domaine.Client;
 import ma.novassure.domaine.Compagnie;
+import ma.novassure.domaine.Document;
 import ma.novassure.domaine.Entreprise;
 import ma.novassure.domaine.Garantie;
 import ma.novassure.domaine.LigneGarantie;
+import ma.novassure.domaine.Paiement;
 import ma.novassure.domaine.Particulier;
 import ma.novassure.domaine.Quittance;
 import ma.novassure.domaine.TypeQuittance;
 import ma.novassure.domaine.Ville;
 import ma.novassure.utils.HibernateUtil;
 
-import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 
 @ManagedBean(name="affaireBean")
@@ -86,10 +93,14 @@ public class AffaireBean implements Serializable{
 	private List<Categorie> categories;
 	private List<Garantie> garanties;
 	private List<LigneGarantie>ligneGaranties;
+	private List<Quittance> quittances;
 	private  LigneGarantie lGarantie;
 	private double primeTotale;
 	private boolean gratuit;
-	private double somme=0;
+	private Document document;
+	private Paiement paiement;
+	private double resteaPayer;
+	private double payer;
 	//-----------fact-----------
 	private String refag,contrat;
 
@@ -107,34 +118,57 @@ public class AffaireBean implements Serializable{
 		entreprise=new Entreprise();
 		affaire=new Affaire();
 		quittance=new Quittance();
+		document=new Document();
+		paiement=new Paiement();
 		ligneGaranties=new ArrayList<LigneGarantie>();
 		garanties=new ArrayList<Garantie>();
 		branches=new ArrayList<Branche>();
-		particuliers=new ArrayList<Particulier>();
-		entreprises=new ArrayList<Entreprise>();
 		villes=new ArrayList<Ville>();
 		compagnies=new ArrayList<Compagnie>();
 		categories=new ArrayList<Categorie>();
 		typeQuittances=new ArrayList<TypeQuittance>();
+		quittances=new ArrayList<Quittance>();
 		typeQuittances=typeQuittanceDAO.findAllEnabledTypes();
 		branches=brancheDAO.findAllBranches();
 		villes=villeDAO.findAllVille();
 		compagnies=compagnieDAO.findAllCompagnies();
+		setPrimeTotale(1);
 	}
 
 
 	public void searchParticulier(ActionEvent event){
+		particuliers=new ArrayList<Particulier>();
 		particulier=clientDAO.findClientByCin(myCin);
 		currentClient=particulier;
-		particuliers.add(particulier);
+		if(particulier!=null)
+			particuliers.add(particulier);
 
 	}
 
 	public void searchEntreprise(ActionEvent event){
+		entreprises=new ArrayList<Entreprise>();
 		entreprise=clientDAO.findClientByNrc(myNrc);
 		currentClient=entreprise;
-		entreprises.add(entreprise);	
+		if(entreprise!=null)
+			entreprises.add(entreprise);	
 	}
+
+	public void clear(){
+		particuliers=new ArrayList<Particulier>();
+		entreprises=new ArrayList<Entreprise>();
+		particulier=new Particulier();
+		entreprise=new Entreprise(); 
+		currentClient=null;
+	}
+
+	//	public void setClientType(){
+	//		if(typeClient.equals("particulier")){
+	//			setTypeClient("particulier");
+	//		}
+	//		else{
+	//			setTypeClient("entreprise");
+	//		}
+	//	}
 
 	public void updateClient(ActionEvent event){
 		System.out.println("entrer");
@@ -146,15 +180,14 @@ public class AffaireBean implements Serializable{
 		}
 	}
 
-	public void clear(){
-		particuliers=new ArrayList<Particulier>();
-		entreprises=new ArrayList<Entreprise>();
-		particulier=new Particulier();
-		entreprise=new Entreprise(); 
-	}
 
+
+	/****
+	 * Gestion des quittances
+	 */
 	public void addQuittance(){
 		if(compagnie!=null && typeQui!=null && codeAgent!=null && categorie!=null){
+			System.out.println("cest bon");
 			Compagnie comp=compagnieDAO.findCompagnieById(Integer.parseInt(compagnie));
 			Agent agent=agentDAO.findAgentByCode(codeAgent);
 			TypeQuittance typeQuittance=typeQuittanceDAO.findTypeQuittanceById(Integer.parseInt(typeQui));
@@ -173,31 +206,60 @@ public class AffaireBean implements Serializable{
 				lGarantie.setGarantie(gar);
 				ligneGaranties.add(lGarantie);       	  
 			}
+			for(LigneGarantie lg:ligneGaranties){
+				lg.setQuittance(quittance);
+				quittance.getGaranties().add(lg); 
+			}
+			affaire.addQuittance(quittance);	
+			quittances.add(quittance);
 		}
+	}
+
+	public void loadQuittance(Quittance quittance){
+		System.out.println("entrer et load");
+		setQuittance(quittance);
+		ligneGaranties=new ArrayList<LigneGarantie>();
+		quittances.remove(quittance);
+	}
+
+	public void removeQuittance(Quittance quittance){
+		System.out.println("entrer et supp "+quittance.getNumPolice());
+		System.out.println(affaire.getQuittances().size());
+		affaire.getQuittances().remove(quittance);
+		System.out.println(affaire.getQuittances().size());
+
+	}
+
+	public String redirectQuittance(String target){
+		return "";
+	}
+
+	public void addNewQuittance(){
+		System.out.println("ds new garantie");
+		quittance=new Quittance();
+		garanties=new ArrayList<Garantie>();
+		ligneGaranties=new ArrayList<LigneGarantie>();
+		categories=new ArrayList<Categorie>();
+		typeQuittances=new ArrayList<TypeQuittance>();
+		typeQuittances=typeQuittanceDAO.findAllEnabledTypes();
+		branches=new ArrayList<Branche>();
+		branches=brancheDAO.findAllBranches();
+		compagnies=new ArrayList<Compagnie>();
+		compagnies=compagnieDAO.findAllCompagnies();
+		codeAgent="";
 	}
 
 	public void saveAndQuit(){
-		System.out.println("saving ");
-		for(LigneGarantie lg:ligneGaranties){
-			System.out.println(lg.getPrimeNette()+"");
-			lg.setQuittance(quittance);
-			quittance.getGaranties().add(lg); 
-		}
-		quittance.setAffaire(affaire);
-		affaire.getQuittances().add(quittance);
 		affaireDAO.createAffaire(affaire);
 	}
 
-	public void onCellEdit(CellEditEvent event){
-		System.out.println("il entre");
-		Object newValue = event.getNewValue();
-		String cast;
-		cast=String.valueOf(newValue);
-		System.out.println(cast);
-		somme+=Double.parseDouble(cast);		
-		setPrimeTotale(somme);
-	}
+	public void onCellEdit(LigneGarantie garantie){
 
+		setPrimeTotale(garantie.getAccessoire()+garantie.getCommission()+
+				garantie.getPrimeNette()+garantie.getTaxe()+garantie.getTimbre());
+
+		System.out.println(getPrimeTotale());		
+	}
 
 	public void annuller(){
 		particulier=new Particulier();
@@ -213,15 +275,15 @@ public class AffaireBean implements Serializable{
 		compagnies=new ArrayList<Compagnie>();
 		categories=new ArrayList<Categorie>();
 		typeQuittances=new ArrayList<TypeQuittance>();
+		quittances=new ArrayList<Quittance>();
 	}
 
 	public String onFlowProcess(FlowEvent event) {
 		affichage();
 		affaire.setClient(currentClient);
-		affaire.setStep(1);
+		affaire.setStep(affaire.getStep()+1);
 		return event.getNewStep();		
 	}
-
 
 	public void load(Particulier p,Entreprise e){
 		if(p!=null){
@@ -245,7 +307,6 @@ public class AffaireBean implements Serializable{
 
 	}
 
-
 	public void loadCategories(){	
 		if(brancheId!=null){		
 			Branche branche =brancheDAO.findBrancheById(Integer.parseInt(brancheId));
@@ -256,7 +317,6 @@ public class AffaireBean implements Serializable{
 		}
 
 	}
-
 
 	private void affichage(){
 		if(currentClient.getNom().equals(particulier.getNom())){
@@ -304,14 +364,81 @@ public class AffaireBean implements Serializable{
 			}
 
 		}
-
-		System.out.println("ok");
 	}
 
+	public String getBrancheName(Quittance quittance){
+		Garantie ga=quittance.getGaranties().get(0).getGarantie();
+		System.out.println("la ga : "+ga.getLibelle());
+		Categorie c=ga.getCategorie();
+		System.out.println(" catego: "+c.getLibelle());
+		Branche b=c.getBranche();
+		System.out.println("branche : "+b.getLibelle());
+		return b.getLibelle();
+
+	}
+
+	public String getCategorieName(Quittance quittance){
+		Garantie ga=quittance.getGaranties().get(0).getGarantie();
+		System.out.println("la ga : "+ga.getLibelle());
+		Categorie c=ga.getCategorie();
+
+		return c.getLibelle();
+	}
+
+	/****
+	 * 
+	 * Gestion des documents
+	 */
+
+	public void addDoc(FileUploadEvent event){
+		try {
+			copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void copyFile(String fileName, InputStream in) {
+		try {
 
 
+			// write the inputStream to a FileOutputStream
+			OutputStream out = new FileOutputStream(new File(fileName));
 
+			int read = 0;
+			byte[] bytes = new byte[1024];
 
+			while ((read = in.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
+			document.setTitre(fileName);
+			System.out.println(document.getTitre());
+			in.close();
+			out.flush();
+			out.close();
+
+			System.out.println("New file created!");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	/**
+	 * 
+	 * Gestion de paiement
+	 */
+
+	public void loadPaiement(Paiement paiement){
+		System.out.println("load paiemnt");
+		setPaiement(paiement);
+	}
+
+	public void removePaiement(Paiement paiement){
+		System.out.println("remove paiement");
+	}
+	
+	
+	
 	//-----------------------getters et setters------------------------
 
 	public ClientDAO getClientDAO() {
@@ -741,6 +868,56 @@ public class AffaireBean implements Serializable{
 
 	public void setlGarantie(LigneGarantie lGarantie) {
 		this.lGarantie = lGarantie;
+	}
+
+
+	public List<Quittance> getQuittances() {
+		return quittances;
+	}
+
+
+	public void setQuittances(List<Quittance> quittances) {
+		this.quittances = quittances;
+	}
+
+
+	public Document getDocument() {
+		return document;
+	}
+
+
+	public void setDocument(Document document) {
+		this.document = document;
+	}
+
+
+	public Paiement getPaiement() {
+		return paiement;
+	}
+
+
+	public void setPaiement(Paiement paiement) {
+		this.paiement = paiement;
+	}
+
+
+	public double getResteaPayer() {
+		return resteaPayer;
+	}
+
+
+	public void setResteaPayer(double resteaPayer) {
+		this.resteaPayer = resteaPayer;
+	}
+
+
+	public double getPayer() {
+		return payer;
+	}
+
+
+	public void setPayer(double payer) {
+		this.payer = payer;
 	}
 
 

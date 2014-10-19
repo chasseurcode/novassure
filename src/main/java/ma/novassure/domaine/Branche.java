@@ -68,5 +68,8 @@ public class Branche implements Serializable{
 		this.activated = activated;
 	}
 		
-
+     public void addCategorie(Categorie categorie){
+    	 categorie.setBranche(this);
+    	 categories.add(categorie);
+    	 }
 }
