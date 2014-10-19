@@ -136,6 +136,11 @@ public class AffaireBean implements Serializable{
 		compagnies=compagnieDAO.findAllCompagnies();
 		setPrimeTotale(1);
 	}
+	
+	/**
+	 * 
+	 * Gestion du client
+	 */
 
 
 	public void searchParticulier(ActionEvent event){
@@ -163,15 +168,6 @@ public class AffaireBean implements Serializable{
 		currentClient=null;
 	}
 
-	//	public void setClientType(){
-	//		if(typeClient.equals("particulier")){
-	//			setTypeClient("particulier");
-	//		}
-	//		else{
-	//			setTypeClient("entreprise");
-	//		}
-	//	}
-
 	public void updateClient(ActionEvent event){
 		System.out.println("entrer");
 		if(particulier!=null){
@@ -182,8 +178,47 @@ public class AffaireBean implements Serializable{
 		}
 	}
 
+	public void load(Particulier p,Entreprise e){
+		if(p!=null){
+			setParticulier(p);
+			setTypeClient("particulier");
+			nom=particulier.getNom();
+			prenom=particulier.getPrenom();
+			telephone=particulier.getTelephone();
+			email=particulier.getEmail();
+			adresse=particulier.getAdresse();
+		}
+		if(e!=null){
+			setEntreprise(e);
+			setTypeClient("entreprise");
+			nom=entreprise.getNom();
+			telephone=entreprise.getTelephone();
+			email=entreprise.getEmail();
+			adresse=entreprise.getAdresse();
 
+		}
 
+	}
+
+	private void affichage(){
+		if(currentClient.getNom().equals(particulier.getNom())){
+			nom=particulier.getNom();
+			telephone=particulier.getTelephone();
+			adresse=particulier.getAdresse();
+			email=particulier.getEmail();
+			maVille=particulier.getVille().getNom();
+		}
+		if(currentClient.getNom().equals(entreprise.getNom())){
+			System.out.println("ds entreprise");
+			nom=entreprise.getNom();
+			telephone=entreprise.getTelephone();
+			adresse=entreprise.getAdresse();
+			email=entreprise.getEmail();
+			maVille=entreprise.getVille().getNom();
+		}
+	}
+
+	
 	/****
 	 * Gestion des quittances
 	 */
@@ -232,10 +267,6 @@ public class AffaireBean implements Serializable{
 
 	}
 
-	public String redirectQuittance(String target){
-		return "";
-	}
-
 	public void addNewQuittance(){
 		System.out.println("ds new garantie");
 		quittance=new Quittance();
@@ -280,35 +311,6 @@ public class AffaireBean implements Serializable{
 		quittances=new ArrayList<Quittance>();
 	}
 
-	public String onFlowProcess(FlowEvent event) {
-		affichage();
-		affaire.setClient(currentClient);
-		affaire.setStep(affaire.getStep()+1);
-		return event.getNewStep();		
-	}
-
-	public void load(Particulier p,Entreprise e){
-		if(p!=null){
-			setParticulier(p);
-			setTypeClient("particulier");
-			nom=particulier.getNom();
-			prenom=particulier.getPrenom();
-			telephone=particulier.getTelephone();
-			email=particulier.getEmail();
-			adresse=particulier.getAdresse();
-		}
-		if(e!=null){
-			setEntreprise(e);
-			setTypeClient("entreprise");
-			nom=entreprise.getNom();
-			telephone=entreprise.getTelephone();
-			email=entreprise.getEmail();
-			adresse=entreprise.getAdresse();
-
-		}
-
-	}
-
 	public void loadCategories(){	
 		if(brancheId!=null){		
 			Branche branche =brancheDAO.findBrancheById(Integer.parseInt(brancheId));
@@ -319,25 +321,7 @@ public class AffaireBean implements Serializable{
 		}
 
 	}
-
-	private void affichage(){
-		if(currentClient.getNom().equals(particulier.getNom())){
-			nom=particulier.getNom();
-			telephone=particulier.getTelephone();
-			adresse=particulier.getAdresse();
-			email=particulier.getEmail();
-			maVille=particulier.getVille().getNom();
-		}
-		if(currentClient.getNom().equals(entreprise.getNom())){
-			System.out.println("ds entreprise");
-			nom=entreprise.getNom();
-			telephone=entreprise.getTelephone();
-			adresse=entreprise.getAdresse();
-			email=entreprise.getEmail();
-			maVille=entreprise.getVille().getNom();
-		}
-	}
-
+	
 	public void setCalendar(){
 		if(duree!=null){
 			Calendar cal = Calendar.getInstance();
@@ -387,6 +371,17 @@ public class AffaireBean implements Serializable{
 		return c.getLibelle();
 	}
 
+	/**
+	 * 
+	 * progression du wizard
+	 */
+	public String onFlowProcess(FlowEvent event) {
+		affichage();
+		affaire.setClient(currentClient);
+		affaire.setStep(affaire.getStep()+1);
+		return event.getNewStep();		
+	}
+
 	/****
 	 * 
 	 * Gestion des documents
@@ -402,7 +397,6 @@ public class AffaireBean implements Serializable{
 	}
 
 	 private void copyFile(String fileName, InputStream in) {
-		//private String dest=getClass().getResource("/documents/");
 		
 		try {
 
