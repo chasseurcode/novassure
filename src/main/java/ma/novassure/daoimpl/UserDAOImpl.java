@@ -36,7 +36,7 @@ public class UserDAOImpl implements UserDAO{
 	public void updateUser(User user) {
 		session.beginTransaction();
 		session.update(user);
-		session.getTransaction().commit();
+		session.getTransaction().commit();	
 	}
 
 	public User findUserByUsername(String username) {

@@ -108,13 +108,18 @@ public class UserBean {
 	public void desableUser(User user) {
 		user.setEnabled(false);
 		userDAO.updateUser(user);
-		System.out.println("enabled");
+		refreshList();
+		System.out.println("desenabled");
 	}
-	
+
 	public void enableUser(User user) {
 		user.setEnabled(true);
 		userDAO.updateUser(user);
+		refreshList();
 		System.out.println("enabled");
 	}
 
+	private void refreshList() {
+		setUsers(userDAO.getAll());
+	}
 }
