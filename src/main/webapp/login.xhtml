@@ -8,7 +8,7 @@
 <h:body>
 	<h:form prependId="false">
 		<p:panel
-			style="width:400px;height:180px;position:relative;margin:auto;"
+			style="width:400px;;position:relative;margin:auto;"
 			header="Authentification">
 			<h:panelGrid columns="2" styleClass="centered">
 				<h:outputLabel value="Nom d'Utilisateur : *" />
@@ -16,8 +16,9 @@
 				<h:outputLabel value="Mot de Passe: *" />
 				<h:inputSecret id="password" value="#{userBean.password}" />
 			</h:panelGrid>
-			<p:commandButton style="width:150px;font-size:0.7em; margin-top:20px;"
-				ajax="false" value="Se connecter" action="#{userBean.login}" />
+			<p:commandButton
+				style="width:150px;font-size:0.7em; margin-top:20px;" ajax="false"
+				value="Se connecter" action="#{userBean.login}" />
 		</p:panel>
 	</h:form>
 </h:body>
