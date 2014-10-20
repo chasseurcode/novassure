@@ -135,6 +135,7 @@ public class AffaireBean implements Serializable{
 		villes=villeDAO.findAllVille();
 		compagnies=compagnieDAO.findAllCompagnies();
 		setPrimeTotale(1);
+		setTypeClient("particulier");
 	}
 
 	/**
