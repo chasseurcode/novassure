@@ -40,29 +40,7 @@ public class ClientBean implements Serializable {
 	}
 	
 	
-	public void addClient(ActionEvent event){
-		System.out.println("entrer ds ajout client");
-		String tClient=getTypeClient();
-		System.out.println(tClient);
-		if(tClient.equals("particulier")){
-			particulier.setAdresse(adresse);
-			particulier.setEmail(email);
-			particulier.setFaxe(faxe);
-			particulier.setNom(nom);
-			particulier.setTelephone(telephone);
-			particulier.setVille(laVille);
-			clientDAO.addClient(particulier);
-		}
-		if(tClient.equals("entreprise")){
-			entreprise.setAdresse(adresse);
-			entreprise.setEmail(email);
-			entreprise.setFaxe(faxe);
-			entreprise.setNom(nom);
-			entreprise.setVille(laVille);
-			clientDAO.addClient(entreprise);
-			
-		}
-	} 
+	
 
 
 	public ClientDAO getClientDAO() {

@@ -22,7 +22,7 @@
 					style="margin-bottom:20px">
                    
                    <h:outputText value="Type client:" />
-			<p:selectOneRadio id="typeclient" value="#{clientBean.typeClient}" required="true">
+			<p:selectOneRadio id="typeclient" value="#{affaireBean.typeClient}" required="true">
 				<f:selectItem itemLabel="Particulier" itemValue="particulier" />
 				<f:selectItem itemLabel="Entreprise" itemValue="entreprise" />
 			</p:selectOneRadio>
@@ -31,49 +31,52 @@
 				style="width:450px;">
 
 				<h:outputText value="Nom" />
-				<p:inputText id="nomParti" value="#{clientBean.nom}"  />
+				<p:inputText id="nomParti" value="#{affaireBean.nom}"  />
 
 				<h:outputText value="Prénom" />
 				<p:inputText id="prenomParti"
-					value="#{clientBean.particulier.prenom}" />
+					value="#{affaireBean.particulier.prenom}" />
 
 				<h:outputText value="CIN" />
-				<p:inputText id="cinParti" value="#{clientBean.particulier.cin}" />
+				<p:inputText id="cinParti" value="#{affaireBean.particulier.cin}" />
 				
 				<h:outputText value="N° RC" />
 				<p:inputText id="nrcEnt"
-					value="#{clientBean.entreprise.nrc}" />
+					value="#{affaireBean.entreprise.nrc}" />
 
 				<h:outputText value="Patente" />
-				<p:inputText id="patenteEnt" value="#{clientBean.entreprise.patente}" />
+				<p:inputText id="patenteEnt" value="#{affaireBean.entreprise.patente}" />
 				
 				<h:outputText value="Raison sociale" />
-				<p:inputText id="raisonSocialeEnt" value="#{clientBean.entreprise.raisonSociale}" />
+				<p:inputText id="raisonSocialeEnt" value="#{affaireBean.entreprise.raisonSociale}" />
 
 				<h:outputText value="Adresse" />
 				<p:inputText id="adresseParti"
-					value="#{clientBean.adresse}" />
+					value="#{affaireBean.adresse}" />
 
 				<h:outputText value="Ville" />
-				<p:selectOneMenu id="villeParti" value="#{clientBean.laVille}" >
+				<p:selectOneMenu id="villeParti" value="#{affaireBean.laVille}" >
 					<f:selectItem itemLabel="Les villes" itemValue="" />
 					<f:selectItems itemLabel="#{laville.nom}" itemValue="#{laville.id}" 
 					value="#{affaireBean.villes}" var="laville"/>
 				</p:selectOneMenu>
 
 				<h:outputText value="E-mail" />
-				<p:inputText id="emailParti" value="#{clientBean.email}" />
+				<p:inputText id="emailParti" value="#{affaireBean.email}" />
 
 				<h:outputText value="Telephone" />
 				<p:inputText id="telParti"
-					value="#{clientBean.telephone}" />
+					value="#{affaireBean.telephone}" />
 
 				<h:outputText value="Faxe" />
-				<p:inputText id="faxeParti" value="#{clientBean.faxe}" />
+				<p:inputText id="faxeParti" value="#{affaireBean.faxe}" />
 			</h:panelGrid>
 
-			<p:commandButton style="display:block;margin:auto;" value="Valider"
-				actionListener="#{clientBean.addClient}"	 />
+					<p:commandButton style="display:block;margin:auto;" value="Valider"
+						actionlistener="#{affaireBean.addClient}">
+						<p:ajax listener="#{affaireBean.addClient}" oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)"/>
+					</p:commandButton>
+
 				</p:panel>
 
 
