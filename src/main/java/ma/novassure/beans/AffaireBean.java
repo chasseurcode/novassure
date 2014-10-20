@@ -414,11 +414,11 @@ public class AffaireBean implements Serializable{
 
 	public void addDoc(FileUploadEvent event){
 		System.out.println("ds add doc");
-		try {
-			copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	private void copyFile(String fileName, InputStream in) {

@@ -7,15 +7,17 @@
 <h:head></h:head>
 <h:body>
 	<h:form prependId="false">
-		<p:panel style="width:400px;height:180px;position:relative;margin:auto;" header="Authentification">
-			<h:panelGrid columns="2" cellpadding="5" styleClass="centered">
-				<h:outputLabel value="Nom d'Utilisateur : *"></h:outputLabel>
+		<p:panel
+			style="width:400px;height:180px;position:relative;margin:auto;"
+			header="Authentification">
+			<h:panelGrid columns="2" styleClass="centered">
+				<h:outputLabel value="Nom d'Utilisateur : *" />
 				<h:inputText id="username" value="#{userBean.username}" />
-
-				<h:outputLabel value="Mot de Passe: *" ></h:outputLabel>
+				<h:outputLabel value="Mot de Passe: *" />
 				<h:inputSecret id="password" value="#{userBean.password}" />
-				<h:commandButton value="Se connecter" action="#{userBean.login}" />
 			</h:panelGrid>
+			<p:commandButton style="width:150px;font-size:0.7em; margin-top:20px;"
+				ajax="false" value="Se connecter" action="#{userBean.login}" />
 		</p:panel>
 	</h:form>
 </h:body>

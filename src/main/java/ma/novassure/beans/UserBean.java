@@ -3,6 +3,7 @@ package ma.novassure.beans;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import ma.novassure.dao.RoleDAO;
@@ -12,7 +13,7 @@ import ma.novassure.domaine.Role;
 import ma.novassure.domaine.User;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class UserBean {
 	private UserDAOImpl userDAO;
 	private List<User> users;

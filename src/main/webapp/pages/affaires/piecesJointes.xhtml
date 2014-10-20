@@ -127,8 +127,7 @@
 		</h:form>
 
 		<p:panel header="Pieces justificatives">
-			<h:form enctype="multipart/form-data">
-
+			<h:form enctype="multipart/form-data" prependId="false" >
 				<h:panelGrid columns="2">
 					<h:outputText value="Permis de conduire" />
 					<h:outputText value="Catre grise" />
@@ -136,8 +135,6 @@
 						fileUploadListener="#{affaireBean.addDoc}"
 						mode="advanced" dragDropSupport="false" sizeLimit="100000" fileLimit="3"
 						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-
-
 					<p:commandLink ajax="false" title="Download">
 						<p:fileDownload value="ok" />
 					</p:commandLink>
