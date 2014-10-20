@@ -21,7 +21,7 @@
 
 			<h:panelGrid columns="3" columnClasses="label, value">
 
-					<p:selectOneRadio id="typeclient" value="#{clientBean.typeClient}"
+					<p:selectOneRadio id="typeclient" value="#{affaireBean.typeClient}"
 						 required="true">
 						<p:ajax event="click" listener="#{affaireBean.checkForm}" update="panelSearch,pantrouver"/>
 						<f:selectItem itemLabel="Particulier" itemValue="particulier" />
